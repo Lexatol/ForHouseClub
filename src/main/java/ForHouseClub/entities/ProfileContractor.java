@@ -16,9 +16,10 @@ public class ProfileContractor {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "profile_id")
-    private Long id;
+    private Long profileId;
 
-    @Column (name = "lk_contractor_id")
+    @OneToOne
+    @JoinColumn (name = "lk_contractor_id")
     private LkContractor lkContractor;
 
     @OneToMany

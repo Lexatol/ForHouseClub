@@ -46,15 +46,15 @@ create table users_roles (
 
 //таблица личных кабинетов
 create table lk_contractors (
-  lk_contractor_id                bigserial primary key,
-  company_id                      bigserial not null,
+  lk_contractor_id                 bigserial primary key,
+  company_id                      bigint not null,
   foreign key (company_id) references companies(company_id)
 );
 
 //таблица профилей компаний
 create table profile_companies (
   profile_id                    bigserial primary key,
-  lk_contractor_id              bigint,
+  lk_contractor_id               bigint,
   specialization_id             int not null,
   foreign key (specialization_id) references specialization (specialization_id),
   foreign key (lk_contractor_id) references lk_contractors(lk_contractor_id)
@@ -107,6 +107,4 @@ insert into profile_companies (profile_id, lk_contractor_id, specialization_id) 
 insert into connection_companies (contractor_id, company_id, status_connection)
 values
 (1, 1, 2), (1, 2, 3);
-
-
 
