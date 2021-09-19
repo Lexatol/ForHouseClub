@@ -15,7 +15,7 @@ public class Company {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name ="company_id")
-    private Long id;
+    private Long companyId;
 
     @Column (name = "company_name")
     private String companyName;
@@ -40,7 +40,6 @@ public class Company {
     @JoinColumn (name = "project_manager")
     private List<User> projectManagers;
 
-    //TODO убрать из ДТО
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<User> users;

@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table (name = "profile_companies")
-public class Profile {
+public class ProfileContractor {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -22,5 +23,5 @@ public class Profile {
 
     @OneToMany
     @JoinColumn(name = "specialization_id")
-    private Specialization specialization;
+    private List<Specialization> specializations;
 }
