@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,4 +20,22 @@ public class LkContractor {
     @OneToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @OneToMany
+    @JoinTable(name = "connection_contractor_customers",
+            joinColumns = @JoinColumn(name = "contractor_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_customer_id "))
+    private List<Company> listCustomers;
+
+
+    @OneToMany
+    @JoinTable(name = "connection_contractor_providers",
+            joinColumns = @JoinColumn(name = "contractor_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_provider_id "))
+    private List<Company> listProvider;
+
+
+
+
+
 }

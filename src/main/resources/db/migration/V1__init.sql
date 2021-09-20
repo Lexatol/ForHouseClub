@@ -61,13 +61,23 @@ create table profile_companies (
 );
 
 //таблица связей компаний
-create table connection_companies (
+create table connection_contractor_customers (
   contractor_id                 bigint,
-  company_id                    bigint,
+  company_customer_id           bigint,
   status_connection             varchar(255), //статус: подрядчик, поставщик
-  primary key (contractor_id, company_id),
+  primary key (contractor_id, company_customer_id),
   foreign key (contractor_id) references companies(company_id),
-  foreign key (company_id) references companies(company_id),
+  foreign key (company_customer_id) references companies(company_id),
+  foreign key (status_connection) references roles(role_id)
+);
+
+create table connection_contractor_providers (
+  contractor_id                 bigint,
+  company_provider_id           bigint,
+  status_connection             varchar(255), //статус: подрядчик, поставщик
+  primary key (contractor_id, company_provider_id),
+  foreign key (contractor_id) references companies(company_id),
+  foreign key (company_provider_id) references companies(company_id),
   foreign key (status_connection) references roles(role_id)
 );
 
@@ -113,7 +123,11 @@ insert into lk_contractors (company_id) values
 insert into profile_companies (profile_id, lk_contractor_id, specialization_id) values
 (1,1,1), (2,2,2), (3,3,3);
 
-insert into connection_companies (contractor_id, company_id, status_connection)
+insert into connection_contractor_customers (contractor_id, company_customer_id, status_connection)
+values
+(1, 1, 2), (1, 2, 3);
+
+insert into connection_contractor_providers (contractor_id, company_provider_id, status_connection)
 values
 (1, 1, 2), (1, 2, 3);
 
