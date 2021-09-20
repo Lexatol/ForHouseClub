@@ -30,7 +30,7 @@ public class User {
     private String userPhone;
 
     @ManyToMany
-    @JoinTable(name = "user_roles",
+    @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> userRoles;

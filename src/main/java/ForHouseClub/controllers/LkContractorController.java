@@ -19,20 +19,19 @@ import java.util.stream.Collectors;
 public class LkContractorController {
     private final LkContractorService lkContractorService;
 
+    @GetMapping
+    public List<LkContractorDto> findAll() {
+        return lkContractorService.findAll()
+                .stream().map(LkContractorDto::new).collect(Collectors.toList());
+    }
+
+
     @GetMapping("/{id}")
     public LkContractorDto findLkContractorById(@PathVariable Long id) {
         LkContractor lkC = lkContractorService.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find user with id: " + id));
+                new ResourceNotFoundException("Unable to find LK with id: " + id));
         return new LkContractorDto(lkC);
     }
-
-    @GetMapping
-    public List<LkContractorDto> findAll() {
-        return lkContractorService.findAll().stream().map(LkContractorDto::new).collect(Collectors.toList());
-    }
-
-
-
 
 
 }

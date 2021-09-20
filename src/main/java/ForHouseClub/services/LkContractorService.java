@@ -1,5 +1,6 @@
 package ForHouseClub.services;
 
+import ForHouseClub.entities.Company;
 import ForHouseClub.entities.LkContractor;
 import ForHouseClub.repositories.LkContractorRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,4 +22,15 @@ public class LkContractorService {
     public Optional<LkContractor> findById(Long id) {
         return lkContractorRepository.findById(id);
     }
+
+    //TODO найти список всех подрядчиков
+    public List<Company> companiesCustomer() {
+        return null;
+    }
+
+    //TODO найти список всех поставщиков
+    public List<Company> companiesProvider() {
+        return null;
+    }
+
 }

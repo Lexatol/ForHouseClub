@@ -16,9 +16,7 @@ public class LkContractorDto {
 
     public LkContractorDto(LkContractor lkContractor) {
         this.LkContractorId = lkContractor.getLkContractorId();
-        CompanyDto compDto = new CompanyDto(lkContractor.getCompany());
-        this.companyDto = compDto;
-
+        this.companyDto = new CompanyDto(lkContractor.getCompany());
     }
 
 
