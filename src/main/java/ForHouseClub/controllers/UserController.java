@@ -1,11 +1,16 @@
 package ForHouseClub.controllers;
 
+import ForHouseClub.dto.UserDto;
+import ForHouseClub.exceptions.ResourceNotFoundException;
 import ForHouseClub.services.UserServices;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -13,5 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserServices userServices;
 
-    //TODO
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable Long id) {
+        return userServices.findById(id)
+                .stream().map(UserDto::new).findFirst()
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Unable to find user with id: " + id));
+    }
+
+    @GetMapping
+    public List<UserDto> findAll() {
+        return userServices.findAll()
+                .stream().map(UserDto::new)
+                .collect(Collectors.toList());
+    }
 }

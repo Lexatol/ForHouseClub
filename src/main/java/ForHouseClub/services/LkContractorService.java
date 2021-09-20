@@ -12,6 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LkContractorService {
     private final LkContractorRepository lkContractorRepository;
+    private final CompanyServices companyServices;
 
     public List<LkContractor> findAll() {
         return lkContractorRepository.findAll();

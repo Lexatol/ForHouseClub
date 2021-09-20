@@ -1,5 +1,7 @@
 package ForHouseClub.services;
 
+import ForHouseClub.entities.Company;
+import ForHouseClub.entities.LkContractor;
 import ForHouseClub.entities.ProfileContractor;
 import ForHouseClub.repositories.ProfileContractorRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,4 +22,11 @@ public class ProfileContractorServices {
     public Optional<ProfileContractor> findById(Long id) {
         return profileContractorRepository.findById(id);
     }
+
+    //TODO надо дописать запрос для поиска компании по личному кабинету
+//    public Company findCompanyById(LkContractor lkContractor) {
+//        return null;
+//    }
+
+
 }
