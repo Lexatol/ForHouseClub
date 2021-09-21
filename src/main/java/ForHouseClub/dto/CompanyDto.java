@@ -1,14 +1,9 @@
 package ForHouseClub.dto;
 
 import ForHouseClub.entities.Company;
-import ForHouseClub.entities.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 import java.util.stream.Collectors;
 

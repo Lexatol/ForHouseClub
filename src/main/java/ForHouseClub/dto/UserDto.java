@@ -1,11 +1,8 @@
 package ForHouseClub.dto;
 
-import ForHouseClub.entities.Role;
 import ForHouseClub.entities.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Collection;
 
 @Data
 @NoArgsConstructor

@@ -1,7 +1,5 @@
 package ForHouseClub.services;
 
-import ForHouseClub.entities.Company;
-import ForHouseClub.entities.LkContractor;
 import ForHouseClub.entities.ProfileContractor;
 import ForHouseClub.repositories.ProfileContractorRepository;
 import lombok.RequiredArgsConstructor;
