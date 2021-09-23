@@ -12,7 +12,8 @@ create table users
     user_name     varchar(30) not null,
     user_password varchar(80) not null,
     user_email    varchar(50),
-    user_phone    varchar(30)
+    user_phone    varchar(30),
+    user_photo    varchar(255)
 );
 
 --// таблица ролей пользователей:
@@ -49,7 +50,15 @@ create table users_roles
     foreign key (role_id) references roles (role_id)
 );
 
---//таблица личных кабинетов
+--//таблица личных кабинетов пользователей
+create table lk_users (
+    lk_users_id     bigserial primary key,
+    user_id         bigint not null,
+    user_position   varchar(255),
+    foreign key (user_id) references users (user_id)
+);
+
+--//таблица личных кабинетов компаний
 create table lk_companies
 (
     lk_company_id    bigserial primary key,
@@ -128,6 +137,7 @@ values ('Capital Group', 1, 2, 'Russia, Moscow', 10000),
        ('Design Company', 3, 4, 'Italia, Rim', 8),
        ('Engineering', 5, 6, 'Russia, Tula', 100);
 
+insert into lk_users (user_name, user_position)
 
 insert into users_roles (user_id, role_id)
 values (1, 4),

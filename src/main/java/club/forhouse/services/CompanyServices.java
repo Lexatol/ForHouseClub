@@ -1,5 +1,6 @@
 package club.forhouse.services;
 
+import club.forhouse.dto.CompanyDto;
 import club.forhouse.entities.Company;
 import club.forhouse.repositories.CompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,9 @@ public class CompanyServices {
 
     public Optional<Company> findById(Long id) {
         return companyRepository.findById(id);
+    }
+
+    public CompanyDto findByName(String companyName) {
+        return new CompanyDto(companyRepository.findByName(companyName));
     }
 }
