@@ -1,5 +1,5 @@
 --//таблица: специализация компании
-create table specialization
+create table specializations
 (
     specialization_id    serial primary key,
     specialization_title varchar(255)
@@ -50,9 +50,9 @@ create table users_roles
 );
 
 --//таблица личных кабинетов
-create table lk_contractors
+create table lk_companies
 (
-    lk_contractor_id bigserial primary key,
+    lk_company_id    bigserial primary key,
     company_id       bigint not null,
     foreign key (company_id) references companies (company_id)
 );
@@ -61,10 +61,10 @@ create table lk_contractors
 create table profile_companies
 (
     profile_id        bigserial primary key,
-    lk_contractor_id  bigint,
+    lk_company_id  bigint,
     specialization_id int not null,
-    foreign key (specialization_id) references specialization (specialization_id),
-    foreign key (lk_contractor_id) references lk_contractors (lk_contractor_id)
+    foreign key (specialization_id) references specializations (specialization_id),
+    foreign key (lk_company_id) references lk_companies (lk_company_id)
 );
 
 --//таблица связей компаний
@@ -100,7 +100,7 @@ create table companies_pm
     foreign key (company_id) references companies (company_id)
 );
 
-insert into specialization (specialization_title)
+insert into specializations (specialization_title)
 values ('Builder'),
        ('Designer'),
        ('Architect'),
@@ -137,12 +137,12 @@ values (1, 4),
        (3, 1),
        (3, 3);
 
-insert into lk_contractors (company_id)
+insert into lk_companies (company_id)
 values (1),
        (2),
        (3);
 
-insert into profile_companies (profile_id, lk_contractor_id, specialization_id)
+insert into profile_companies (profile_id, lk_company_id, specialization_id)
 values (1, 1, 1),
        (2, 2, 2),
        (3, 3, 3);
