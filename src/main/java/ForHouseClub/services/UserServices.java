@@ -2,7 +2,6 @@ package ForHouseClub.services;
 
 import ForHouseClub.entities.User;
 import ForHouseClub.repositories.UserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

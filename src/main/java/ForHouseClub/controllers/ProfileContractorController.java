@@ -1,9 +1,7 @@
 package ForHouseClub.controllers;
 
 
-import ForHouseClub.dto.LkContractorDto;
 import ForHouseClub.dto.ProfileContractorDto;
-import ForHouseClub.entities.LkContractor;
 import ForHouseClub.entities.ProfileContractor;
 import ForHouseClub.exceptions.ResourceNotFoundException;
 import ForHouseClub.services.ProfileContractorServices;
