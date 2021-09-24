@@ -5,7 +5,7 @@
         .module('app', ['ngRoute', 'ngStorage'])
         .config(config);
 
-    function config($routeProvider, $httpProvider) {
+    function config($routeProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'main/main.html'
