@@ -13,11 +13,11 @@
             })
             .when('/profileCompanies', {
                 templateUrl: 'profileCompanies/profileCompanies.html',
-                controller: 'profileContractorController'
+                controller: 'ProfileContractorController'
             })
             .when('/users', {
                 templateUrl: 'users/users.html',
-                controller: 'userController'
+                controller: 'UserController'
             })
             .otherwise({
                 redirect: '/'
