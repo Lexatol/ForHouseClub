@@ -3,20 +3,21 @@
 
     angular
         .module('app', ['ngRoute', 'ngStorage'])
-        .config(config);
+        .config(config)
+        .run();
 
     function config($routeProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'main/main.html'
             })
-            .when('/profile_companies', {
-                templateUrl: 'contractor/profile_companies.html',
-                controller: 'ProfileContractorController'
+            .when('/profileCompanies', {
+                templateUrl: 'profileCompanies/profileCompanies.html',
+                controller: 'profileContractorController'
             })
             .when('/users', {
                 templateUrl: 'users/users.html',
-                controller: 'UserController'
+                controller: 'userController'
             })
             .otherwise({
                 redirect: '/'

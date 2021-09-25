@@ -4,15 +4,16 @@
         <input class="form-control" type="number" hidden ng-model="user.id">
         <div class="form-group col-md-6">
             <label for="elementUsername">Имя пользователя</label>
-            <input ng-readonly="true" class="form-control" type="text" ng-model="user.username" id="elementUsername">
+            <input ng-readonly="true" class="form-control" type="text" ng-model="user.username" id="elementUsername"
+                placeholder="{{user.username}}">
         </div>
         <div class="form-group col-md-6">
-            <label for="elementHobbies">Почта</label>
-            <input class="form-control" type="text" ng-model="user.email" id="elementHobbies">
+            <label for="elementEmail">Почта</label>
+            <input class="form-control" type="text" ng-model="user.email" id="elementEmail">
         </div>
         <div class="form-group col-md-6">
-            <label for="elementPass">Телефон</label>
-            <input class="form-control" type="password" ng-model="user.phone" id="elementPass">
+            <label for="elementPhone">Телефон</label>
+            <input class="form-control" type="password" ng-model="user.phone" id="elementPhone">
         </div>
     </form>
 </div>
