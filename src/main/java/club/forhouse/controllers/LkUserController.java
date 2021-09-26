@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/lk_users")
+@RequestMapping("api/v1/profile_users")
 public class LkUserController {
     private final LkUserService lkUserService;
 

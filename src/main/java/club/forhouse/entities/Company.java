@@ -27,8 +27,8 @@ public class Company {
     @Column(name = "company_name")
     private String companyName;
 
-    @Column(name = "company_address")
-    private String companyAddress;
+    @Column(name = "legal_address")
+    private String legalAddress;
 
     @Column(name = "company_phone")
     private String companyPhone;
@@ -50,6 +50,21 @@ public class Company {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     @ToString.Exclude
     private List<User> projectManagers;
+
+    @OneToMany
+    @JoinTable(name = "connection_contractor_customers",
+            joinColumns = @JoinColumn(name = "contractor_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_customer_id "))
+    @ToString.Exclude
+    private List<Company> listCustomers;
+
+
+    @OneToMany
+    @JoinTable(name = "connection_contractor_providers",
+            joinColumns = @JoinColumn(name = "contractor_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_provider_id "))
+    @ToString.Exclude
+    private List<Company> listProviders;
 
     @Override
     public boolean equals(Object o) {

@@ -1,27 +1,45 @@
 --//таблица: специализация компании
 create table specializations
 (
-    specialization_id    serial primary key,
-    specialization_title varchar(255)
+    specialization_id       serial primary key,
+    specialization_title    varchar(255)
 );
 
 --//таблица пользователей сервиса
 create table users
 (
-    user_id       bigserial primary key,
-    user_name     varchar(30) not null,
-    user_password varchar(80) not null,
-    user_email    varchar(50),
-    user_phone    varchar(30),
-    user_photo    varchar(255)
+    user_id                 bigserial primary key,
+    user_name               varchar(30) not null,
+    user_password           varchar(80) not null,
+    user_email              varchar(50),
+    user_phone              varchar(30),
+    user_photo              varchar(255)
 );
 
 --// таблица ролей пользователей:
 --// заказчик, подрядчик, администратор FHC(for house club), менеджер FHC
 create table roles
 (
-    role_id   serial primary key,
-    role_name varchar(50) not null
+    role_id                 serial primary key,
+    role_name               varchar(50) not null
+);
+
+--//кросс таблица пользователей, ролей
+create table users_roles
+(
+    user_id                bigint not null,
+    role_id                int not null,
+    primary key (user_id, role_id),
+    foreign key (user_id) references users (user_id),
+    foreign key (role_id) references roles (role_id)
+);
+
+--//таблица личных кабинетов пользователей
+create table profile_users (
+    profile_id             bigserial primary key,
+    user_id                bigint not null,
+    user_position          varchar(255),
+    foreign key (user_id) references users (user_id)
 );
 
 
@@ -30,58 +48,37 @@ create table companies
 (
     company_id             bigserial primary key,
     company_name           varchar(255) not null,
+    inn                    int not null,
+    kpp                    int not null,
     general_manager        bigint       not null,
     project_manager        bigint       not null,
-    company_address        varchar(255),
+    legal_address          varchar(255),
+    actual_address         varchar(255),
     company_phone          varchar(255),
     company_email          varchar(255),
     composition_And_Number int,
+    description            varchar,
     foreign key (general_manager) references users (user_id),
     foreign key (project_manager) references users (user_id)
 );
 
---//кросс таблица пользователей, ролей
-create table users_roles
-(
-    user_id bigint not null,
-    role_id int    not null,
-    primary key (user_id, role_id),
-    foreign key (user_id) references users (user_id),
-    foreign key (role_id) references roles (role_id)
-);
-
---//таблица личных кабинетов пользователей
-create table lk_users (
-    lk_users_id     bigserial primary key,
-    user_id         bigint not null,
-    user_position   varchar(255),
-    foreign key (user_id) references users (user_id)
-);
-
---//таблица личных кабинетов компаний
-create table lk_companies
-(
-    lk_company_id    bigserial primary key,
-    company_id       bigint not null,
-    foreign key (company_id) references companies (company_id)
-);
 
 --//таблица профилей компаний
 create table profile_companies
 (
-    profile_id        bigserial primary key,
-    lk_company_id  bigint,
-    specialization_id int not null,
+    profile_id             bigserial primary key,
+    company_id             bigint,
+    specialization_id      int not null,
     foreign key (specialization_id) references specializations (specialization_id),
-    foreign key (lk_company_id) references lk_companies (lk_company_id)
+    foreign key (company_id) references companies (company_id)
 );
 
 --//таблица связей компаний
 create table connection_contractor_customers
 (
-    contractor_id       bigint,
-    company_customer_id bigint,
-    status_connection   varchar(255), --//статус: подрядчик, поставщик
+    contractor_id          bigint,
+    company_customer_id    bigint,
+    status_connection      varchar(255), --//статус: подрядчик, поставщик
     primary key (contractor_id, company_customer_id),
     foreign key (contractor_id) references companies (company_id),
     foreign key (company_customer_id) references companies (company_id),
@@ -90,9 +87,9 @@ create table connection_contractor_customers
 
 create table connection_contractor_providers
 (
-    contractor_id       bigint,
-    company_provider_id bigint,
-    status_connection   varchar(255), --//статус: подрядчик, поставщик
+    contractor_id          bigint,
+    company_provider_id    bigint,
+    status_connection      varchar(255), --//статус: подрядчик, поставщик
     primary key (contractor_id, company_provider_id),
     foreign key (contractor_id) references companies (company_id),
     foreign key (company_provider_id) references companies (company_id),
@@ -102,8 +99,8 @@ create table connection_contractor_providers
 --//таблица связей компании и project_manager
 create table companies_pm
 (
-    company_id bigint not null,
-    user_id    int    not null,
+    company_id             bigint not null,
+    user_id                int not null,
     primary key (company_id, user_id),
     foreign key (user_id) references users (user_id),
     foreign key (company_id) references companies (company_id)
@@ -131,13 +128,16 @@ VALUES ('CONTRACTOR'),
        ('ADMIN'),
        ('MANAGER');
 
-insert into companies (company_name, general_manager, project_manager,
-                       company_address, composition_And_Number)
-values ('Capital Group', 1, 2, 'Russia, Moscow', 10000),
-       ('Design Company', 3, 4, 'Italia, Rim', 8),
-       ('Engineering', 5, 6, 'Russia, Tula', 100);
+insert into companies (company_name,inn, kpp, general_manager, project_manager,
+                       legal_address, composition_And_Number)
+values ('Capital Group',123445,2312,  1, 2, 'Russia, Moscow', 10000),
+       ('Design Company',123445,2312,  3, 4, 'Italia, Rim', 8),
+       ('Engineering',123445,2312,  5, 6, 'Russia, Tula', 100);
 
-insert into lk_users (user_name, user_position)
+insert into profile_users (user_id, user_position)
+values
+(1, 'general manager'),
+(2, 'project manage');
 
 insert into users_roles (user_id, role_id)
 values (1, 4),
@@ -147,12 +147,7 @@ values (1, 4),
        (3, 1),
        (3, 3);
 
-insert into lk_companies (company_id)
-values (1),
-       (2),
-       (3);
-
-insert into profile_companies (profile_id, lk_company_id, specialization_id)
+insert into profile_companies (profile_id, company_id, specialization_id)
 values (1, 1, 1),
        (2, 2, 2),
        (3, 3, 3);

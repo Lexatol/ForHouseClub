@@ -1,6 +1,6 @@
 package club.forhouse.services;
 
-import club.forhouse.entities.ProfileContractor;
+import club.forhouse.entities.ProfileCompanies;
 import club.forhouse.repositories.ProfileContractorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,11 @@ import java.util.Optional;
 public class ProfileContractorServices {
     private final ProfileContractorRepository profileContractorRepository;
 
-    public List<ProfileContractor> findAll() {
+    public List<ProfileCompanies> findAll() {
         return profileContractorRepository.findAll();
     }
 
-    public Optional<ProfileContractor> findById(Long id) {
+    public Optional<ProfileCompanies> findById(Long id) {
         return profileContractorRepository.findById(id);
     }
 

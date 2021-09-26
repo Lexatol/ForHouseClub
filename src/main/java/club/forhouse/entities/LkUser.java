@@ -13,11 +13,11 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-@Table(name = "lk_users")
+@Table(name = "profile_users")
 public class LkUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lk_user_id")
+    @Column(name = "profile_id")
     private Long lkUserId;
 
     @OneToOne

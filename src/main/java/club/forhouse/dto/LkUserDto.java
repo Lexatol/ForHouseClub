@@ -1,13 +1,11 @@
 package club.forhouse.dto;
 
 import club.forhouse.entities.LkUser;
-import club.forhouse.services.CompanyServices;
 
 public class LkUserDto {
     private Long id;
     private String name;
     private String photo;
-    private CompanyDto company;
     private String position;
 
     public LkUserDto(LkUser lkUser) {
