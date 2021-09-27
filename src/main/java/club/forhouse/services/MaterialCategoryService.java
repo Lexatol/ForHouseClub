@@ -2,6 +2,7 @@ package club.forhouse.services;
 
 import club.forhouse.dto.MaterialCategoryDto;
 import club.forhouse.entities.MaterialCategory;
+import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.MaterialCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,7 +24,8 @@ public class MaterialCategoryService {
     }
 
     public MaterialCategoryDto getById(Long id) {
-        MaterialCategory byId = materialCategoryRepository.getById(id);
+        MaterialCategory byId = materialCategoryRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Material Category with id: " + id));
         return mapper.map(byId, MaterialCategoryDto.class);
     }
 }
