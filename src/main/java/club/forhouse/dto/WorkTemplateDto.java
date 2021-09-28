@@ -13,5 +13,6 @@ public class WorkTemplateDto {
     private String name;
     private String description;
     private List<WorkTemplateMaterialDto> materials;
+    private List<WorkTemplateOperationDto> operations;
 
 }
