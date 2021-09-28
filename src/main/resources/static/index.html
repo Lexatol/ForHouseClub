@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="app">
+<html ng-app="app" ng-controller = "IndexController">
 
 <head>
     <meta charset="utf-8">
@@ -34,18 +34,19 @@
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#!/" class="nav-link active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#!/profileCompanies" class="nav-link">Подрядчики</a></li>
-                <li class="nav-item"><a href="#!/users" class="nav-link">Заказчики</a></li>
+                <li class="nav-item"><a href="#!/profileCompanies" class="nav-link">Профиль подрядчика</a></li>
+                <li class="nav-item"><a href="#!/users" class="nav-link" ng-if="isUserLoggedIn()">Пользователь</a></li>
+                <li class="nav-item"><a href="#!/auth" class="nav-link">Вход</a></li>
             </ul>
         </header>
     </div>
-
 
     <ng-view></ng-view>
 
     <script src="index.js"></script>
     <script src="profileCompanies/profileCompanies.js"></script>
     <script src="users/users.js"></script>
+    <script src="auth/auth.js"></script>
 </div>
 </body>
 </html>

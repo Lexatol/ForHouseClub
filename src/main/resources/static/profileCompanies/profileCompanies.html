@@ -1,1 +1,93 @@
 <h3>Профиль Компании</h3>
+<!--{{companies.lkCompanyDto.companyDto}}
+
+{{companies.lkCompanyDto.companyDto.companyName}}
+-->
+
+<ul>
+    <li>
+        <p>Название компании: {{cDto.companyName}}</p>
+        <p>Адресс: {{cDto.companyAddress}}</p>
+        <p>Телефон: {{cDto.companyPhone}}</p>
+        <p>Email: {{cDto.companyEmail}}</p>
+        <p>Композиция и число: {{cDto.compositionAndNumber}}</p>
+        <p>Глваный Менеджер: {{cDto.generalManager.name}}</p>
+        <p ng-repeat="mInf in cDto.projectManagers">
+            <span>Менеджеры проекта: {{mInf.username}}</span>
+        </p>
+    </li>
+</ul>
+
+<h4>Заказчики</h4>
+<ul>
+    <li ng-repeat="c in cCustomer">
+        <p>Название компании: {{c.companyName}}</p>
+        <p>Адресс: {{c.companyAddress}}</p>
+        <p>Телефон: {{c.companyPhone}}</p>
+        <p>Email: {{c.companyEmail}}</p>
+        <p>Композиция и число: {{c.compositionAndNumber}}</p>
+        <p>Глваный Менеджер: {{c.generalManager.name}}</p>
+        <p ng-repeat="mInf in c.projectManagers">
+            <span>Менеджеры проекта: {{mInf.username}}</span>
+        </p>
+    </li>
+</ul>
+
+<h4>Провайдеры</h4>
+<ul>
+    <li ng-repeat="p in cProvider">
+        <p>Название компании: {{p.companyName}}</p>
+        <p>Адресс: {{p.companyAddress}}</p>
+        <p>Телефон: {{p.companyPhone}}</p>
+        <p>Email: {{p.companyEmail}}</p>
+        <p>Композиция и число: {{p.compositionAndNumber}}</p>
+        <p>Глваный Менеджер: {{p.generalManager.name}}</p>
+        <p ng-repeat="mInf in p.projectManagers">
+            <span>Менеджеры проекта: {{mInf.username}}</span>
+        </p>
+    </li>
+</ul>
+
+<!--
+<table class="table table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>companyName</td>
+        <td>companyAddress</td>
+        <td>companyPhone</td>
+        <td>companyEmail</td>
+        <td>compositionAndNumber</td>
+        <td>generalManager</td>
+        <td>projectManagers</td>
+    </tr>-->
+<!--<tbody>
+    <tr ng-repeat="dto in companies.lkCompanyDto">
+        <td>{{dto.companyName}}</td>
+        <td>{{dto.companyAddress}}</td>
+        <td>{{dto.companyPhone}}</td>
+        <td>{{dto.companyEmail}}</td>
+        <td>{{dto.compositionAndNumber}}</td>
+        <td>{{dto.generalManager.username}}</td>
+        <td ng-repeat="pm in dto">
+            <span>{{pm.username}}</span>
+        </td>
+        </tr>
+    </tbody>
+</table>-->
+
+
+<!--
+<form novalidate>
+    <input class="form-control" type="number" hidden ng-model="companies.profileId">
+    <div class="form-group col-md-6">
+        <label for="elementUsername">Название компании</label>
+        <input class="form-control" type="text" ng-model="companies.CompanyDto." id="elementUsername">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="elementEmail">Почта</label>
+        <input class="form-control" type="text" ng-model="companies.email" id="elementEmail">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="elementPhone">Телефон</label>
+        <input class="form-control" ng-model="companies.phone" id="elementPhone">
+    </div>
+</form>-->
