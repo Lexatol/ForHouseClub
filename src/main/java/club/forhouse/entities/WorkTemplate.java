@@ -25,6 +25,9 @@ public class WorkTemplate {
     @OneToMany(mappedBy = "templateId")
     private List<WorkTemplateMaterial> materials;
 
+    @OneToMany(mappedBy = "templateId")
+    private List<WorkTemplateOperation> operations;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
