@@ -37,6 +37,12 @@ CREATE TABLE operations_categories
     description varchar
 );
 
+
+INSERT INTO operations_categories(name, description)
+VALUES ('Ручные работы', ''),
+       ('Механизированные работы', ''),
+       ('Уборка', '');
+
 CREATE TABLE operations
 (
     operation_id bigserial PRIMARY KEY,
@@ -44,6 +50,14 @@ CREATE TABLE operations
     category_id  bigserial,
     description  varchar
 );
+
+INSERT INTO operations(name, description, category_id)
+VALUES ('Постучать', '', 1),
+       ('Поднять', '', 1),
+       ('Закрутить', '', 2),
+       ('Выкрутить', '', 2),
+       ('Подмести', '', 3),
+       ('Вынести', '', 3);
 
 CREATE TABLE works_templates
 (
