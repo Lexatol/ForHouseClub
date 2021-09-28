@@ -1,7 +1,7 @@
 package club.forhouse.dto;
 
 
-import club.forhouse.entities.ProfileContractor;
+import club.forhouse.entities.ProfileCompanies;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ProfileContractorDto {
     private Long profileId;
-    private LkCompanyDto lkCompanyDto;
+    private CompanyDto companyDto;
     private List<SpecializationDto> specializations;
 
-    public ProfileContractorDto(ProfileContractor profileContractor) {
-        this.profileId = profileContractor.getProfileId();
-        this.lkCompanyDto = new LkCompanyDto(profileContractor.getLkCompany());
-        this.specializations = profileContractor.getSpecializations()
+    public ProfileContractorDto(ProfileCompanies profileCompanies) {
+        this.profileId = profileCompanies.getProfileId();
+        this.companyDto = new CompanyDto(profileCompanies.getCompany());
+        this.specializations = profileCompanies.getSpecializations()
                 .stream().map(SpecializationDto::new).collect(Collectors.toList());
     }
 }
