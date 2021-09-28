@@ -2,7 +2,7 @@ package club.forhouse.controllers;
 
 
 import club.forhouse.dto.ProfileContractorDto;
-import club.forhouse.entities.ProfileContractor;
+import club.forhouse.entities.ProfileCompanies;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.services.ProfileContractorServices;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class ProfileContractorController {
 
     @GetMapping("/{id}")
     public ProfileContractorDto findProfileContractorById(@PathVariable Long id) {
-        ProfileContractor pfC = profileContractorServices.findById(id).orElseThrow(() ->
+        ProfileCompanies pfC = profileContractorServices.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Unable to find profile with id: " + id));
         return new ProfileContractorDto(pfC);
     }

@@ -17,7 +17,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Table(name = "profile_companies")
-public class ProfileContractor {
+public class ProfileCompanies {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,8 @@ public class ProfileContractor {
     private Long profileId;
 
     @OneToOne
-    @JoinColumn(name = "lk_company_id")
-    private LkCompany lkCompany;
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     @OneToMany
     @JoinColumn(name = "specialization_id")
@@ -37,7 +37,7 @@ public class ProfileContractor {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProfileContractor that = (ProfileContractor) o;
+        ProfileCompanies that = (ProfileCompanies) o;
         return Objects.equals(profileId, that.profileId);
     }
 

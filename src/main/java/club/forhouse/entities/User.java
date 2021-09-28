@@ -21,7 +21,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "user_name")
     private String userName;
@@ -34,6 +34,9 @@ public class User {
 
     @Column(name = "user_phone")
     private String userPhone;
+
+    @Column(name = "user_photo")
+    private String photo;
 
     @ManyToMany
     @JoinTable(name = "users_roles",
@@ -48,11 +51,11 @@ public class User {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return Objects.equals(user_id, user.user_id);
+        return Objects.equals(userId, user.userId);
     }
 
     @Override
     public int hashCode() {
-        return user_id != null ? user_id.hashCode() : 0;
+        return userId != null ? userId.hashCode() : 0;
     }
 }

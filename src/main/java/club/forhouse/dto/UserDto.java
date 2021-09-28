@@ -7,15 +7,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserDto {
+    private Long id;
     private String username;
     private String email;
     private String phone;
-//    private Collection<Role> roles;
+    private String photo;
 
     public UserDto(User user) {
+        this.id = user.getUserId();
         this.username = user.getUserName();
         this.email = user.getUserEmail();
         this.phone = user.getUserPhone();
-//        this.roles = user.getUserRoles();
+        this.photo = user.getPhoto();
     }
 }
