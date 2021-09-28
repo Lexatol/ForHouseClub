@@ -4,8 +4,8 @@
     angular
         .module('app', ['ngRoute', 'ngStorage'])
         .config(config)
-        .controller('IndexController', function($scope, $http, $localStorage) {
-            $scope.hello = "hello"
+        .controller('IndexController', function($scope, $http, $localStorage, $route) {
+            $scope.$route = $route;
 
             $scope.isUserLoggedIn = function () {
                 if ($localStorage.currentUser) {
@@ -20,19 +20,23 @@
     function config($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'main/main.html'
+                templateUrl: 'main/main.html',
+                active:'homePage'
             })
             .when('/profileCompanies', {
                 templateUrl: 'profileCompanies/profileCompanies.html',
-                controller: 'ProfileContractorController'
+                controller: 'ProfileContractorController',
+                active:'profileCompanies'
             })
             .when('/users', {
                 templateUrl: 'users/users.html',
-                controller: 'UserController'
+                controller: 'UserController',
+                active:'userPage'
             })
             .when('/auth', {
                 templateUrl: 'auth/auth.html',
-                controller: 'AuthController'
+                controller: 'AuthController',
+                active:'authPage'
             })
             .otherwise({
                 redirect: '/'

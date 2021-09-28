@@ -33,10 +33,14 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#!/" class="nav-link active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#!/profileCompanies" class="nav-link">Профиль подрядчика</a></li>
-                <li class="nav-item"><a href="#!/users" class="nav-link" ng-if="isUserLoggedIn()">Пользователь</a></li>
-                <li class="nav-item"><a href="#!/auth" class="nav-link">Вход</a></li>
+                <li class="nav-item"><a href="#!/" class="nav-link" aria-current="page"
+                                        ng-class="{'active':$route.current.active === 'homePage'}">Главная</a></li>
+                <li class="nav-item"><a href="#!/profileCompanies" class="nav-link"
+                                        ng-class="{'active':$route.current.active === 'profileCompanies'}">Профиль подрядчика</a></li>
+                <li class="nav-item"><a href="#!/users" class="nav-link" ng-if="isUserLoggedIn()"
+                                        ng-class="{'active':$route.current.active === 'userPage'}">Пользователь</a></li>
+                <li class="nav-item"><a href="#!/auth" class="nav-link"
+                                        ng-class="{'active':$route.current.active === 'authPage'}">Вход</a></li>
             </ul>
         </header>
     </div>
