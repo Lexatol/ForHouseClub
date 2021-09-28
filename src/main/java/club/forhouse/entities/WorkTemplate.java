@@ -5,23 +5,18 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "materials")
+@Table(name = "works_templates")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Material {
+public class WorkTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "material_id")
+    @Column(name = "template_id")
     @NonNull
-    private Long materialId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    @ToString.Exclude
-    private MaterialCategory category;
+    private Long templateId;
 
     private String name;
     private String description;
@@ -30,14 +25,12 @@ public class Material {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Material material = (Material) o;
-
-        return materialId.equals(material.materialId);
+        WorkTemplate that = (WorkTemplate) o;
+        return templateId.equals(that.templateId);
     }
 
     @Override
     public int hashCode() {
-        return materialId.hashCode();
+        return templateId.hashCode();
     }
 }

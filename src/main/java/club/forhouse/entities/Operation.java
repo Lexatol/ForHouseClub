@@ -25,4 +25,19 @@ public class Operation {
 
     private String name;
     private String description;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Operation operation = (Operation) o;
+
+        return operationId.equals(operation.operationId);
+    }
+
+    @Override
+    public int hashCode() {
+        return operationId.hashCode();
+    }
 }

@@ -66,6 +66,12 @@ CREATE TABLE works_templates
     description varchar
 );
 
+INSERT INTO works_templates (name)
+VALUES ('Устройство временного туалета и душевой'),
+       ('Монтаж защитных ограждающих конструкций пола и стен'),
+       ('Монтаж перегородок из ПГП блоков 10см (влагостойких)'),
+       ('Монтаж перегородок из ГКЛ в два слоя (с вращающимся телевизором)');
+
 CREATE TABLE works_templates_materials
 (
     row_id      bigserial PRIMARY KEY NOT NULL,
@@ -73,6 +79,14 @@ CREATE TABLE works_templates_materials
     material_id bigserial             NOT NULL,
     quantity    int                   NOT NULL DEFAULT 0
 );
+
+INSERT INTO works_templates_materials (template_id, material_id, quantity)
+VALUES (1, 1, 1),
+       (1, 2, 2),
+       (2, 3, 2),
+       (2, 4, 2),
+       (2, 5, 6),
+       (3, 1, 2);
 
 CREATE TABLE works_templates_operations
 (
@@ -82,3 +96,11 @@ CREATE TABLE works_templates_operations
     quantity     int                   NOT NULL DEFAULT 0
 );
 
+
+INSERT INTO works_templates_operations (template_id, operation_id, quantity)
+VALUES (1, 1, 1),
+       (1, 2, 2),
+       (2, 6, 4),
+       (2, 5, 8),
+       (3, 2, 5),
+       (3, 1, 2);
