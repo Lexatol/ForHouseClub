@@ -23,6 +23,6 @@ public class MaterialService {
     public MaterialDto getById(long id) {
         return materialRepository.findById(id)
                 .map(materialMapper::toDto)
-                .orElseThrow(() -> new ResourceNotFoundException("Unable to find Material Category with id:" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Unable to find Material with id:" + id));
     }
 }
