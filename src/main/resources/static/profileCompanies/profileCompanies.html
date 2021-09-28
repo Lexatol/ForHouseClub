@@ -1,0 +1,45 @@
+<h3>Профиль Компании</h3>
+
+<ul>
+    <li>
+        <p>Название компании: {{cDto.companyName}}</p>
+        <p>Адресс: {{cDto.companyAddress}}</p>
+        <p>Телефон: {{cDto.companyPhone}}</p>
+        <p>Email: {{cDto.companyEmail}}</p>
+        <p>Композиция и число: {{cDto.compositionAndNumber}}</p>
+        <p>Глваный Менеджер: {{cDto.generalManager.name}}</p>
+        <p ng-repeat="mInf in cDto.projectManagers">
+            <span>Менеджеры проекта: {{mInf.username}}</span>
+        </p>
+    </li>
+</ul>
+
+<h4>Заказчики</h4>
+<ul>
+    <li ng-repeat="c in cCustomer">
+        <p>Название компании: {{c.companyName}}</p>
+        <p>Адресс: {{c.companyAddress}}</p>
+        <p>Телефон: {{c.companyPhone}}</p>
+        <p>Email: {{c.companyEmail}}</p>
+        <p>Композиция и число: {{c.compositionAndNumber}}</p>
+        <p>Глваный Менеджер: {{c.generalManager.name}}</p>
+        <p ng-repeat="mInf in c.projectManagers">
+            <span>Менеджеры проекта: {{mInf.username}}</span>
+        </p>
+    </li>
+</ul>
+
+<h4>Провайдеры</h4>
+<ul>
+    <li ng-repeat="p in cProvider">
+        <p>Название компании: {{p.companyName}}</p>
+        <p>Адресс: {{p.companyAddress}}</p>
+        <p>Телефон: {{p.companyPhone}}</p>
+        <p>Email: {{p.companyEmail}}</p>
+        <p>Композиция и число: {{p.compositionAndNumber}}</p>
+        <p>Глваный Менеджер: {{p.generalManager.name}}</p>
+        <p ng-repeat="mInf in p.projectManagers">
+            <span>Менеджеры проекта: {{mInf.username}}</span>
+        </p>
+    </li>
+</ul>
