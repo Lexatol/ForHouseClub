@@ -37,4 +37,13 @@ public class MaterialCategoryService {
         MaterialCategory materialCategory = categoryMapper.map(categoryNewDto, MaterialCategory.class);
         return categoryMapper.map(materialCategoryRepository.save(materialCategory), MaterialCategoryDto.class);
     }
+
+    public MaterialCategoryDto save(MaterialCategoryDto categoryDto) {
+        if (materialCategoryRepository.existsById(categoryDto.getCategoryId())) {
+            MaterialCategory materialCategory = categoryMapper.map(categoryDto, MaterialCategory.class);
+            return categoryMapper.map(materialCategoryRepository.save(materialCategory), MaterialCategoryDto.class);
+        } else {
+            throw new ResourceNotFoundException("Unable to find Material Category with id: " + categoryDto.getCategoryId());
+        }
+    }
 }

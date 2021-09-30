@@ -29,4 +29,10 @@ public class MaterialCategoryController {
     public MaterialCategoryDto addNew(@RequestBody MaterialCategoryNewDto newCategory) {
         return materialCategoryService.addNew(newCategory);
     }
+
+    @PutMapping
+    public MaterialCategoryDto save(@RequestBody MaterialCategoryDto newCategory) {
+        return materialCategoryService.save(newCategory);
+    }
+
 }
