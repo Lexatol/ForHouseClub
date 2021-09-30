@@ -1,6 +1,7 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.MaterialDto;
+import club.forhouse.dto.material.MaterialDto;
+import club.forhouse.dto.material.MaterialNewDto;
 import club.forhouse.services.MaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,5 +23,16 @@ public class MaterialController {
     @GetMapping("/{id}")
     public MaterialDto getById(@PathVariable Long id) {
         return materialService.getById(id);
+    }
+
+
+    @PostMapping
+    public MaterialDto addNew(@RequestBody MaterialNewDto newMaterial) {
+        return materialService.addNew(newMaterial);
+    }
+
+    @PutMapping
+    public MaterialDto save(@RequestBody MaterialDto materialDto) {
+        return materialService.save(materialDto);
     }
 }

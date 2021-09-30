@@ -1,7 +1,7 @@
 package club.forhouse.services;
 
-import club.forhouse.dto.MaterialCategoryDto;
-import club.forhouse.dto.MaterialCategoryNewDto;
+import club.forhouse.dto.material.MaterialCategoryDto;
+import club.forhouse.dto.material.MaterialCategoryNewDto;
 import club.forhouse.entities.MaterialCategory;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.MaterialCategoryRepository;

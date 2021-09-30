@@ -1,7 +1,9 @@
 package club.forhouse.services;
 
 import club.forhouse.configuration.MaterialMapper;
-import club.forhouse.dto.MaterialDto;
+import club.forhouse.dto.material.MaterialDto;
+import club.forhouse.dto.material.MaterialNewDto;
+import club.forhouse.entities.Material;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.MaterialRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,4 +27,19 @@ public class MaterialService {
                 .map(materialMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Unable to find Material with id:" + id));
     }
+
+    public MaterialDto addNew(MaterialNewDto newDto) {
+        Material material = materialMapper.toEntity(newDto);
+        return materialMapper.toDto(materialRepository.save(material));
+    }
+
+    public MaterialDto save(MaterialDto materialDto) {
+        if (materialRepository.existsById(materialDto.getMaterialId())) {
+            Material material = materialMapper.toEntity(materialDto);
+            return materialMapper.toDto(materialRepository.save(material));
+        } else {
+            throw new ResourceNotFoundException("Unable to find Material  with id: " + materialDto.getMaterialId());
+        }
+    }
+
 }

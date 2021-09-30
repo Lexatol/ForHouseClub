@@ -1,7 +1,7 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.MaterialCategoryDto;
-import club.forhouse.dto.MaterialCategoryNewDto;
+import club.forhouse.dto.material.MaterialCategoryDto;
+import club.forhouse.dto.material.MaterialCategoryNewDto;
 import club.forhouse.services.MaterialCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
