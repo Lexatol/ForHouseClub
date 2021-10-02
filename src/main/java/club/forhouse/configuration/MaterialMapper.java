@@ -80,6 +80,8 @@ public class MaterialMapper {
             MaterialCategory category = categoryRepository.findById(source.getCategoryId())
                     .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %d not exist", source.getCategoryId())));
             destination.setCategory(category);
+        } else {
+            destination.setCategory(null);
         }
     }
 
@@ -88,6 +90,8 @@ public class MaterialMapper {
             MaterialCategory category = categoryRepository.findById(source.getCategoryId())
                     .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %d not exist", source.getCategoryId())));
             destination.setCategory(category);
+        } else {
+            destination.setCategory(null);
         }
     }
 
@@ -98,6 +102,4 @@ public class MaterialMapper {
             destination.setCategory(category.getName());
         }
     }
-
-
 }

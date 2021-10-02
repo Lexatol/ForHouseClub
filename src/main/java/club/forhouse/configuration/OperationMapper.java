@@ -1,6 +1,7 @@
 package club.forhouse.configuration;
 
 import club.forhouse.dto.operation.OperationDto;
+import club.forhouse.dto.operation.OperationNewDto;
 import club.forhouse.entities.Operation;
 import club.forhouse.entities.OperationCategory;
 import club.forhouse.exceptions.ResourceNotFoundException;
@@ -28,10 +29,19 @@ public class OperationMapper {
 
         mapper.createTypeMap(OperationDto.class, Operation.class)
                 .addMappings(m -> m.skip(Operation::setCategory)).setPostConverter(toEntityConverter());
+
+        mapper.createTypeMap(OperationNewDto.class, Operation.class)
+                .addMappings(m -> m.skip(Operation::setCategory)).setPostConverter(toNewEntityConverter())
+                .addMappings(m -> m.skip(Operation::setOperationId));
+
     }
 
 
     public Operation toEntity(OperationDto dto) {
+        return Objects.isNull(dto) ? null : mapper.map(dto, Operation.class);
+    }
+
+    public Operation toEntity(OperationNewDto dto) {
         return Objects.isNull(dto) ? null : mapper.map(dto, Operation.class);
     }
 
@@ -42,6 +52,15 @@ public class OperationMapper {
     public Converter<OperationDto, Operation> toEntityConverter() {
         return context -> {
             OperationDto source = context.getSource();
+            Operation destination = context.getDestination();
+            mapCategory(source, destination);
+            return context.getDestination();
+        };
+    }
+
+    public Converter<OperationNewDto, Operation> toNewEntityConverter() {
+        return context -> {
+            OperationNewDto source = context.getSource();
             Operation destination = context.getDestination();
             mapCategory(source, destination);
             return context.getDestination();
@@ -62,6 +81,18 @@ public class OperationMapper {
             OperationCategory category = categoryRepository.findById(source.getCategoryId())
                     .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %d not exist", source.getCategoryId())));
             destination.setCategory(category);
+        } else {
+            destination.setCategory(null);
+        }
+    }
+
+    private void mapCategory(OperationNewDto source, Operation destination) {
+        if (source.getCategoryId() != null) {
+            OperationCategory category = categoryRepository.findById(source.getCategoryId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %d not exist", source.getCategoryId())));
+            destination.setCategory(category);
+        } else {
+            destination.setCategory(null);
         }
     }
 
