@@ -1,6 +1,6 @@
 package club.forhouse.configuration;
 
-import club.forhouse.dto.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
 import club.forhouse.entities.Operation;
 import club.forhouse.entities.WorkTemplate;
 import club.forhouse.entities.WorkTemplateOperation;

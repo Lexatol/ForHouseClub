@@ -1,7 +1,7 @@
 package club.forhouse.services;
 
 import club.forhouse.configuration.WorkTemplateOperationMapper;
-import club.forhouse.dto.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
 import club.forhouse.entities.WorkTemplate;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.WorkTemplateOperationRepository;

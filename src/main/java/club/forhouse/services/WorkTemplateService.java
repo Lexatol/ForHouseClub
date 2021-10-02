@@ -1,6 +1,6 @@
 package club.forhouse.services;
 
-import club.forhouse.dto.WorkTemplateDto;
+import club.forhouse.dto.worktemplate.WorkTemplateDto;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.WorkTemplateRepository;
 import lombok.RequiredArgsConstructor;

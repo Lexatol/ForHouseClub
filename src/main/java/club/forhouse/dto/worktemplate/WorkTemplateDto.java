@@ -1,4 +1,4 @@
-package club.forhouse.dto;
+package club.forhouse.dto.worktemplate;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

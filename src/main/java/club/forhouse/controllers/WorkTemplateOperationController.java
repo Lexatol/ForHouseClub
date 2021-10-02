@@ -1,6 +1,6 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
 import club.forhouse.services.WorkTemplateOperationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
