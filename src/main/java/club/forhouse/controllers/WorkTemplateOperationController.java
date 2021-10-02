@@ -1,6 +1,7 @@
 package club.forhouse.controllers;
 
 import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationNewDto;
 import club.forhouse.services.WorkTemplateOperationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,8 +27,19 @@ public class WorkTemplateOperationController {
         return templateOperationService.getById(id);
     }
 
-    @GetMapping("/by_template/{templateId}")
-    public List<WorkTemplateOperationDto> getByTemplateId(@PathVariable Long templateId) {
+    @GetMapping("/find")
+    public List<WorkTemplateOperationDto> getByTemplateId(@RequestParam(name = "tmpl") Long templateId) {
         return templateOperationService.getByTemplateId(templateId);
     }
+
+    @PostMapping
+    public WorkTemplateOperationDto addNew(@RequestBody WorkTemplateOperationNewDto operationNewDto) {
+        return templateOperationService.addNew(operationNewDto);
+    }
+
+    @PutMapping
+    public WorkTemplateOperationDto save(@RequestBody WorkTemplateOperationDto operationDto) {
+        return templateOperationService.save(operationDto);
+    }
+
 }

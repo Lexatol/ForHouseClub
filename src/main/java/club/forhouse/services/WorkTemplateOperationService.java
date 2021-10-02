@@ -2,7 +2,9 @@ package club.forhouse.services;
 
 import club.forhouse.configuration.WorkTemplateOperationMapper;
 import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationNewDto;
 import club.forhouse.entities.WorkTemplate;
+import club.forhouse.entities.WorkTemplateOperation;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.WorkTemplateOperationRepository;
 import club.forhouse.repositories.WorkTemplateRepository;
@@ -43,5 +45,22 @@ public class WorkTemplateOperationService {
         );
         return templateOperationRepository.findAllByTemplateId(template)
                 .stream().map(modelMapper::toDto).collect(Collectors.toList());
+    }
+
+    public WorkTemplateOperationDto addNew(WorkTemplateOperationNewDto newDto) {
+        return modelMapper.toDto(templateOperationRepository.save(modelMapper.toEntity(newDto)));
+    }
+
+    public WorkTemplateOperationDto save(WorkTemplateOperationDto operationDto) {
+        if (templateOperationRepository.existsById(operationDto.getOperationId())) {
+            if (templateRepository.existsById(operationDto.getTemplateId())) {
+                WorkTemplateOperation operation = modelMapper.toEntity(operationDto);
+                return modelMapper.toDto(templateOperationRepository.save(operation));
+            } else {
+                throw new ResourceNotFoundException("Unable to find Work Template with id: " + operationDto.getTemplateId());
+            }
+        } else {
+            throw new ResourceNotFoundException("Unable to find Work Template Operation with id: " + operationDto.getOperationId());
+        }
     }
 }
