@@ -6,6 +6,7 @@ import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.services.LkUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class LkUserController {
     }
 
     @GetMapping("/{id}")
-    public LkUserDto findById(Long id) {
+    public LkUserDto findById(@PathVariable Long id) {
         LkUser lkU = lkUserService.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Unable to find LK user with id: " + id));
         return new LkUserDto(lkU);

@@ -28,7 +28,7 @@ public class WorkTemplateMaterialController {
     }
 
     @GetMapping("/find")
-    public List<WorkTemplateMaterialDto> getByTemplateId(@RequestParam(name = "tmplt") Long templateId) {
+    public List<WorkTemplateMaterialDto> getByTemplateId(@RequestParam(name = "tmpl") Long templateId) {
         return templateMaterialService.getByTemplateId(templateId);
     }
 

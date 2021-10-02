@@ -120,18 +120,14 @@ public class WorkTemplateMaterialMapper {
 
     private void mapMaterial(WorkTemplateMaterial source, WorkTemplateMaterialDto destination) {
         Material material = source.getMaterialId();
-        if (material != null) {
-            destination.setMaterial(material.getName());
-            destination.setMaterialId(material.getMaterialId());
-        }
+        destination.setMaterial(material.getName());
+        destination.setMaterialId(material.getMaterialId());
     }
 
     private void mapTemplate(WorkTemplateMaterial source, WorkTemplateMaterialDto destination) {
         WorkTemplate template = source.getTemplateId();
-        if (template != null) {
-            destination.setTemplate(template.getName());
-            destination.setTemplateId(template.getTemplateId());
-        }
+        destination.setTemplate(template.getName());
+        destination.setTemplateId(template.getTemplateId());
     }
 
 }

@@ -84,18 +84,14 @@ public class WorkTemplateOperationMapper {
 
     private void mapOperation(WorkTemplateOperation source, WorkTemplateOperationDto destination) {
         Operation operation = source.getOperationId();
-        if (operation != null) {
-            destination.setOperation(operation.getName());
-            destination.setOperationId(operation.getOperationId());
-        }
+        destination.setOperation(operation.getName());
+        destination.setOperationId(operation.getOperationId());
     }
 
     private void mapTemplate(WorkTemplateOperation source, WorkTemplateOperationDto destination) {
         WorkTemplate template = source.getTemplateId();
-        if (template != null) {
-            destination.setTemplate(template.getName());
-            destination.setTemplateId(template.getTemplateId());
-        }
+        destination.setTemplate(template.getName());
+        destination.setTemplateId(template.getTemplateId());
     }
 
 }
