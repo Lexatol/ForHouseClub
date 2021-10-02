@@ -16,7 +16,7 @@ public class WorkTemplateController {
     @GetMapping
     public Page<WorkTemplateDto> getAll(@RequestParam(name = "page", defaultValue = "1") int page,
                                         @RequestParam(defaultValue = "5") int size) {
-        return workTemplateService.getAll(page, size);
+        return workTemplateService.getAll(page - 1, size);
     }
 
     @GetMapping("/{id}")

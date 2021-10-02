@@ -1,6 +1,7 @@
 package club.forhouse.configuration;
 
 import club.forhouse.dto.worktemplate.WorkTemplateMaterialDto;
+import club.forhouse.dto.worktemplate.WorkTemplateMaterialNewDto;
 import club.forhouse.entities.Material;
 import club.forhouse.entities.WorkTemplate;
 import club.forhouse.entities.WorkTemplateMaterial;
@@ -35,10 +36,19 @@ public class WorkTemplateMaterialMapper {
                 .addMappings(m -> m.skip(WorkTemplateMaterial::setTemplateId))
                 .addMappings(m -> m.skip(WorkTemplateMaterial::setMaterialId))
                 .setPostConverter(toEntityConverter());
+
+        mapper.createTypeMap(WorkTemplateMaterialNewDto.class, WorkTemplateMaterial.class)
+                .addMappings(m -> m.skip(WorkTemplateMaterial::setTemplateId))
+                .addMappings(m -> m.skip(WorkTemplateMaterial::setMaterialId))
+                .addMappings(m -> m.skip(WorkTemplateMaterial::setRowId))
+                .setPostConverter(toNewEntityConverter());
     }
 
-
     public WorkTemplateMaterial toEntity(WorkTemplateMaterialDto dto) {
+        return Objects.isNull(dto) ? null : mapper.map(dto, WorkTemplateMaterial.class);
+    }
+
+    public WorkTemplateMaterial toEntity(WorkTemplateMaterialNewDto dto) {
         return Objects.isNull(dto) ? null : mapper.map(dto, WorkTemplateMaterial.class);
     }
 
@@ -46,7 +56,7 @@ public class WorkTemplateMaterialMapper {
         return Objects.isNull(material) ? null : mapper.map(material, WorkTemplateMaterialDto.class);
     }
 
-    public Converter<WorkTemplateMaterialDto, WorkTemplateMaterial> toEntityConverter() {
+    private Converter<WorkTemplateMaterialDto, WorkTemplateMaterial> toEntityConverter() {
         return context -> {
             WorkTemplateMaterialDto source = context.getSource();
             WorkTemplateMaterial destination = context.getDestination();
@@ -56,7 +66,17 @@ public class WorkTemplateMaterialMapper {
         };
     }
 
-    public Converter<WorkTemplateMaterial, WorkTemplateMaterialDto> toDtoConverter() {
+    private Converter<WorkTemplateMaterialNewDto, WorkTemplateMaterial> toNewEntityConverter() {
+        return context -> {
+            WorkTemplateMaterialNewDto source = context.getSource();
+            WorkTemplateMaterial destination = context.getDestination();
+            mapMaterial(source, destination);
+            mapTemplate(source, destination);
+            return context.getDestination();
+        };
+    }
+
+    private Converter<WorkTemplateMaterial, WorkTemplateMaterialDto> toDtoConverter() {
         return context -> {
             WorkTemplateMaterial source = context.getSource();
             WorkTemplateMaterialDto destination = context.getDestination();
@@ -74,7 +94,23 @@ public class WorkTemplateMaterialMapper {
         }
     }
 
+    private void mapMaterial(WorkTemplateMaterialNewDto source, WorkTemplateMaterial destination) {
+        if (source.getMaterialId() != null) {
+            Material material = materialRepository.findById(source.getMaterialId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("Material with id %d not exist", source.getMaterialId())));
+            destination.setMaterialId(material);
+        }
+    }
+
     private void mapTemplate(WorkTemplateMaterialDto source, WorkTemplateMaterial destination) {
+        if (source.getTemplateId() != null) {
+            WorkTemplate template = workTemplateRepository.findById(source.getTemplateId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplate with id %d not exist", source.getTemplateId())));
+            destination.setTemplateId(template);
+        }
+    }
+
+    private void mapTemplate(WorkTemplateMaterialNewDto source, WorkTemplateMaterial destination) {
         if (source.getTemplateId() != null) {
             WorkTemplate template = workTemplateRepository.findById(source.getTemplateId())
                     .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplate with id %d not exist", source.getTemplateId())));

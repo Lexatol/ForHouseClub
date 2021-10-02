@@ -2,7 +2,9 @@ package club.forhouse.services;
 
 import club.forhouse.configuration.WorkTemplateMaterialMapper;
 import club.forhouse.dto.worktemplate.WorkTemplateMaterialDto;
+import club.forhouse.dto.worktemplate.WorkTemplateMaterialNewDto;
 import club.forhouse.entities.WorkTemplate;
+import club.forhouse.entities.WorkTemplateMaterial;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.WorkTemplateMaterialRepository;
 import club.forhouse.repositories.WorkTemplateRepository;
@@ -43,5 +45,22 @@ public class WorkTemplateMaterialService {
         );
         return templateMaterialRepository.findAllByTemplateId(template)
                 .stream().map(modelMapper::toDto).collect(Collectors.toList());
+    }
+
+    public WorkTemplateMaterialDto addNew(WorkTemplateMaterialNewDto newDto) {
+        return modelMapper.toDto(templateMaterialRepository.save(modelMapper.toEntity(newDto)));
+    }
+
+    public WorkTemplateMaterialDto save(WorkTemplateMaterialDto materialDto) {
+        if (templateMaterialRepository.existsById(materialDto.getMaterialId())) {
+            if (templateRepository.existsById(materialDto.getTemplateId())) {
+                WorkTemplateMaterial material = modelMapper.toEntity(materialDto);
+                return modelMapper.toDto(templateMaterialRepository.save(material));
+            } else {
+                throw new ResourceNotFoundException("Unable to find Work Template with id: " + materialDto.getTemplateId());
+            }
+        } else {
+            throw new ResourceNotFoundException("Unable to find Work Template Material with id: " + materialDto.getMaterialId());
+        }
     }
 }
