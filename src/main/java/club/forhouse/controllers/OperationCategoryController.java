@@ -1,12 +1,10 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.OperationCategoryDto;
+import club.forhouse.dto.operation.OperationCategoryDto;
+import club.forhouse.dto.operation.OperationCategoryNewDto;
 import club.forhouse.services.OperationCategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +24,15 @@ public class OperationCategoryController {
     public OperationCategoryDto getById(@PathVariable Long id) {
         return operationCategoryService.getById(id);
     }
+
+    @PostMapping
+    public OperationCategoryDto addNew(@RequestBody OperationCategoryNewDto newCategory) {
+        return operationCategoryService.addNew(newCategory);
+    }
+
+    @PutMapping
+    public OperationCategoryDto save(@RequestBody OperationCategoryDto newCategory) {
+        return operationCategoryService.save(newCategory);
+    }
+
 }

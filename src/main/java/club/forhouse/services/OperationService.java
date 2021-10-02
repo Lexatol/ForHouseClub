@@ -1,7 +1,7 @@
 package club.forhouse.services;
 
 import club.forhouse.configuration.OperationMapper;
-import club.forhouse.dto.OperationDto;
+import club.forhouse.dto.operation.OperationDto;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.OperationRepository;
 import lombok.RequiredArgsConstructor;

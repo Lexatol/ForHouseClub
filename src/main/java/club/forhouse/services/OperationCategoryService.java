@@ -1,6 +1,8 @@
 package club.forhouse.services;
 
-import club.forhouse.dto.OperationCategoryDto;
+import club.forhouse.dto.operation.OperationCategoryDto;
+import club.forhouse.dto.operation.OperationCategoryNewDto;
+import club.forhouse.entities.OperationCategory;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.OperationCategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +31,20 @@ public class OperationCategoryService {
                 .map(it -> categoryMapper.map(it, OperationCategoryDto.class))
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Unable to find Operation Category with id: " + id));
+    }
+
+
+    public OperationCategoryDto addNew(OperationCategoryNewDto categoryNewDto) {
+        OperationCategory category = categoryMapper.map(categoryNewDto, OperationCategory.class);
+        return categoryMapper.map(operationCategoryRepository.save(category), OperationCategoryDto.class);
+    }
+
+    public OperationCategoryDto save(OperationCategoryDto categoryDto) {
+        if (operationCategoryRepository.existsById(categoryDto.getCategoryId())) {
+            OperationCategory materialCategory = categoryMapper.map(categoryDto, OperationCategory.class);
+            return categoryMapper.map(operationCategoryRepository.save(materialCategory), OperationCategoryDto.class);
+        } else {
+            throw new ResourceNotFoundException("Unable to find Operation Category with id: " + categoryDto.getCategoryId());
+        }
     }
 }

@@ -1,6 +1,6 @@
 package club.forhouse.configuration;
 
-import club.forhouse.dto.OperationDto;
+import club.forhouse.dto.operation.OperationDto;
 import club.forhouse.entities.Operation;
 import club.forhouse.entities.OperationCategory;
 import club.forhouse.exceptions.ResourceNotFoundException;
