@@ -5,10 +5,7 @@ import club.forhouse.entities.Company;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.services.CompanyServices;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

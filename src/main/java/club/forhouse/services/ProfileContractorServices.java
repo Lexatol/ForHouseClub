@@ -21,6 +21,10 @@ public class ProfileContractorServices {
         return profileContractorRepository.findById(id);
     }
 
+    public Optional<ProfileCompanies> findCompanyByGeneralManagerEmail(String managerEmail) {
+        return profileContractorRepository.findCompanyByGeneralManagerEmail(managerEmail);
+    }
+
     //TODO надо дописать запрос для поиска компании по личному кабинету
 //    public Company findCompanyById(LkCompany lkContractor) {
 //        return null;

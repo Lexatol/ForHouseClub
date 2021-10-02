@@ -22,4 +22,8 @@ public class CompanyServices {
     public Optional<Company> findById(Long id) {
         return companyRepository.findById(id);
     }
+
+    public Optional<Company> findCompanyByGeneralManagerEmail(String manager) {
+        return companyRepository.findCompanyByGeneralManagerEmail(manager);
+    }
 }

@@ -20,4 +20,8 @@ public class RoleServices {
     public Optional<Role> findById(Long id) {
         return roleRepository.findById(id);
     }
+
+    public Role getUserRole() {
+        return roleRepository.findRoleByRoleName("ROLE_USER");
+    }
 }
