@@ -1,6 +1,5 @@
 package club.forhouse.entities;
 
-import club.forhouse.dto.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

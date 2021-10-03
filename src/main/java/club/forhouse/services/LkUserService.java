@@ -2,6 +2,7 @@ package club.forhouse.services;
 
 import club.forhouse.dto.LkUserDto;
 import club.forhouse.entities.LkUser;
+import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.LkUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,10 @@ public class LkUserService {
         return lkUserRepository.findAll().stream().map(LkUserDto::new).collect(Collectors.toList());
     }
 
-    public Optional<LkUser> findById(Long id) {
-        return lkUserRepository.findById(id);
+    public LkUserDto findById(Long id) {
+        LkUser lkUser = lkUserRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find LK user with id: " + id));
+        return new LkUserDto(lkUser);
     }
 }
 

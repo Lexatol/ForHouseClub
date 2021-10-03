@@ -36,8 +36,8 @@ public class Company {
     @Column(name = "company_email")
     private String companyEmail;
 
-    @Column(name = "composition_And_Number")
-    private Integer compositionAndNumber;
+    @Column(name = "number_Employees")
+    private Integer numberEmployees;
 
     @OneToOne
     @JoinColumn(name = "general_manager")

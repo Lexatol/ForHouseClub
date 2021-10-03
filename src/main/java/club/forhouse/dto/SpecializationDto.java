@@ -1,18 +1,20 @@
 package club.forhouse.dto;
 
 import club.forhouse.entities.Specialization;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class SpecializationDto {
 
-    private int specializationId;
-    private String specializationTitle;
+    private Long id;
+    private String title;
 
     public SpecializationDto(Specialization specialization) {
-        this.specializationId = specialization.getSpecializationId();
-        this.specializationTitle = specialization.getSpecializationTitle();
+        this.id = specialization.getSpecializationId();
+        this.title = specialization.getSpecializationTitle();
     }
 }

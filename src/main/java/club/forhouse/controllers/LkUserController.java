@@ -24,9 +24,7 @@ public class LkUserController {
 
     @GetMapping("/{id}")
     public LkUserDto findById(Long id) {
-        LkUser lkU = lkUserService.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find LK user with id: " + id));
-        return new LkUserDto(lkU);
+        return lkUserService.findById(id);
     }
 }
 

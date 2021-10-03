@@ -10,11 +10,15 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class RoleServices {
+public class RoleService {
     private final RoleRepository roleRepository;
 
     public List<Role> findAll() {
         return roleRepository.findAll();
+    }
+
+    public Role getUserRole() {
+        return roleRepository.findRoleByRoleName("ROLE_USER");
     }
 
     public Optional<Role> findById(Long id) {

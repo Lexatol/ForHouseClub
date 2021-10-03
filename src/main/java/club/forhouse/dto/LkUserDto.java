@@ -1,7 +1,12 @@
 package club.forhouse.dto;
 
 import club.forhouse.entities.LkUser;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@NoArgsConstructor
 public class LkUserDto {
     private Long id;
     private String name;

@@ -15,11 +15,11 @@ public class CompanyDto {
     private String legalAddress;
     private String companyPhone;
     private String companyEmail;
-    private Integer compositionAndNumber;
+    private Integer numberEmployees;
     private UserDto generalManager;
     private List<UserDto> projectManagers;
-    private List<CompanyDto> listCustomers;
-    private List<CompanyDto> listProviders;
+    private List<SimpleCompanyDto> listCustomers;
+    private List<SimpleCompanyDto> listProviders;
 
     public CompanyDto(Company company) {
         this.id = company.getCompanyId();
@@ -27,10 +27,11 @@ public class CompanyDto {
         this.legalAddress = company.getLegalAddress();
         this.companyPhone = company.getCompanyPhone();
         this.companyEmail = company.getCompanyEmail();
-        this.compositionAndNumber = company.getCompositionAndNumber();
+        this.numberEmployees = company.getNumberEmployees();
         this.generalManager = new UserDto(company.getGeneralManager());
         this.projectManagers = company.getProjectManagers().stream().map(UserDto::new).collect(Collectors.toList());
-//        this.listCustomers = company.getListCustomers().stream().map(CompanyDto::new).collect(Collectors.toList());
-//        this.listProviders = company.getListProviders().stream().map(CompanyDto::new).collect(Collectors.toList());
+        this.listCustomers = company.getListCustomers().stream().map(SimpleCompanyDto::new).collect(Collectors.toList());
+        this.listProviders = company.getListCustomers().stream().map(SimpleCompanyDto::new).collect(Collectors.toList());
     }
 }
+
