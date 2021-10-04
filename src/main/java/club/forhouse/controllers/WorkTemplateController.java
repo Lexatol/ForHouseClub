@@ -1,6 +1,7 @@
 package club.forhouse.controllers;
 
 import club.forhouse.dto.worktemplate.WorkTemplateDto;
+import club.forhouse.dto.worktemplate.WorkTemplateNewDto;
 import club.forhouse.services.WorkTemplateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,5 +23,10 @@ public class WorkTemplateController {
     @GetMapping("/{id}")
     public WorkTemplateDto getById(@PathVariable Long id) {
         return workTemplateService.getById(id);
+    }
+
+    @PostMapping
+    public WorkTemplateDto addNew(@RequestBody WorkTemplateNewDto newDto) {
+        return workTemplateService.addNew(newDto);
     }
 }

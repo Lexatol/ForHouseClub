@@ -1,6 +1,8 @@
 package club.forhouse.services;
 
 import club.forhouse.dto.worktemplate.WorkTemplateDto;
+import club.forhouse.dto.worktemplate.WorkTemplateNewDto;
+import club.forhouse.entities.WorkTemplate;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.WorkTemplateRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,4 +31,9 @@ public class WorkTemplateService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Unable to find Work Template with id: " + id));
     }
+
+    public WorkTemplateDto addNew(WorkTemplateNewDto newDto) {
+        return modelMapper.map(workTemplateRepository.save(modelMapper.map(newDto, WorkTemplate.class)), WorkTemplateDto.class);
+    }
+
 }

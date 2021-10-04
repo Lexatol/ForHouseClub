@@ -1,17 +1,31 @@
 package club.forhouse.dto.worktemplate;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class WorkTemplateNewDto {
-
     private String name;
     private String description;
-    private List<WorkTemplateMaterialDto> materials;
-    private List<WorkTemplateOperationDto> operations;
+
+    private List<WorkTemplateNewMaterialDto> materials;
+    private List<WorkTemplateNewOperationDto> operations;
+
+    @Data
+    @NoArgsConstructor
+    public static class WorkTemplateNewMaterialDto {
+        private Long materialId;
+        private int quantity;
+    }
+
+    @Data
+    @NoArgsConstructor
+    public static class WorkTemplateNewOperationDto {
+        private Long operationId;
+        private int quantity;
+    }
 
 }
