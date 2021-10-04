@@ -1,6 +1,5 @@
 package club.forhouse.dto;
 
-import club.forhouse.entities.Specialization;
 import lombok.*;
 
 @Getter
@@ -9,12 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SpecializationDto {
+    private Long specializationId;
+    private String specializationTitle;
 
-    private Long id;
-    private String title;
-
-    public SpecializationDto(Specialization specialization) {
-        this.id = specialization.getSpecializationId();
-        this.title = specialization.getSpecializationTitle();
-    }
 }

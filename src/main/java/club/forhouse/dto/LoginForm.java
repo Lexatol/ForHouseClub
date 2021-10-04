@@ -1,8 +1,9 @@
 package club.forhouse.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 public class LoginForm {
     private String email;
     private String password;

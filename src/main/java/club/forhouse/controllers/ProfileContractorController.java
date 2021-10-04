@@ -2,7 +2,7 @@ package club.forhouse.controllers;
 
 
 import club.forhouse.dto.ProfileContractorDto;
-import club.forhouse.services.ProfileContractorService;
+import club.forhouse.services.ProfileCompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,16 +15,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/profile_companies")
 public class ProfileContractorController {
-    private final ProfileContractorService profileContractorService;
+    private final ProfileCompanyService profileCompanyService;
 
     @GetMapping
     public List<ProfileContractorDto> findAll() {
-        return profileContractorService.findAll();
+        return profileCompanyService.findAll();
     }
 
 
     @GetMapping("/{id}")
     public ProfileContractorDto findProfileContractorById(@PathVariable Long id) {
-        return profileContractorService.findById(id);
+        return profileCompanyService.findById(id);
     }
 }

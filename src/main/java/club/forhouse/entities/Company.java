@@ -1,9 +1,6 @@
 package club.forhouse.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -78,4 +75,6 @@ public class Company {
     public int hashCode() {
         return companyId != null ? companyId.hashCode() : 0;
     }
+
+
 }
