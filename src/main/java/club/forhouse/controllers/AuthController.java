@@ -1,17 +1,13 @@
 package club.forhouse.controllers;
 
-import club.forhouse.configuration.JwtTokenUtil;
-import club.forhouse.dto.JwtRequest;
-import club.forhouse.dto.JwtResponse;
-import club.forhouse.exceptions.MarketError;
+import club.forhouse.dto.LoginForm;
+import club.forhouse.dto.UserDto;
+import club.forhouse.entities.User;
+import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.services.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -27,7 +23,6 @@ public class AuthController {
     @PostMapping("/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
-            System.out.println(authRequest.getUsername() + " " + authRequest.getPassword());
             // Аутентификация клиента: authenticationManager - сверяет данные о клиенте с тем что находится  в UserDetails
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         } catch (BadCredentialsException ex) {

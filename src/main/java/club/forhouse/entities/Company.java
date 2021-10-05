@@ -1,9 +1,6 @@
 package club.forhouse.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -36,8 +33,8 @@ public class Company {
     @Column(name = "company_email")
     private String companyEmail;
 
-    @Column(name = "composition_And_Number")
-    private Integer compositionAndNumber;
+    @Column(name = "number_Employees")
+    private Integer numberEmployees;
 
     @OneToOne
     @JoinColumn(name = "general_manager")
@@ -78,4 +75,6 @@ public class Company {
     public int hashCode() {
         return companyId != null ? companyId.hashCode() : 0;
     }
+
+
 }
