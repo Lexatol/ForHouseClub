@@ -56,12 +56,6 @@ public class UserService implements UserDetailsService {
         return userMapper.toListDto(userRepository.findAll());
     }
 
-    public UserDto findByUsername(String name) {
-        User user = userRepository.findUserByUserName(name).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find user with id: " + name));
-        return userMapper.toDto(user);
-    }
-
     public Optional<User> findByUsernameForRegistration(String name) {
         return userRepository.findUserByUserName(name);
     }
@@ -76,13 +70,6 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findUserByUserEmail(email)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Unable to find user with name: " + email));
-        return userMapper.toDto(user);
-    }
-
-    public UserDto findUserByUserEmailAndUserPassword(String email, String password) {
-        User user = userRepository.findUserByUserEmailAndUserPassword(email, password)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Unable to find user with email: " + email));;
         return userMapper.toDto(user);
     }
 
