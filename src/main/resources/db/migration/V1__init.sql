@@ -1,7 +1,7 @@
 --//таблица: специализация компании
 create table specializations
 (
-    specialization_id       serial primary key,
+    specialization_id       bigserial primary key,
     specialization_title    varchar(255)
 );
 
@@ -56,7 +56,7 @@ create table companies
     actual_address         varchar(255),
     company_phone          varchar(255),
     company_email          varchar(255),
-    composition_And_Number int,
+    number_Employees       int,
     description            varchar,
     foreign key (general_manager) references users (user_id),
     foreign key (project_manager) references users (user_id)
@@ -113,23 +113,23 @@ values ('Builder'),
        ('Engineering');
 
 insert into users (user_name, user_password, user_email, user_phone)
-values ('Petya', 123, 'petya@google.com', 89851002121),
-       ('Vasya', 123, 'vasya@google.com', 89851002122),
-       ('Misha', 123, 'misha@google.com', 89851002123),
-       ('Lesha', 123, 'lesha@google.com', 89851002124),
-       ('Ksenya', 123, 'ksenya@google.com', 89851002125),
-       ('Olya', 123, 'olya@google.com', 89851002126);
+values ('Petya', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO', 'petya@google.com', 89851002121),
+       ('Vasya', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO', 'vasya@google.com', 89851002122),
+       ('Misha', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO', 'misha@google.com', 89851002123),
+       ('Lesha', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO', 'lesha@google.com', 89851002124),
+       ('Ksenya', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO', 'ksenya@google.com', 89851002125),
+       ('Olya', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO', 'olya@google.com', 89851002126);
 
 
 insert into roles (role_name)
-VALUES ('CONTRACTOR'),
-       ('CUSTOMER'),
-       ('PROVIDER'),
-       ('ADMIN'),
-       ('MANAGER');
+VALUES ('ROLE_CONTRACTOR'),
+       ('ROLE_CUSTOMER'),
+       ('ROLE_PROVIDER'),
+       ('ROLE_ADMIN'),
+       ('ROLE_MANAGER');
 
 insert into companies (company_name,inn, kpp, general_manager, project_manager,
-                       legal_address, composition_And_Number)
+                       legal_address, number_Employees)
 values ('Capital Group',123445,2312,  1, 2, 'Russia, Moscow', 10000),
        ('Design Company',123445,2312,  3, 4, 'Italia, Rim', 8),
        ('Engineering',123445,2312,  5, 6, 'Russia, Tula', 100);

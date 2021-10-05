@@ -17,7 +17,7 @@
         })
         .run(run);
 
-    function config($routeProvider) {
+    function config($routeProvider, $httpProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'main/main.html',
@@ -38,9 +38,38 @@
                 controller: 'AuthController',
                 active:'authPage'
             })
+            .when('/register', {
+                templateUrl: 'register/register.html',
+                controller: 'regController',
+                active:'regPage'
+            })
             .otherwise({
                 redirect: '/'
             });
+
+
+        $httpProvider.interceptors.push(function ($q, $location) {
+            return {
+                'responseError': function (rejection, $localStorage, $http) {
+                    var defer = $q.defer();
+                    if (rejection.status == 401 || rejection.status == 403) {
+                        console.log('error: 401-403');
+                        $location.path('/auth');
+                        if (!(localStorage.getItem("localUser") === null)) {
+                            delete $localStorage.currentUser;
+                            $http.defaults.headers.common.Authorization = '';
+                            console.log('zxc');
+                        }
+                        console.log(rejection.data);
+                        var answer = JSON.parse(rejection.data);
+                        console.log(answer);
+                        // window.alert(answer.message);
+                    }
+                    defer.reject(rejection);
+                    return defer.promise;
+                }
+            };
+        });
     }
 
     function run($rootScope, $http, $localStorage) {

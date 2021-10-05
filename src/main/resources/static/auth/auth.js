@@ -1,20 +1,22 @@
 angular.module('app').controller('AuthController', function ($scope, $http, $localStorage) {
-    const contextPath = 'http://localhost:8189/fhc';
+    const contextPath = 'http://localhost:8189';
 
     $scope.tryToAuth = function () {
         $http.post(contextPath + '/auth', $scope.user)
             .then(function successCallback(response) {
-                if (response.data) {
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data;
-                    $localStorage.currentUser = {email: $scope.user.email, token: response.data};
+                if (response.data.token) {
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+                    $localStorage.currentUser = {email: $scope.user.username, token: response.data.token};
 
-                    $scope.user.email = null;
+                    $scope.user.username = null;
                     $scope.user.password = null;
 
                     //console.log($localStorage.currentUser);
                 }
             }, function errorCallback(response) {
-                window.alert(response.data.message);
+                try {
+                    window.alert(response.data.message);
+                } catch (e) {}
                 $scope.clearUser();
             });
     };
@@ -23,8 +25,8 @@ angular.module('app').controller('AuthController', function ($scope, $http, $loc
         localStorage.clear();
         $scope.clearUser();
         try {
-            if ($scope.user.email) {
-                $scope.user.email = null;
+            if ($scope.user.username) {
+                $scope.user.username = null;
             }
             if ($scope.user.password) {
                 $scope.user.password = null;

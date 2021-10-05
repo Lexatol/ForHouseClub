@@ -1,14 +1,14 @@
 <h3>Профиль Компании</h3>
 
 <div>
-    <p>Название компании: {{cDto.companyName}}</p>
-    <p>Адресс: {{cDto.legalAddress}}</p>
-    <p>Телефон: {{cDto.companyPhone}}</p>
-    <p>Email: {{cDto.companyEmail}}</p>
-    <p>Композиция и число: {{cDto.compositionAndNumber}}</p>
-    <p>Главный Менеджер: {{cDto.generalManager.username}}</p>
+    <p>Название компании: {{company.companyName}}</p>
+    <p>Адресс: {{company.legalAddress}}</p>
+    <p>Телефон: {{company.phone}}</p>
+    <p>Email: {{company.email}}</p>
+    <p>Число нанимателей: {{company.numberEmployees}}</p>
+    <p>Главный Менеджер: {{company.generalManager.userName}}</p>
     <p>Менеджеры проекта:</p>
-    <p ng-repeat="mInf in cDto.projectManagers">
-        <span>{{mInf.username}}</span>
+    <p ng-repeat="mInf in company.projectManagers">
+        <span>{{mInf.userName}}</span>
     </p>
 </div>
