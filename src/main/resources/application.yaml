@@ -1,7 +1,5 @@
 server:
   port: 8189
-  servlet:
-    context-path: /fhc
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -21,3 +19,5 @@ spring:
 springdoc:
   swagger-ui:
     path: /swag
+jwt:
+  secret: tg5g98h45g98h45g9845hg98hf9834hf9834hjheriheriuher9g8h384y5934yhhtertg
