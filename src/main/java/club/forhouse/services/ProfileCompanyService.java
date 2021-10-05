@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,4 +27,9 @@ public class ProfileCompanyService {
         return profileCompanyMapper.toDto(pfC);
     }
 
+    public ProfileContractorDto findCompanyByGeneralManagerEmail(String email) {
+        ProfileCompany pfC = profileCompanyRepository.findCompanyByGeneralManagerEmail(email).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find profile with id: " + email));
+        return profileCompanyMapper.toDto(pfC);
+    }
 }

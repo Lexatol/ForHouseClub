@@ -31,19 +31,6 @@ public class JwtTokenUtil {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-//    private Date getExpirationDateFromToken(String token) {
-//        return getClaimFromToken(token, Claims::getExpiration);
-//    }
-//
-//    public boolean validateToken(String token) {
-//        return !isTokenExpired(token);
-//    }
-//
-//    public boolean validateToken(String token, UserDetails userDetails) {
-//        String username = getUsernameFromToken(token);
-//        return Objects.equals(username, userDetails.getUsername()) && !isTokenExpired(token);
-//    }
-
     // собирает claims - права пользователя на этапе аутентификации
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();

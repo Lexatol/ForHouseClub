@@ -38,6 +38,11 @@
                 controller: 'AuthController',
                 active:'authPage'
             })
+            .when('/register', {
+                templateUrl: 'register/register.html',
+                controller: 'regController',
+                active:'regPage'
+            })
             .otherwise({
                 redirect: '/'
             });

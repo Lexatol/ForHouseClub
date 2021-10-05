@@ -1,13 +1,20 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.LoginForm;
+import club.forhouse.configuration.JwtTokenUtil;
+import club.forhouse.dto.JwtRequest;
+import club.forhouse.dto.JwtResponse;
 import club.forhouse.dto.UserDto;
 import club.forhouse.entities.User;
+import club.forhouse.exceptions.MarketError;
 import club.forhouse.exceptions.ResourceNotFoundException;
-import club.forhouse.services.UserServices;
+import club.forhouse.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -15,7 +22,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class AuthController {
-    private final UserServices userService;
+    private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
