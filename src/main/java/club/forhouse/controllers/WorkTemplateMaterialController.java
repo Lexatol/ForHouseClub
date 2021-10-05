@@ -1,6 +1,7 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.WorkTemplateMaterialDto;
+import club.forhouse.dto.worktemplate.WorkTemplateMaterialDto;
+import club.forhouse.dto.worktemplate.WorkTemplateMaterialNewDto;
 import club.forhouse.services.WorkTemplateMaterialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,7 @@ public class WorkTemplateMaterialController {
     @GetMapping
     public Page<WorkTemplateMaterialDto> getAll(@RequestParam(name = "page", defaultValue = "1") int page,
                                                 @RequestParam(defaultValue = "5") int size) {
-        return templateMaterialService.getAll(page, size);
+        return templateMaterialService.getAll(page - 1, size);
     }
 
     @GetMapping("/{id}")
@@ -26,8 +27,18 @@ public class WorkTemplateMaterialController {
         return templateMaterialService.getById(id);
     }
 
-    @GetMapping("/by_template/{templateId}")
-    public List<WorkTemplateMaterialDto> getByTemplateId(@PathVariable Long templateId) {
+    @GetMapping("/find")
+    public List<WorkTemplateMaterialDto> getByTemplateId(@RequestParam(name = "tmpl") Long templateId) {
         return templateMaterialService.getByTemplateId(templateId);
+    }
+
+    @PostMapping
+    public WorkTemplateMaterialDto addNew(@RequestBody WorkTemplateMaterialNewDto materialNewDto) {
+        return templateMaterialService.addNew(materialNewDto);
+    }
+
+    @PutMapping
+    public WorkTemplateMaterialDto save(@RequestBody WorkTemplateMaterialDto materialDto) {
+        return templateMaterialService.save(materialDto);
     }
 }

@@ -23,9 +23,11 @@ public class WorkTemplate {
     private String description;
 
     @OneToMany(mappedBy = "templateId")
+    @ToString.Exclude
     private List<WorkTemplateMaterial> materials;
 
     @OneToMany(mappedBy = "templateId")
+    @ToString.Exclude
     private List<WorkTemplateOperation> operations;
 
     @Override

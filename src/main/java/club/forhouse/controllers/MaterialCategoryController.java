@@ -1,12 +1,10 @@
 package club.forhouse.controllers;
 
-import club.forhouse.dto.MaterialCategoryDto;
+import club.forhouse.dto.material.MaterialCategoryDto;
+import club.forhouse.dto.material.MaterialCategoryNewDto;
 import club.forhouse.services.MaterialCategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +24,15 @@ public class MaterialCategoryController {
     public MaterialCategoryDto getById(@PathVariable Long id) {
         return materialCategoryService.getById(id);
     }
+
+    @PostMapping
+    public MaterialCategoryDto addNew(@RequestBody MaterialCategoryNewDto newCategory) {
+        return materialCategoryService.addNew(newCategory);
+    }
+
+    @PutMapping
+    public MaterialCategoryDto save(@RequestBody MaterialCategoryDto newCategory) {
+        return materialCategoryService.save(newCategory);
+    }
+
 }

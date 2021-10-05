@@ -1,6 +1,7 @@
 package club.forhouse.configuration;
 
-import club.forhouse.dto.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
+import club.forhouse.dto.worktemplate.WorkTemplateOperationNewDto;
 import club.forhouse.entities.Operation;
 import club.forhouse.entities.WorkTemplate;
 import club.forhouse.entities.WorkTemplateOperation;
@@ -35,10 +36,19 @@ public class WorkTemplateOperationMapper {
                 .addMappings(m -> m.skip(WorkTemplateOperation::setTemplateId))
                 .addMappings(m -> m.skip(WorkTemplateOperation::setOperationId))
                 .setPostConverter(toEntityConverter());
+
+        mapper.createTypeMap(WorkTemplateOperationNewDto.class, WorkTemplateOperation.class)
+                .addMappings(m -> m.skip(WorkTemplateOperation::setTemplateId))
+                .addMappings(m -> m.skip(WorkTemplateOperation::setOperationId))
+                .addMappings(m -> m.skip(WorkTemplateOperation::setRowId))
+                .setPostConverter(toNewEntityConverter());
     }
 
-
     public WorkTemplateOperation toEntity(WorkTemplateOperationDto dto) {
+        return Objects.isNull(dto) ? null : mapper.map(dto, WorkTemplateOperation.class);
+    }
+
+    public WorkTemplateOperation toEntity(WorkTemplateOperationNewDto dto) {
         return Objects.isNull(dto) ? null : mapper.map(dto, WorkTemplateOperation.class);
     }
 
@@ -49,6 +59,16 @@ public class WorkTemplateOperationMapper {
     public Converter<WorkTemplateOperationDto, WorkTemplateOperation> toEntityConverter() {
         return context -> {
             WorkTemplateOperationDto source = context.getSource();
+            WorkTemplateOperation destination = context.getDestination();
+            mapOperation(source, destination);
+            mapTemplate(source, destination);
+            return context.getDestination();
+        };
+    }
+
+    public Converter<WorkTemplateOperationNewDto, WorkTemplateOperation> toNewEntityConverter() {
+        return context -> {
+            WorkTemplateOperationNewDto source = context.getSource();
             WorkTemplateOperation destination = context.getDestination();
             mapOperation(source, destination);
             mapTemplate(source, destination);
@@ -74,7 +94,23 @@ public class WorkTemplateOperationMapper {
         }
     }
 
+    private void mapOperation(WorkTemplateOperationNewDto source, WorkTemplateOperation destination) {
+        if (source.getOperationId() != null) {
+            Operation operation = operationRepository.findById(source.getOperationId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("Operation with id %d not exist", source.getOperationId())));
+            destination.setOperationId(operation);
+        }
+    }
+
     private void mapTemplate(WorkTemplateOperationDto source, WorkTemplateOperation destination) {
+        if (source.getTemplateId() != null) {
+            WorkTemplate template = workTemplateRepository.findById(source.getTemplateId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplate with id %d not exist", source.getTemplateId())));
+            destination.setTemplateId(template);
+        }
+    }
+
+    private void mapTemplate(WorkTemplateOperationNewDto source, WorkTemplateOperation destination) {
         if (source.getTemplateId() != null) {
             WorkTemplate template = workTemplateRepository.findById(source.getTemplateId())
                     .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplate with id %d not exist", source.getTemplateId())));
@@ -84,18 +120,13 @@ public class WorkTemplateOperationMapper {
 
     private void mapOperation(WorkTemplateOperation source, WorkTemplateOperationDto destination) {
         Operation operation = source.getOperationId();
-        if (operation != null) {
-            destination.setOperation(operation.getName());
-            destination.setOperationId(operation.getOperationId());
-        }
+        destination.setOperation(operation.getName());
+        destination.setOperationId(operation.getOperationId());
     }
 
     private void mapTemplate(WorkTemplateOperation source, WorkTemplateOperationDto destination) {
         WorkTemplate template = source.getTemplateId();
-        if (template != null) {
-            destination.setTemplate(template.getName());
-            destination.setTemplateId(template.getTemplateId());
-        }
+        destination.setTemplate(template.getName());
+        destination.setTemplateId(template.getTemplateId());
     }
-
 }
