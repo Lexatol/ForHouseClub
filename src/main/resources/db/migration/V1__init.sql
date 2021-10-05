@@ -1,7 +1,7 @@
 --//таблица: специализация компании
 create table specializations
 (
-    specialization_id       serial primary key,
+    specialization_id       bigserial primary key,
     specialization_title    varchar(255)
 );
 
@@ -56,7 +56,7 @@ create table companies
     actual_address         varchar(255),
     company_phone          varchar(255),
     company_email          varchar(255),
-    composition_And_Number int,
+    number_Employees       int,
     description            varchar,
     foreign key (general_manager) references users (user_id),
     foreign key (project_manager) references users (user_id)
@@ -122,14 +122,14 @@ values ('Petya', 123, 'petya@google.com', 89851002121),
 
 
 insert into roles (role_name)
-VALUES ('CONTRACTOR'),
-       ('CUSTOMER'),
-       ('PROVIDER'),
-       ('ADMIN'),
-       ('MANAGER');
+VALUES ('ROLE_CONTRACTOR'),
+       ('ROLE_CUSTOMER'),
+       ('ROLE_PROVIDER'),
+       ('ROLE_ADMIN'),
+       ('ROLE_MANAGER');
 
 insert into companies (company_name,inn, kpp, general_manager, project_manager,
-                       legal_address, composition_And_Number)
+                       legal_address, number_Employees)
 values ('Capital Group',123445,2312,  1, 2, 'Russia, Moscow', 10000),
        ('Design Company',123445,2312,  3, 4, 'Italia, Rim', 8),
        ('Engineering',123445,2312,  5, 6, 'Russia, Tula', 100);

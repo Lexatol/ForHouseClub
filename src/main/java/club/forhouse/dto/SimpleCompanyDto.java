@@ -7,8 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpecializationDto {
-    private Long specializationId;
-    private String specializationTitle;
-
+public class SimpleCompanyDto {
+    private Long companyId;
+    private String companyName;
 }

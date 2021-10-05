@@ -1,10 +1,6 @@
 package club.forhouse.entities;
 
-import club.forhouse.dto.UserDto;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "profile_users")
 public class LkUser {
     @Id

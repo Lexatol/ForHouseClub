@@ -17,7 +17,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Table(name = "profile_companies")
-public class ProfileCompanies {
+public class ProfileCompany {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class ProfileCompanies {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ProfileCompanies that = (ProfileCompanies) o;
+        ProfileCompany that = (ProfileCompany) o;
         return Objects.equals(profileId, that.profileId);
     }
 
