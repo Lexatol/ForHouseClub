@@ -18,5 +18,6 @@ public class UserDto {
     private String userEmail;
     private String userPhone;
     private String photo;
+    private String userPassword;
     private Collection<Role> userRoles;
 }
