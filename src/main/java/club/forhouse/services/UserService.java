@@ -73,15 +73,15 @@ public class UserService implements UserDetailsService {
         return userMapper.toDto(user);
     }
 
-    public Optional<User> findByUserName(String username) {
-        return userRepository.findUserByUserName(username);
+    public Optional<User> findByUserEmail(String mail) {
+        return userRepository.findUserByUserEmail(mail);
     }
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUserName(username).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", username)));
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getUserPassword(), mapRolesToAuthorities(user.getUserRoles()));
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        User user = findByUserEmail(mail).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", mail)));
+        return new org.springframework.security.core.userdetails.User(user.getUserEmail(), user.getUserPassword(), mapRolesToAuthorities(user.getUserRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

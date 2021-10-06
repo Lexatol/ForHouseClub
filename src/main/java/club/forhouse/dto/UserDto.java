@@ -1,6 +1,10 @@
 package club.forhouse.dto;
 
+import club.forhouse.entities.Role;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -14,4 +18,5 @@ public class UserDto {
     private String userEmail;
     private String userPhone;
     private String photo;
+    private Collection<Role> userRoles;
 }
