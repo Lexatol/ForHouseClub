@@ -24,10 +24,6 @@ public class WorkTemplate {
 
     @OneToMany(mappedBy = "templateId")
     @ToString.Exclude
-    private List<WorkTemplateMaterial> materials;
-
-    @OneToMany(mappedBy = "templateId")
-    @ToString.Exclude
     private List<WorkTemplateOperation> operations;
 
     @Override

@@ -3,11 +3,11 @@ package club.forhouse.services;
 import club.forhouse.configuration.WorkTemplateMaterialMapper;
 import club.forhouse.dto.worktemplate.WorkTemplateMaterialDto;
 import club.forhouse.dto.worktemplate.WorkTemplateMaterialNewDto;
-import club.forhouse.entities.WorkTemplate;
 import club.forhouse.entities.WorkTemplateMaterial;
+import club.forhouse.entities.WorkTemplateOperation;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.WorkTemplateMaterialRepository;
-import club.forhouse.repositories.WorkTemplateRepository;
+import club.forhouse.repositories.WorkTemplateOperationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WorkTemplateMaterialService {
     private final WorkTemplateMaterialRepository templateMaterialRepository;
-    private final WorkTemplateRepository templateRepository;
+    private final WorkTemplateOperationRepository operationRepository;
     private final WorkTemplateMaterialMapper modelMapper;
 
     public Page<WorkTemplateMaterialDto> getAll(int page, int size) {
@@ -38,12 +38,12 @@ public class WorkTemplateMaterialService {
     }
 
     @Transactional
-    public List<WorkTemplateMaterialDto> getByTemplateId(Long templateId) {
+    public List<WorkTemplateMaterialDto> getByOperationId(Long operationId) {
 
-        WorkTemplate template = templateRepository.findById(templateId).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find Work Template with id: " + templateId)
+        WorkTemplateOperation operation = operationRepository.findById(operationId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Work Template Operation with id: " + operationId)
         );
-        return templateMaterialRepository.findAllByTemplateId(template)
+        return templateMaterialRepository.findAllByOperationId(operation)
                 .stream().map(modelMapper::toDto).collect(Collectors.toList());
     }
 
@@ -53,11 +53,11 @@ public class WorkTemplateMaterialService {
 
     public WorkTemplateMaterialDto save(WorkTemplateMaterialDto materialDto) {
         if (templateMaterialRepository.existsById(materialDto.getMaterialId())) {
-            if (templateRepository.existsById(materialDto.getTemplateId())) {
+            if (operationRepository.existsById(materialDto.getOperationId())) {
                 WorkTemplateMaterial material = modelMapper.toEntity(materialDto);
                 return modelMapper.toDto(templateMaterialRepository.save(material));
             } else {
-                throw new ResourceNotFoundException("Unable to find Work Template with id: " + materialDto.getTemplateId());
+                throw new ResourceNotFoundException("Unable to find Work Operation with id: " + materialDto.getOperationId());
             }
         } else {
             throw new ResourceNotFoundException("Unable to find Work Template Material with id: " + materialDto.getMaterialId());
