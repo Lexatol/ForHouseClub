@@ -12,7 +12,6 @@ public class WorkTemplateDto {
     private Long templateId;
     private String name;
     private String description;
-    private List<WorkTemplateMaterialDto> materials;
     private List<WorkTemplateOperationDto> operations;
 
 }

@@ -9,8 +9,8 @@ public class WorkTemplateMaterialDto {
 
     private Long rowId;
 
-    private Long templateId;
-    private String template;
+    private Long operationId;
+    private String operation;
 
     private Long materialId;
     private String material;

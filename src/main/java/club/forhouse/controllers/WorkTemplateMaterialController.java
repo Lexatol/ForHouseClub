@@ -28,8 +28,8 @@ public class WorkTemplateMaterialController {
     }
 
     @GetMapping("/find")
-    public List<WorkTemplateMaterialDto> getByTemplateId(@RequestParam(name = "tmpl") Long templateId) {
-        return templateMaterialService.getByTemplateId(templateId);
+    public List<WorkTemplateMaterialDto> getByOperationId(@RequestParam(name = "operationId") Long operationId) {
+        return templateMaterialService.getByOperationId(operationId);
     }
 
     @PostMapping

@@ -19,10 +19,10 @@ public class WorkTemplateMaterial {
     private Long rowId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "template_id")
+    @JoinColumn(name = "operation_id")
     @ToString.Exclude
     @NonNull
-    private WorkTemplate templateId;
+    private WorkTemplateOperation operationId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "material_id")
