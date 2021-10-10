@@ -24,14 +24,18 @@ public class ProfileCompany {
     @Column(name = "profile_id")
     private Long profileId;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "specialization_id")
     @ToString.Exclude
     private List<Specialization> specializations;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pricelist_id")
+    private PriceListCompany priceListCompany;
 
     @Override
     public boolean equals(Object o) {

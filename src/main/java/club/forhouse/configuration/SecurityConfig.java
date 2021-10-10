@@ -21,8 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 //.antMatchers("/api/v1/users/**").authenticated()
                 //.antMatchers("/api/v1/profile_companies/**").authenticated()
-                //.antMatchers("/h2-console/**").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+//                .anyRequest().permitAll()
+                .and()
+                .headers().frameOptions().disable()
                 .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);  // Теперь сессии не нужно создавать на бэкенде

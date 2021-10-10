@@ -17,7 +17,7 @@ public class ProfileCompanyService {
     private final ProfileCompanyMapper profileCompanyMapper;
 
     public List<ProfileContractorDto> findAll() {
-        return profileCompanyMapper.toListDto(profileCompanyRepository.findAll())  ;
+        return profileCompanyMapper.toListDto(profileCompanyRepository.findAll());
     }
 
     public ProfileContractorDto findById(Long id) {
@@ -34,7 +34,7 @@ public class ProfileCompanyService {
 
     public ProfileContractorDto saveOrUpdate(ProfileContractorDto profileContractorDto) {
         ProfileCompany profileCompany = profileCompanyMapper.toProfileCompany(profileContractorDto);
-        profileCompanyRepository.save(profileCompany);
+        profileCompany = profileCompanyRepository.save(profileCompany);
         return profileCompanyMapper.toDto(profileCompany);
     }
 }

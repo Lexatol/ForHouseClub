@@ -34,8 +34,10 @@ public class ProfileContractorController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> saveOrUpdateProfile(@RequestBody @Validated ProfileContractorDto profileContractorDto) {
-        profileCompanyService.saveOrUpdate(profileContractorDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ProfileContractorDto saveOrUpdateProfile(@RequestBody ProfileContractorDto profileContractorDto) {
+        System.out.println("1 "+ profileContractorDto.getPriceListCompany());
+        ProfileContractorDto profileContractorDto1 =  profileCompanyService.saveOrUpdate(profileContractorDto);
+        System.out.println("2 " + profileContractorDto1.getPriceListCompany());
+        return profileContractorDto1;
     }
 }

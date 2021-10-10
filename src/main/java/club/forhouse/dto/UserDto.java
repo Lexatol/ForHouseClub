@@ -18,5 +18,5 @@ public class UserDto {
     private String userEmail;
     private String userPhone;
     private String photo;
-    private Collection<Role> userRoles;
+//    private Collection<Role> userRoles;
 }
