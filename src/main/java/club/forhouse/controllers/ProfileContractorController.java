@@ -2,13 +2,14 @@ package club.forhouse.controllers;
 
 
 import club.forhouse.dto.ProfileContractorDto;
-import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.services.ProfileCompanyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +31,11 @@ public class ProfileContractorController {
     @GetMapping("/company_info")
     public ProfileContractorDto findProfileContractorByGeneralManager(@RequestParam String email) {
         return profileCompanyService.findCompanyByGeneralManagerEmail(email);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<?> saveOrUpdateProfile(@RequestBody @Validated ProfileContractorDto profileContractorDto) {
+        profileCompanyService.saveOrUpdate(profileContractorDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
