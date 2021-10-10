@@ -30,6 +30,18 @@ VALUES ('Пескобетон (ЦПС) М300 Dauer 40 кг',
        ('Сетка кладочная 50х50 мм d2,5 мм 0,5х2 м', 'Сетка кладочная 50х50 мм d2,5 мм 0,5х2 м', 3),
        ('Уголок горячекатаный 50х50х5 мм 3 м', 'Уголок горячекатаный 50х50х5 мм 3 м', 3);
 
+CREATE TABLE works_categories
+(
+    category_id bigserial PRIMARY KEY NOT NULL,
+    name        varchar(255)          NOT NULL,
+    description varchar
+);
+
+INSERT INTO works_categories(name)
+VALUES ('окна'),
+       ('потолок'),
+       ('стены');
+
 CREATE TABLE operations_categories
 (
     category_id bigserial PRIMARY KEY NOT NULL,
@@ -37,10 +49,9 @@ CREATE TABLE operations_categories
     description varchar
 );
 
-
 INSERT INTO operations_categories(name, description)
-VALUES ('Окна', ''),
-       ('Потолок', ''),
+VALUES ('Ручные работы', ''),
+       ('Механизированные работы', ''),
        ('Уборка', '');
 
 CREATE TABLE operations
@@ -63,14 +74,15 @@ CREATE TABLE works_templates
 (
     template_id bigserial PRIMARY KEY NOT NULL,
     name        varchar(255)          NOT NULL,
+    category_id bigserial,
     description varchar
 );
 
-INSERT INTO works_templates (name)
-VALUES ('Устройство временного туалета и душевой'),
-       ('Монтаж защитных ограждающих конструкций пола и стен'),
-       ('Монтаж перегородок из ПГП блоков 10см (влагостойких)'),
-       ('Монтаж перегородок из ГКЛ в два слоя (с вращающимся телевизором)');
+INSERT INTO works_templates (name, category_id)
+VALUES ('Устройство временного туалета и душевой', 1),
+       ('Монтаж защитных ограждающих конструкций пола и стен', 2),
+       ('Монтаж перегородок из ПГП блоков 10см (влагостойких)', 3),
+       ('Монтаж перегородок из ГКЛ в два слоя (с вращающимся телевизором)', 3);
 
 CREATE TABLE works_templates_operations
 (
