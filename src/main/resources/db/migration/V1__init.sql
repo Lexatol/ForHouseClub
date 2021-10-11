@@ -67,9 +67,11 @@ create table profile_companies
     profile_id             bigserial primary key,
     company_id             bigint,
     specialization_id      int not null,
+
     foreign key (specialization_id) references specializations (specialization_id),
     foreign key (company_id) references companies (company_id)
 );
+
 
 --//таблица связей компаний
 create table connection_contractor_customers
@@ -142,11 +144,6 @@ values (1, 1),
        (3, 1),
        (3, 2);
 
-insert into profile_companies (profile_id, company_id, specialization_id)
-values (1, 1, 1),
-       (2, 2, 2),
-       (3, 3, 3);
-
 insert into connection_contractor_customers (contractor_id, company_customer_id, status_connection)
 values (1, 1, 1),
        (1, 2, 2);
@@ -160,5 +157,3 @@ values (1, 1),
        (1, 2),
        (2, 3),
        (2, 4);
-
-

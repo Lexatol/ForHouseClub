@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class ProfileCompanyService {
     private final ProfileCompanyMapper profileCompanyMapper;
 
     public List<ProfileContractorDto> findAll() {
-        return profileCompanyMapper.toListDto(profileCompanyRepository.findAll())  ;
+        return profileCompanyMapper.toListDto(profileCompanyRepository.findAll());
     }
 
     public ProfileContractorDto findById(Long id) {
@@ -35,31 +34,7 @@ public class ProfileCompanyService {
 
     public ProfileContractorDto saveOrUpdate(ProfileContractorDto profileContractorDto) {
         ProfileCompany profileCompany = profileCompanyMapper.toProfileCompany(profileContractorDto);
-        System.out.println(profileCompany.getCompany().getCompanyName());
-        profileCompanyRepository.save(profileCompany);
+        profileCompany = profileCompanyRepository.save(profileCompany);
         return profileCompanyMapper.toDto(profileCompany);
     }
-
-    /*public ProfileCompany findCompanyByEmailForSave(String email) {
-        ProfileCompany pfC = profileCompanyRepository.findCompanyByGeneralManagerEmail(email).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find profile with id: " + email));
-        return pfC;
-    }
-
-    public void saveOrUpdate(ProfileContractorDto profileContractorDto) {
-        ProfileCompany pfC = profileCompanyRepository.findCompanyByGeneralManagerEmail(profileContractorDto.getCompany().getGeneralManager().getUserEmail()).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find profile"));
-
-        pfC.setCompany(profileCompanyMapper.toEntity(profileContractorDto).getCompany());
-        pfC.setSpecializations(profileCompanyMapper.toEntity(profileContractorDto).getSpecializations());
-
-        //System.out.println(pfC.getSpecializations());
-
-        //System.out.println(profileCompanyMapper.toEntity(profileContractorDto).getCompany());
-        //System.out.println(profileCompanyMapper.toEntity(profileContractorDto).getSpecializations().get(0).getSpecializationId());
-        //
-
-        // ??? RROR 21896 --- [nio-8189-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : Нарушение ссылочной целостности
-        // profileCompanyRepository.save(pfC);
-    }*/
 }
