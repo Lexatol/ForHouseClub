@@ -12,8 +12,9 @@ angular.module('app').controller('ProfileContractorController', function ($scope
     $scope.saveChanges = function () {
         $scope.profileCompany.company = $scope.company
 
-        $http.put(contextPath + '/api/v1/profile_companies', $scope.profileCompany)
+        $http.post(contextPath + '/api/v1/profile_companies/save', $scope.profileCompany)
             .then(function (response) {
+                $scope.loadCompanies();
                 alert('Данные обновлены обновлен');
             });
     };

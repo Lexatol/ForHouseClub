@@ -35,6 +35,7 @@ public class ProfileCompanyService {
 
     public ProfileContractorDto saveOrUpdate(ProfileContractorDto profileContractorDto) {
         ProfileCompany profileCompany = profileCompanyMapper.toProfileCompany(profileContractorDto);
+        System.out.println(profileCompany.getCompany().getCompanyName());
         profileCompanyRepository.save(profileCompany);
         return profileCompanyMapper.toDto(profileCompany);
     }
