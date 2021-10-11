@@ -1,12 +1,12 @@
 package club.forhouse.controllers;
 
 
+import club.forhouse.dto.PriceListCompanyDto;
 import club.forhouse.dto.ProfileContractorDto;
+import club.forhouse.dto.operation.OperationDto;
+import club.forhouse.services.PriceListCompanyService;
 import club.forhouse.services.ProfileCompanyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("api/v1/profile_companies")
 public class ProfileContractorController {
     private final ProfileCompanyService profileCompanyService;
+    private final PriceListCompanyService priceListCompanyService;
 
     @GetMapping
     public List<ProfileContractorDto> findAll() {
@@ -35,9 +36,15 @@ public class ProfileContractorController {
 
     @PostMapping("/save")
     public ProfileContractorDto saveOrUpdateProfile(@RequestBody ProfileContractorDto profileContractorDto) {
-        System.out.println("1 "+ profileContractorDto.getPriceListCompany());
-        ProfileContractorDto profileContractorDto1 =  profileCompanyService.saveOrUpdate(profileContractorDto);
-        System.out.println("2 " + profileContractorDto1.getPriceListCompany());
-        return profileContractorDto1;
+        return profileCompanyService.saveOrUpdate(profileContractorDto);
+    }
+    //TODO необходимо протестить, не проверял, уточнить возможность передачи двух requestbody
+    @PostMapping("/add_operation")
+    public ProfileContractorDto addNewOperation
+            (@RequestBody ProfileContractorDto profileContractorDto,
+             @RequestBody OperationDto operationDto) {
+        PriceListCompanyDto priceList = priceListCompanyService.addNewOperation(profileContractorDto, operationDto);
+        profileContractorDto.setPriceListCompany(priceList);
+        return profileContractorDto;
     }
 }
