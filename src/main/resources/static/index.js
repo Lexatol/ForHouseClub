@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ngRoute', 'ngStorage'])
+        .module('app', ['ngRoute', 'ngStorage', 'editElement'])
         .config(config)
         .controller('IndexController', function($scope, $http, $localStorage, $route) {
             $scope.$route = $route;

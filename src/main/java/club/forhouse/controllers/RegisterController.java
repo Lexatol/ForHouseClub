@@ -33,5 +33,4 @@ public class RegisterController {
         userService.saveUserFromDto(systemUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
 }

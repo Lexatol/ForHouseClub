@@ -10,6 +10,5 @@ import java.util.List;
 public interface ProfileCompanyMapper {
     ProfileContractorDto toDto(ProfileCompany profileCompany);
     List<ProfileContractorDto> toListDto(List<ProfileCompany> companyList);
-
-
+    ProfileCompany toEntity(ProfileContractorDto profileContractorDto);
 }
