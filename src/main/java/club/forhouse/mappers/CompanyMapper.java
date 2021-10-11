@@ -9,5 +9,6 @@ import java.util.List;
 @Mapper
 public interface CompanyMapper {
     CompanyDto toDto(Company company);
+
     List<CompanyDto> toListDto(List<Company> companyList);
 }

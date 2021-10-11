@@ -17,4 +17,5 @@ public class SystemUserDto {
     private String email;
     private String password;
     private String confirmationPassword;
+    private String companyName;
 }

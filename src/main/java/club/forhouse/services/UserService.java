@@ -73,6 +73,13 @@ public class UserService implements UserDetailsService {
         return userMapper.toDto(user);
     }
 
+    public User findByUserName(String name) {
+        User user = userRepository.findUserByUserName(name)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Unable to find user with name: " + name));
+        return user;
+    }
+
     public Optional<User> findByUserEmail(String mail) {
         return userRepository.findUserByUserEmail(mail);
     }

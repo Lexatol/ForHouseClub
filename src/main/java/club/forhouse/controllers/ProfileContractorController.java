@@ -2,22 +2,14 @@ package club.forhouse.controllers;
 
 
 import club.forhouse.dto.ProfileContractorDto;
-import club.forhouse.entities.ProfileCompany;
-import club.forhouse.entities.User;
-import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.services.ProfileCompanyService;
-import club.forhouse.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.text.ParseException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,14 +33,9 @@ public class ProfileContractorController {
         return profileCompanyService.findCompanyByGeneralManagerEmail(email);
     }
 
-    @PutMapping(produces = "application/json")
-    public ResponseEntity<?> updateProfileContractor(Principal principal, @RequestBody ProfileContractorDto profileContractorDto) {
-        //User currentUser = userService.findByUserEmail(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("Unable to find current user"));
-        //ProfileCompany p = profileCompanyService.findCompanyByEmailForSave(currentUser.getUserEmail());
-
-        //System.out.println(profileContractorDto.getCompany().getGeneralManager().getUserEmail());
-        //System.out.println(profileContractorDto.getCompany().getCompanyName());
+    @PostMapping("/save")
+    public ResponseEntity<?> saveOrUpdateProfile(@RequestBody @Validated ProfileContractorDto profileContractorDto) {
         profileCompanyService.saveOrUpdate(profileContractorDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

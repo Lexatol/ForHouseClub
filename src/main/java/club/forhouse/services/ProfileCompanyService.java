@@ -33,7 +33,13 @@ public class ProfileCompanyService {
         return profileCompanyMapper.toDto(pfC);
     }
 
-    public ProfileCompany findCompanyByEmailForSave(String email) {
+    public ProfileContractorDto saveOrUpdate(ProfileContractorDto profileContractorDto) {
+        ProfileCompany profileCompany = profileCompanyMapper.toProfileCompany(profileContractorDto);
+        profileCompanyRepository.save(profileCompany);
+        return profileCompanyMapper.toDto(profileCompany);
+    }
+
+    /*public ProfileCompany findCompanyByEmailForSave(String email) {
         ProfileCompany pfC = profileCompanyRepository.findCompanyByGeneralManagerEmail(email).orElseThrow(() ->
                 new ResourceNotFoundException("Unable to find profile with id: " + email));
         return pfC;
@@ -54,5 +60,5 @@ public class ProfileCompanyService {
 
         // ??? RROR 21896 --- [nio-8189-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : Нарушение ссылочной целостности
         // profileCompanyRepository.save(pfC);
-    }
+    }*/
 }

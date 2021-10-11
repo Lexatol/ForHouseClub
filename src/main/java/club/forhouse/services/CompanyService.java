@@ -15,6 +15,8 @@ import java.util.List;
 public class CompanyService {
     public final CompanyRepository companyRepository;
     public final CompanyMapper companyMapper;
+    public final UserService userService;
+
 
     public List<CompanyDto> findAll() {
         return companyMapper.toListDto(companyRepository.findAll());
@@ -25,4 +27,12 @@ public class CompanyService {
                 new ResourceNotFoundException("Unable to find Company with id: " + id));
         return companyMapper.toDto(company);
     }
+
+    public CompanyDto saveCompanyFromName(String companyName, String generalManager) {
+        Company company = new Company();
+        company.setCompanyName(companyName);
+        company.setGeneralManager(userService.findByUserName(generalManager));
+        return companyMapper.toDto(company);
+    }
+
 }
