@@ -15,4 +15,7 @@ public interface WorkTemplateOperationRepository extends JpaRepository<WorkTempl
 
     @Query("from WorkTemplateOperation as wto where wto.operationId.category = ?1")
     List<WorkTemplateOperation> findAllByOperationCategory(OperationCategory category);
+
+    @Query("from WorkTemplateOperation as wto where wto.operationId.category = ?1 AND wto.templateId = ?2")
+    List<WorkTemplateOperation> findAllByOperationCategoryAndTemplate(OperationCategory category, WorkTemplate template);
 }

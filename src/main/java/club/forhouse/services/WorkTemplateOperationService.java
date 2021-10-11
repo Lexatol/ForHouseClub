@@ -59,6 +59,19 @@ public class WorkTemplateOperationService {
                 .stream().map(modelMapper::toDto).collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<WorkTemplateOperationDto> getByCategoryIdAndTemplateId(Long categoryId, Long templateId) {
+        OperationCategory category = categoryRepository.findById(categoryId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Operation Category with id: " + categoryId)
+        );
+
+        WorkTemplate template = templateRepository.findById(templateId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Work Template with id: " + templateId)
+        );
+        return templateOperationRepository.findAllByOperationCategoryAndTemplate(category, template)
+                .stream().map(modelMapper::toDto).collect(Collectors.toList());
+    }
+
     public WorkTemplateOperationDto addNew(WorkTemplateOperationNewDto newDto) {
         return modelMapper.toDto(templateOperationRepository.save(modelMapper.toEntity(newDto)));
     }
