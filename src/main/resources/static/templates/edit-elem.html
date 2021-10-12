@@ -1,9 +1,10 @@
-<p>{{$ctrl.name}}:
+<p>{{$ctrl.name}}
     <span ng-hide="editing">
-        {{$ctrl.edit}} <button ng-click="editing = true">Edit</button>
+        {{$ctrl.edit}} <button ng-click="startEdit()">Edit</button>
         </span>
     <span ng-show="editing">
             <input type="text" ng-model="$ctrl.edit">
-            <button ng-click="sendData()" >Save</button>
+            <button ng-click="sendData()">Save</button>
+            <button ng-click="closeEdit()">Close</button>
         </span>
 </p>

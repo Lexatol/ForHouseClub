@@ -1,27 +1,12 @@
 <h3>Профиль Компании</h3>
 
 <div>
-    <edit-element name="Название компании" edit=company.companyName></edit-element>
-
-    <!--<p>Название компании:
-        <span ng-hide="editing">
-        {{company.companyName}} <button ng-click="editing = true">Edit</button>
-        </span>
-        <span ng-show="editing">
-            <input type="text" ng-model="company.companyName">
-            <button ng-click="editing = false">Save</button>
-        </span>
-    </p>-->
-
-    <p>Адресс: {{company.legalAddress}}</p>
-    <p>Телефон: {{company.phone}}</p>
-    <p>Email: {{company.email}}</p>
-    <p>Число нанимателей: {{company.numberEmployees}}</p>
+    <edit-element name="Название компании:" edit=company.companyName></edit-element>
+    <edit-element name="Адресс:" edit=company.legalAddress></edit-element>
+    <edit-element name="Телефон:" edit=company.phone></edit-element>
+    <edit-element name="Email:" edit=company.email></edit-element>
+    <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
     <p>Главный Менеджер: {{company.generalManager.userName}}</p>
-    <p>Менеджеры проекта:</p>
-    <p ng-repeat="mInf in company.projectManagers">
-        <span>{{mInf.userName}}</span>
-    </p>
 
     <button ng-click = "saveChanges()">Save Changes</button>
 </div>

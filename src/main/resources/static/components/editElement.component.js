@@ -11,6 +11,16 @@ angular.module('editElement')
             $scope.sendData = function () {
                 $scope.editing = false
                 console.log(this.$ctrl.edit)
-            };
+            }
+
+            $scope.closeEdit = function () {
+                this.$ctrl.edit = $scope.currentEdit
+                $scope.editing = false
+            }
+
+            $scope.startEdit = function () {
+                $scope.editing = true
+                $scope.currentEdit = this.$ctrl.edit
+            }
         }
     });
