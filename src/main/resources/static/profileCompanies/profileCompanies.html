@@ -6,8 +6,11 @@
     <edit-element name="Телефон:" edit=company.companyPhone></edit-element>
     <edit-element name="Email:" edit=company.companyEmail></edit-element>
     <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
-    <edit-element name="Специализация:" edit=profileCompany.specializations[0].specializationTitle></edit-element>
-    <button ng-click = "saveChanges()">Save Changes</button>
+    <h5>Специализации</h5>
+    <div ng-repeat="spec in profileCompany.specializations">
+        <edit-element name="" edit=spec.specializationTitle></edit-element>
+    </div>
+    <button ng-click = "saveChanges()">Save All Changes</button>
 </div>
 
 <br>
