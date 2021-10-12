@@ -8,5 +8,13 @@ angular.module('app').controller('UserController', function ($scope, $http, $loc
             });
     }
 
+    $scope.submitUpdateProfile = function () {
+        $http.put(contextPath + '/api/v1/users', $scope.user)
+            .then(function (response) {
+                $scope.loadProfile();
+                alert('Профиль обновлен');
+            });
+    };
+
     $scope.loadProfile();
 });

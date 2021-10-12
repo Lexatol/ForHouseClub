@@ -21,32 +21,4 @@ angular.module('app').controller('AuthController', function ($scope, $http, $loc
                 $scope.clearUser();
             });
     };
-    /*
-    $scope.tryToLogout = function () {
-        localStorage.clear();
-        $scope.clearUser();
-        try {
-            if ($scope.user.username) {
-                $scope.user.username = null;
-            }
-            if ($scope.user.password) {
-                $scope.user.password = null;
-            }   
-        } catch (e) {
-            console.log("already cleaned")
-        }
-    };
-
-    $scope.clearUser = function () {
-        delete $localStorage.currentUser;
-        $http.defaults.headers.common.Authorization = '';
-    };
-
-    $scope.isUserLoggedIn = function () {
-        if ($localStorage.currentUser) {
-            return true;
-        } else {
-            return false;
-        }
-    };*/
 });

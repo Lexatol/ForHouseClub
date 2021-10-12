@@ -24,10 +24,10 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registration(@RequestBody @Validated SystemUserDto systemUser, BindingResult bindingResult) {
-        if (userService.findByUsernameForRegistration(systemUser.getName()).isPresent()) {
+        if (userService.findByUsernameForRegistration(systemUser.getUserName()).isPresent()) {
             return new ResponseEntity<>(new RegistrationError("such user already exists"), HttpStatus.BAD_REQUEST);
         }
-        if (!systemUser.getPassword().equals(systemUser.getConfirmationPassword())) {
+        if (!systemUser.getUserPassword().equals(systemUser.getConfirmationPassword())) {
             return new ResponseEntity<>(new RegistrationError("password mismatch"), HttpStatus.BAD_REQUEST);
         }
 
@@ -36,7 +36,7 @@ public class RegisterController {
         }
 
         userService.saveUserFromDto(systemUser);
-        CompanyDto newCompany = companyService.saveCompanyFromName(systemUser.getCompanyName(), systemUser.getName());
+        CompanyDto newCompany = companyService.saveCompanyFromName(systemUser.getCompanyName(), systemUser.getUserName());
         profileCompanyService.saveProfileFromName(newCompany.getCompanyName());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
