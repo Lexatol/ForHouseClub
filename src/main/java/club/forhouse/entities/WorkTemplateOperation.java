@@ -34,6 +34,7 @@ public class WorkTemplateOperation {
     private int quantity = 0;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "operationId")
+    @ToString.Exclude
     private List<WorkTemplateMaterial> materials;
 
     @Override

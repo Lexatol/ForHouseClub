@@ -116,3 +116,38 @@ VALUES (1, 1, 1),
        (2, 4, 2),
        (2, 5, 6),
        (3, 1, 2);
+
+
+CREATE TABLE estimates
+(
+    estimate_id     bigserial PRIMARY KEY NOT NULL,
+    company_id      bigserial             NOT NULL,
+    estimate_number integer               NOT NULL DEFAULT 0,
+    estimate_date   date                  NOT NULL,
+    address         varchar(255)
+);
+
+CREATE TABLE estimates_works
+(
+    row_id         bigserial PRIMARY KEY NOT NULL,
+    estimate_id    bigserial             NOT NULL,
+    works_template bigserial             NOT NULL
+);
+
+CREATE TABLE estimate_operations
+(
+    row_id       bigserial PRIMARY KEY NOT NULL,
+    estimate_id  bigserial             NOT NULL,
+    work_id      bigserial             NOT NULL,
+    operation_id bigserial             NOT NULL,
+    quantity     int                   NOT NULL DEFAULT 0
+);
+
+CREATE TABLE estimate_materials
+(
+    row_id       bigserial PRIMARY KEY NOT NULL,
+    estimate_id  bigserial             NOT NULL,
+    operation_id bigserial             NOT NULL,
+    material_id  bigserial             NOT NULL,
+    quantity     int                   NOT NULL DEFAULT 0
+);

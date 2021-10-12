@@ -22,6 +22,11 @@ public class WorkTemplate {
     private String name;
     private String description;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @ToString.Exclude
+    private WorkCategory category;
+
     @OneToMany(mappedBy = "templateId")
     @ToString.Exclude
     private List<WorkTemplateOperation> operations;
