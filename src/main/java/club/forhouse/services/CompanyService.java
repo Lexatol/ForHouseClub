@@ -2,6 +2,7 @@ package club.forhouse.services;
 
 import club.forhouse.dto.CompanyDto;
 import club.forhouse.entities.Company;
+import club.forhouse.entities.ProfileCompany;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.mappers.CompanyMapper;
 import club.forhouse.repositories.CompanyRepository;
@@ -32,7 +33,13 @@ public class CompanyService {
         Company company = new Company();
         company.setCompanyName(companyName);
         company.setGeneralManager(userService.findByUserName(generalManager));
+        companyRepository.save(company);
         return companyMapper.toDto(company);
     }
 
+    public Company findByName(String companyName) {
+        Company company = companyRepository.findByCompanyName(companyName).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Company with name: " + companyName));
+        return company;
+    }
 }

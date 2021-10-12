@@ -10,7 +10,6 @@ angular.module('editElement')
         controller: function ($scope) {
             $scope.sendData = function () {
                 $scope.editing = false
-                console.log(this.$ctrl.edit)
             }
 
             $scope.closeEdit = function () {

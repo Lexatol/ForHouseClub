@@ -1,4 +1,4 @@
-angular.module('app').controller('AuthController', function ($scope, $http, $localStorage) {
+angular.module('app').controller('AuthController', function ($scope, $http, $localStorage, $window) {
     const contextPath = 'http://localhost:8189';
 
     $scope.tryToAuth = function () {
@@ -11,6 +11,7 @@ angular.module('app').controller('AuthController', function ($scope, $http, $loc
                     $scope.user.username = null;
                     $scope.user.password = null;
 
+                    $window.location.href = contextPath + '#!/users';
                     //console.log($localStorage.currentUser);
                 }
             }, function errorCallback(response) {
@@ -20,7 +21,7 @@ angular.module('app').controller('AuthController', function ($scope, $http, $loc
                 $scope.clearUser();
             });
     };
-
+    /*
     $scope.tryToLogout = function () {
         localStorage.clear();
         $scope.clearUser();
@@ -47,5 +48,5 @@ angular.module('app').controller('AuthController', function ($scope, $http, $loc
         } else {
             return false;
         }
-    };
+    };*/
 });

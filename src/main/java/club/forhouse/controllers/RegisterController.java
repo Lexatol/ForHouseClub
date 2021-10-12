@@ -1,8 +1,10 @@
 package club.forhouse.controllers;
 
+import club.forhouse.dto.CompanyDto;
 import club.forhouse.dto.SystemUserDto;
 import club.forhouse.exceptions.RegistrationError;
 import club.forhouse.services.CompanyService;
+import club.forhouse.services.ProfileCompanyService;
 import club.forhouse.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegisterController {
     private final UserService userService;
     private final CompanyService companyService;
+    private final ProfileCompanyService profileCompanyService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registration(@RequestBody @Validated SystemUserDto systemUser, BindingResult bindingResult) {
@@ -33,7 +36,8 @@ public class RegisterController {
         }
 
         userService.saveUserFromDto(systemUser);
-        companyService.saveCompanyFromName(systemUser.getCompanyName(), systemUser.getName());
+        CompanyDto newCompany = companyService.saveCompanyFromName(systemUser.getCompanyName(), systemUser.getName());
+        profileCompanyService.saveProfileFromName(newCompany.getCompanyName());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

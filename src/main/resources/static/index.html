@@ -40,13 +40,16 @@
                                         ng-class="{'active':$route.current.active === 'homePage'}">Главная</a></li>
                 <li class="nav-item"><a href="#!/profileCompanies" class="nav-link"
                                         ng-class="{'active':$route.current.active === 'profileCompanies'}"
-                                        ng-if="isUserLoggedIn()">Профиль подрядчика</a></li>
+                                        ng-if="isUserLoggedIn()">Профиль Компании</a></li>
                 <li class="nav-item"><a href="#!/users" class="nav-link" ng-if="isUserLoggedIn()"
                                         ng-class="{'active':$route.current.active === 'userPage'}">Пользователь</a></li>
                 <li class="nav-item"><a href="#!/auth" class="nav-link"
+                                        ng-if="!isUserLoggedIn()"
                                         ng-class="{'active':$route.current.active === 'authPage'}">Вход</a></li>
                 <li class="nav-item"><a href="#!/register" class="nav-link"
                                         ng-class="{'active':$route.current.active === 'regPage'}">Регистрация</a></li>
+                <li class="nav-item"><a href="#" class="nav-link bg-warning exit"
+                                        ng-if="isUserLoggedIn()" ng-click="tryToLogout()">Выход</a></li>
             </ul>
         </header>
     </div>

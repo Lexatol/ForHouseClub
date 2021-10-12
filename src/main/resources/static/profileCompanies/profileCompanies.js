@@ -6,6 +6,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
             .then(function (response) {
                 $scope.profileCompany = response.data;
                 $scope.company = $scope.profileCompany.company;
+                console.log($scope.profileCompany)
             });
     }
 

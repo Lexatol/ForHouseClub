@@ -3,10 +3,18 @@
 <div>
     <edit-element name="Название компании:" edit=company.companyName></edit-element>
     <edit-element name="Адресс:" edit=company.legalAddress></edit-element>
-    <edit-element name="Телефон:" edit=company.phone></edit-element>
-    <edit-element name="Email:" edit=company.email></edit-element>
+    <edit-element name="Телефон:" edit=company.companyPhone></edit-element>
+    <edit-element name="Email:" edit=company.companyEmail></edit-element>
     <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
-    <p>Главный Менеджер: {{company.generalManager.userName}}</p>
-
+    <edit-element name="Специализация:" edit=profileCompany.specializations[0].specializationTitle></edit-element>
     <button ng-click = "saveChanges()">Save Changes</button>
+</div>
+
+<br>
+
+<h2>Информация о менеджере</h2>
+<div>
+    <p>Главный Менеджер: {{company.generalManager.userName}}</p>
+    <p>Почта: {{company.generalManager.userEmail}}</p>
+    <p>Телефон: {{company.generalManager.userPhone}}</p>
 </div>

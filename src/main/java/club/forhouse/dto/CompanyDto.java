@@ -13,8 +13,8 @@ public class CompanyDto {
     private Long companyId;
     private String companyName;
     private String legalAddress;
-    private String phone;
-    private String email;
+    private String companyPhone;
+    private String companyEmail;
     private Integer numberEmployees;
     private UserDto generalManager;
 //    private List<UserDto> projectManagers;

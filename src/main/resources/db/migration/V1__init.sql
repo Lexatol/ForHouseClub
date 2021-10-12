@@ -66,7 +66,7 @@ create table profile_companies
 (
     profile_id             bigserial primary key,
     company_id             bigint,
-    specialization_id      int not null,
+    specialization_id      int,
 
     foreign key (specialization_id) references specializations (specialization_id),
     foreign key (company_id) references companies (company_id)
