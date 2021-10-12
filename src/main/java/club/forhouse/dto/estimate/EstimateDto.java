@@ -1,5 +1,7 @@
-package club.forhouse.dto;
+package club.forhouse.dto.estimate;
 
+import club.forhouse.dto.CompanyDto;
+import club.forhouse.dto.UserDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -13,4 +15,5 @@ public class EstimateDto {
     private Integer number;
     private LocalDate date;
     private String address;
+    private UserDto author;
 }

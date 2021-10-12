@@ -123,8 +123,9 @@ CREATE TABLE estimates
     estimate_id     bigserial PRIMARY KEY NOT NULL,
     company_id      bigserial             NOT NULL,
     estimate_number integer               NOT NULL DEFAULT 0,
-    estimate_date   date                  NOT NULL,
-    address         varchar(255)
+    estimate_date   date                  NOT NULL DEFAULT now(),
+    address         varchar(255),
+    author          bigserial
 );
 
 CREATE TABLE estimates_works
@@ -134,7 +135,7 @@ CREATE TABLE estimates_works
     works_template bigserial             NOT NULL
 );
 
-CREATE TABLE estimate_operations
+CREATE TABLE estimates_operations
 (
     row_id       bigserial PRIMARY KEY NOT NULL,
     estimate_id  bigserial             NOT NULL,
@@ -143,7 +144,7 @@ CREATE TABLE estimate_operations
     quantity     int                   NOT NULL DEFAULT 0
 );
 
-CREATE TABLE estimate_materials
+CREATE TABLE estimates_materials
 (
     row_id       bigserial PRIMARY KEY NOT NULL,
     estimate_id  bigserial             NOT NULL,
