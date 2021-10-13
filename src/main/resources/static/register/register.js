@@ -1,4 +1,4 @@
-angular.module('app').controller('regController', function ($scope, $http) {
+angular.module('app').controller('regController', function ($scope, $http, $window) {
     const contextPath = 'http://localhost:8189';
 
     $scope.tryToRegister = function () {
@@ -9,5 +9,6 @@ angular.module('app').controller('regController', function ($scope, $http) {
                 window.alert(response.data.message);
                 $scope.clearUser();
             });
+        $window.location.href = contextPath + '#!/auth';
     }
 });

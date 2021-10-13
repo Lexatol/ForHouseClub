@@ -152,3 +152,11 @@ CREATE TABLE estimates_materials
     material_id  bigserial             NOT NULL,
     quantity     int                   NOT NULL DEFAULT 0
 );
+
+INSERT INTO works_templates_operations (template_id, operation_id, quantity)
+VALUES (1, 1, 1),
+       (1, 2, 2),
+       (2, 6, 4),
+       (2, 5, 8),
+       (3, 2, 5),
+       (3, 1, 2);

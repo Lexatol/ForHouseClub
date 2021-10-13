@@ -73,6 +73,17 @@ public class UserService implements UserDetailsService {
         return userMapper.toDto(user);
     }
 
+    public Optional<User> findOptionalByEmail(String email) {
+        return userRepository.findUserByUserEmail(email);
+    }
+
+    public User findByUserName(String name) {
+        User user = userRepository.findUserByUserName(name)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Unable to find user with name: " + name));
+        return user;
+    }
+
     public Optional<User> findByUserEmail(String mail) {
         return userRepository.findUserByUserEmail(mail);
     }
@@ -90,10 +101,14 @@ public class UserService implements UserDetailsService {
 
     public User saveUserFromDto(SystemUserDto systemUserDto) {
         User user = new User();
-        user.setUserName(systemUserDto.getName());
-        user.setUserEmail(systemUserDto.getEmail());
-        user.setUserPassword(passwordEncoder.encode(systemUserDto.getPassword()));
+        user.setUserName(systemUserDto.getUserName());
+        user.setUserEmail(systemUserDto.getUserEmail());
+        user.setUserPassword(passwordEncoder.encode(systemUserDto.getUserPassword()));
         user.setUserRoles(Arrays.asList(roleService.getUserRole()));
         return save(user);
+    }
+
+    public User saveOrUpdate(User user) {
+        return userRepository.save(user);
     }
 }

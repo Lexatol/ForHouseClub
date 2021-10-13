@@ -40,6 +40,9 @@ public class Company {
     @JoinColumn(name = "general_manager")
     private User generalManager;
 
+//    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
+//    private PriceListCompany priceListCompany;
+
     // TODO надо переделать и продумать механизм добавления именно из юзером только проджект менеджеров
     @OneToMany
     @JoinTable(name = "companies_pm",
