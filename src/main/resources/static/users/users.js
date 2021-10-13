@@ -1,8 +1,15 @@
 angular.module('app').controller('UserController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:8189';
 
-    $scope.loadProfile = function () {
+    /*$scope.loadProfile = function () {
         $http.get(contextPath + '/api/v1/users/profile/' + $localStorage.currentUser.email)
+            .then(function (response) {
+                $scope.user = response.data;
+            });
+    }*/
+
+    $scope.loadProfile = function () {
+        $http.get(contextPath + '/api/v1/users')
             .then(function (response) {
                 $scope.user = response.data;
             });
@@ -13,6 +20,8 @@ angular.module('app').controller('UserController', function ($scope, $http, $loc
             .then(function (response) {
                 $scope.loadProfile();
                 alert('Профиль обновлен');
+            }, function errorCallback(response) {
+                window.alert(response.data.message);
             });
     };
 

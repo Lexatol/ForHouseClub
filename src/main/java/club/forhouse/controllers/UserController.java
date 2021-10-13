@@ -37,11 +37,11 @@ public class UserController {
         return userServices.findAll();
     }
 
-    /*@GetMapping(produces = "application/json")
+    @GetMapping(produces = "application/json")
     public SystemUserDto getCurrentProfile(Principal principal) {
         User user = userServices.findOptionalByEmail(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("Unable to find profile for current user"));
         return new SystemUserDto(user);
-    }*/
+    }
 
     @PutMapping(produces = "application/json")
     public ResponseEntity<?> getCurrentProfile(Principal principal, @RequestBody SystemUserDto systemUserDto) {

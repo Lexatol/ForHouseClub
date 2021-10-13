@@ -16,8 +16,23 @@ angular.module('app').controller('ProfileContractorController', function ($scope
         $http.post(contextPath + '/api/v1/profile_companies/save', $scope.profileCompany)
             .then(function (response) {
                 $scope.loadCompanies();
-                alert('Данные обновлены обновлен');
+                alert('Данные обновлены');
             });
+    };
+
+    $scope.removeThisSpec = function (specId) {
+        console.log(specId + " " + $scope.profileCompany.specializations[0].specializationId);
+
+        for (let index = 0; index < $scope.profileCompany.specializations.length; ++index) {
+            if($scope.profileCompany.specializations[index].specializationId === specId) {
+                $scope.profileCompany.specializations = $scope.profileCompany.specializations.splice(index, index)
+            }
+        }
+    };
+
+    $scope.addNewSpec = function () {
+        let newSpec = {specializationId: "", specializationTitle: ""}
+        $scope.profileCompany.specializations.push(newSpec);
     };
 
     $scope.loadCompanies();

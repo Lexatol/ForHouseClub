@@ -22,10 +22,10 @@ public class SystemUserDto {
     private String confirmationPassword;
     private String companyName;
 
-    /*public SystemUserDto(User user) {
+    public SystemUserDto(User user) {
         this.userId = user.getUserId();
-        this.name = user.getUserName();
-        this.email = user.getUserEmail();
-        this.phone = user.getUserPhone();
-    }*/
+        this.userName = user.getUserName();
+        this.userEmail = user.getUserEmail();
+        this.userPhone = user.getUserPhone();
+    }
 }
