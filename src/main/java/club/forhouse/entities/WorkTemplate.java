@@ -22,9 +22,10 @@ public class WorkTemplate {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "templateId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     @ToString.Exclude
-    private List<WorkTemplateMaterial> materials;
+    private WorkCategory category;
 
     @OneToMany(mappedBy = "templateId")
     @ToString.Exclude

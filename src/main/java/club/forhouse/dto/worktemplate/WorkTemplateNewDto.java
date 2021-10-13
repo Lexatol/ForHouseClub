@@ -11,15 +11,7 @@ public class WorkTemplateNewDto {
     private String name;
     private String description;
 
-    private List<WorkTemplateNewMaterialDto> materials;
     private List<WorkTemplateNewOperationDto> operations;
-
-    @Data
-    @NoArgsConstructor
-    public static class WorkTemplateNewMaterialDto {
-        private Long materialId;
-        private int quantity;
-    }
 
     @Data
     @NoArgsConstructor

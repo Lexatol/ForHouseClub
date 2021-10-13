@@ -3,11 +3,11 @@ package club.forhouse.configuration;
 import club.forhouse.dto.worktemplate.WorkTemplateMaterialDto;
 import club.forhouse.dto.worktemplate.WorkTemplateMaterialNewDto;
 import club.forhouse.entities.Material;
-import club.forhouse.entities.WorkTemplate;
 import club.forhouse.entities.WorkTemplateMaterial;
+import club.forhouse.entities.WorkTemplateOperation;
 import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.repositories.MaterialRepository;
-import club.forhouse.repositories.WorkTemplateRepository;
+import club.forhouse.repositories.WorkTemplateOperationRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -19,26 +19,26 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class WorkTemplateMaterialMapper {
-    private final WorkTemplateRepository workTemplateRepository;
+    private final WorkTemplateOperationRepository operationRepository;
     private final MaterialRepository materialRepository;
     private final ModelMapper mapper;
 
     @PostConstruct
     public void setupMapper() {
         mapper.createTypeMap(WorkTemplateMaterial.class, WorkTemplateMaterialDto.class)
-                .addMappings(m -> m.skip(WorkTemplateMaterialDto::setTemplateId))
-                .addMappings(m -> m.skip(WorkTemplateMaterialDto::setTemplate))
+                .addMappings(m -> m.skip(WorkTemplateMaterialDto::setOperationId))
+                .addMappings(m -> m.skip(WorkTemplateMaterialDto::setOperation))
                 .addMappings(m -> m.skip(WorkTemplateMaterialDto::setMaterialId))
                 .addMappings(m -> m.skip(WorkTemplateMaterialDto::setMaterial))
                 .setPostConverter(toDtoConverter());
 
         mapper.createTypeMap(WorkTemplateMaterialDto.class, WorkTemplateMaterial.class)
-                .addMappings(m -> m.skip(WorkTemplateMaterial::setTemplateId))
+                .addMappings(m -> m.skip(WorkTemplateMaterial::setOperationId))
                 .addMappings(m -> m.skip(WorkTemplateMaterial::setMaterialId))
                 .setPostConverter(toEntityConverter());
 
         mapper.createTypeMap(WorkTemplateMaterialNewDto.class, WorkTemplateMaterial.class)
-                .addMappings(m -> m.skip(WorkTemplateMaterial::setTemplateId))
+                .addMappings(m -> m.skip(WorkTemplateMaterial::setOperationId))
                 .addMappings(m -> m.skip(WorkTemplateMaterial::setMaterialId))
                 .addMappings(m -> m.skip(WorkTemplateMaterial::setRowId))
                 .setPostConverter(toNewEntityConverter());
@@ -61,7 +61,7 @@ public class WorkTemplateMaterialMapper {
             WorkTemplateMaterialDto source = context.getSource();
             WorkTemplateMaterial destination = context.getDestination();
             mapMaterial(source, destination);
-            mapTemplate(source, destination);
+            mapOperation(source, destination);
             return context.getDestination();
         };
     }
@@ -71,7 +71,7 @@ public class WorkTemplateMaterialMapper {
             WorkTemplateMaterialNewDto source = context.getSource();
             WorkTemplateMaterial destination = context.getDestination();
             mapMaterial(source, destination);
-            mapTemplate(source, destination);
+            mapOperation(source, destination);
             return context.getDestination();
         };
     }
@@ -81,7 +81,7 @@ public class WorkTemplateMaterialMapper {
             WorkTemplateMaterial source = context.getSource();
             WorkTemplateMaterialDto destination = context.getDestination();
             mapMaterial(source, destination);
-            mapTemplate(source, destination);
+            mapOperation(source, destination);
             return context.getDestination();
         };
     }
@@ -102,19 +102,19 @@ public class WorkTemplateMaterialMapper {
         }
     }
 
-    private void mapTemplate(WorkTemplateMaterialDto source, WorkTemplateMaterial destination) {
-        if (source.getTemplateId() != null) {
-            WorkTemplate template = workTemplateRepository.findById(source.getTemplateId())
-                    .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplate with id %d not exist", source.getTemplateId())));
-            destination.setTemplateId(template);
+    private void mapOperation(WorkTemplateMaterialDto source, WorkTemplateMaterial destination) {
+        if (source.getOperationId() != null) {
+            WorkTemplateOperation operation = operationRepository.findById(source.getOperationId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplateOperation with id %d not exist", source.getOperationId())));
+            destination.setOperationId(operation);
         }
     }
 
-    private void mapTemplate(WorkTemplateMaterialNewDto source, WorkTemplateMaterial destination) {
-        if (source.getTemplateId() != null) {
-            WorkTemplate template = workTemplateRepository.findById(source.getTemplateId())
-                    .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplate with id %d not exist", source.getTemplateId())));
-            destination.setTemplateId(template);
+    private void mapOperation(WorkTemplateMaterialNewDto source, WorkTemplateMaterial destination) {
+        if (source.getOperationId() != null) {
+            WorkTemplateOperation operation = operationRepository.findById(source.getOperationId())
+                    .orElseThrow(() -> new ResourceNotFoundException(String.format("WorkTemplateOperation with id %d not exist", source.getOperationId())));
+            destination.setOperationId(operation);
         }
     }
 
@@ -124,10 +124,10 @@ public class WorkTemplateMaterialMapper {
         destination.setMaterialId(material.getMaterialId());
     }
 
-    private void mapTemplate(WorkTemplateMaterial source, WorkTemplateMaterialDto destination) {
-        WorkTemplate template = source.getTemplateId();
-        destination.setTemplate(template.getName());
-        destination.setTemplateId(template.getTemplateId());
+    private void mapOperation(WorkTemplateMaterial source, WorkTemplateMaterialDto destination) {
+        WorkTemplateOperation operation = source.getOperationId();
+        destination.setOperation(operation.getOperationId().getName());
+        destination.setOperationId(operation.getRowId());
     }
 
 }

@@ -1,17 +1,19 @@
-package club.forhouse.entities;
+package club.forhouse.entities.estimate;
 
+import club.forhouse.entities.Material;
 import lombok.*;
 
 import javax.persistence.*;
 
+@Table(name = "estimates_materials")
 @Entity
-@Table(name = "works_templates_materials")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class WorkTemplateMaterial {
+public class EstimateMaterial {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "row_id")
@@ -19,27 +21,33 @@ public class WorkTemplateMaterial {
     private Long rowId;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estimate_id")
+    @ToString.Exclude
+    @NonNull
+    private Estimate estimate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "operation_id")
     @ToString.Exclude
     @NonNull
-    private WorkTemplateOperation operationId;
+    private EstimateOperation estimateOperation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "material_id")
-    @NonNull
     @ToString.Exclude
-    private Material materialId;
+    @NonNull
+    private Material material;
 
-    private int quantity = 0;
+    private Integer quantity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        WorkTemplateMaterial material = (WorkTemplateMaterial) o;
+        EstimateMaterial that = (EstimateMaterial) o;
 
-        return rowId.equals(material.rowId);
+        return rowId.equals(that.rowId);
     }
 
     @Override

@@ -28,8 +28,18 @@ public class WorkTemplateOperationController {
     }
 
     @GetMapping("/find")
-    public List<WorkTemplateOperationDto> getByTemplateId(@RequestParam(name = "tmpl") Long templateId) {
-        return templateOperationService.getByTemplateId(templateId);
+    public List<WorkTemplateOperationDto> getByTemplateId(@RequestParam(name = "tmpl", required = false) Long templateId,
+                                                          @RequestParam(name = "category", required = false) Long categoryId) {
+
+        if (templateId != null && categoryId != null) {
+            return templateOperationService.getByCategoryIdAndTemplateId(categoryId, templateId);
+        } else if (templateId == null && categoryId != null) {
+            return templateOperationService.getByCategoryId(categoryId);
+        } else if (templateId != null) {
+            return templateOperationService.getByTemplateId(templateId);
+        } else {
+            throw new RuntimeException("Invalid parameters");
+        }
     }
 
     @PostMapping

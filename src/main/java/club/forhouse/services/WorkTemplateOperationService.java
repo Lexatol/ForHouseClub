@@ -3,9 +3,11 @@ package club.forhouse.services;
 import club.forhouse.configuration.WorkTemplateOperationMapper;
 import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
 import club.forhouse.dto.worktemplate.WorkTemplateOperationNewDto;
+import club.forhouse.entities.OperationCategory;
 import club.forhouse.entities.WorkTemplate;
 import club.forhouse.entities.WorkTemplateOperation;
 import club.forhouse.exceptions.ResourceNotFoundException;
+import club.forhouse.repositories.OperationCategoryRepository;
 import club.forhouse.repositories.WorkTemplateOperationRepository;
 import club.forhouse.repositories.WorkTemplateRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class WorkTemplateOperationService {
     private final WorkTemplateOperationRepository templateOperationRepository;
     private final WorkTemplateRepository templateRepository;
     private final WorkTemplateOperationMapper modelMapper;
+    private final OperationCategoryRepository categoryRepository;
 
     public Page<WorkTemplateOperationDto> getAll(int page, int size) {
         return templateOperationRepository.findAll(PageRequest.of(page, size))
@@ -44,6 +47,28 @@ public class WorkTemplateOperationService {
                 new ResourceNotFoundException("Unable to find Work Template with id: " + templateId)
         );
         return templateOperationRepository.findAllByTemplateId(template)
+                .stream().map(modelMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<WorkTemplateOperationDto> getByCategoryId(Long categoryId) {
+        OperationCategory category = categoryRepository.findById(categoryId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Operation Category with id: " + categoryId)
+        );
+        return templateOperationRepository.findAllByOperationCategory(category)
+                .stream().map(modelMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<WorkTemplateOperationDto> getByCategoryIdAndTemplateId(Long categoryId, Long templateId) {
+        OperationCategory category = categoryRepository.findById(categoryId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Operation Category with id: " + categoryId)
+        );
+
+        WorkTemplate template = templateRepository.findById(templateId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Work Template with id: " + templateId)
+        );
+        return templateOperationRepository.findAllByOperationCategoryAndTemplate(category, template)
                 .stream().map(modelMapper::toDto).collect(Collectors.toList());
     }
 

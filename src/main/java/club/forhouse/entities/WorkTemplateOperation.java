@@ -3,6 +3,7 @@ package club.forhouse.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "works_templates_operations")
@@ -31,6 +32,10 @@ public class WorkTemplateOperation {
     private Operation operationId;
 
     private int quantity = 0;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "operationId")
+    @ToString.Exclude
+    private List<WorkTemplateMaterial> materials;
 
     @Override
     public boolean equals(Object o) {
