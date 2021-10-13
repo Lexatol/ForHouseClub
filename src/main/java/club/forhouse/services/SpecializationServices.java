@@ -22,6 +22,12 @@ public class SpecializationServices {
         return specializationMapper.toDTO(spec);
     }
 
+    public Specialization findSpecById(Long id) {
+        Specialization spec = specializationRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find specialization with id: " + id));
+        return spec;
+    }
+
     public List<SpecializationDto> findAll() {
         return specializationMapper.toListDto(specializationRepository.findAll());
     }

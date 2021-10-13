@@ -1,14 +1,25 @@
 <h3>Профиль Компании</h3>
 
 <div>
-    <p>Название компании: {{company.companyName}}</p>
-    <p>Адресс: {{company.legalAddress}}</p>
-    <p>Телефон: {{company.phone}}</p>
-    <p>Email: {{company.email}}</p>
-    <p>Число нанимателей: {{company.numberEmployees}}</p>
+    <edit-element name="Название компании:" edit=company.companyName></edit-element>
+    <edit-element name="Адресс:" edit=company.legalAddress></edit-element>
+    <edit-element name="Телефон:" edit=company.companyPhone></edit-element>
+    <edit-element name="Email:" edit=company.companyEmail></edit-element>
+    <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
+    <h5>Специализации</h5>
+    <div ng-repeat="spec in profileCompany.specializations">
+        <edit-element name="" edit=spec.specializationTitle></edit-element>
+        <!--<button ng-click = removeThisSpec(spec.specializationId)>-</button>-->
+    </div>
+    <!--<button ng-click = addNewSpec()>Add specialization</button>-->
+    <button ng-click = "saveChanges()">Save All Changes</button>
+</div>
+
+<br>
+
+<h2>Информация о менеджере</h2>
+<div>
     <p>Главный Менеджер: {{company.generalManager.userName}}</p>
-    <p>Менеджеры проекта:</p>
-    <p ng-repeat="mInf in company.projectManagers">
-        <span>{{mInf.userName}}</span>
-    </p>
+    <p>Почта: {{company.generalManager.userEmail}}</p>
+    <p>Телефон: {{company.generalManager.userPhone}}</p>
 </div>

@@ -13,4 +13,5 @@ public class ProfileContractorDto {
     private Long profileId;
     private CompanyDto company;
     private List<SpecializationDto> specializations;
+    private PriceListCompanyDto priceListCompany;
 }

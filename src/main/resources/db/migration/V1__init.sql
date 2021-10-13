@@ -48,18 +48,16 @@ create table companies
 (
     company_id             bigserial primary key,
     company_name           varchar(255) not null,
-    inn                    int not null,
-    kpp                    int not null,
+    inn                    int,
+    kpp                    int,
     general_manager        bigint       not null,
-    project_manager        bigint       not null,
     legal_address          varchar(255),
     actual_address         varchar(255),
     company_phone          varchar(255),
     company_email          varchar(255),
     number_Employees       int,
     description            varchar,
-    foreign key (general_manager) references users (user_id),
-    foreign key (project_manager) references users (user_id)
+    foreign key (general_manager) references users (user_id)
 );
 
 
@@ -68,10 +66,12 @@ create table profile_companies
 (
     profile_id             bigserial primary key,
     company_id             bigint,
-    specialization_id      int not null,
+    specialization_id      int,
+
     foreign key (specialization_id) references specializations (specialization_id),
     foreign key (company_id) references companies (company_id)
 );
+
 
 --//таблица связей компаний
 create table connection_contractor_customers
@@ -122,48 +122,38 @@ values ('Petya', '$2a$12$zCa/vu1142NwfLnRW..e0.wdnmxgnh7if6ROeVuCi62XR6N9db9eO',
 
 
 insert into roles (role_name)
-VALUES ('ROLE_CONTRACTOR'),
-       ('ROLE_CUSTOMER'),
-       ('ROLE_PROVIDER'),
+VALUES
        ('ROLE_ADMIN'),
        ('ROLE_MANAGER');
 
-insert into companies (company_name,inn, kpp, general_manager, project_manager,
-                       legal_address, number_Employees)
-values ('Capital Group',123445,2312,  1, 2, 'Russia, Moscow', 10000),
-       ('Design Company',123445,2312,  3, 4, 'Italia, Rim', 8),
-       ('Engineering',123445,2312,  5, 6, 'Russia, Tula', 100);
+insert into companies (company_name,inn, kpp, general_manager, legal_address, number_Employees)
+values ('Capital Group', 123445, 2312,  1, 'Russia, Moscow', 10000),
+       ('Design Company',123445, 2312,  3, 'Italia, Rim', 8),
+       ('Engineering', 123445, 2312,  5, 'Russia, Tula', 100);
 
 insert into profile_users (user_id, user_position)
 values
 (1, 'general manager'),
-(2, 'project manage');
+(2, 'project manager');
 
 insert into users_roles (user_id, role_id)
-values (1, 4),
+values (1, 1),
        (1, 2),
        (2, 1),
-       (2, 3),
+       (2, 2),
        (3, 1),
-       (3, 3);
-
-insert into profile_companies (profile_id, company_id, specialization_id)
-values (1, 1, 1),
-       (2, 2, 2),
-       (3, 3, 3);
+       (3, 2);
 
 insert into connection_contractor_customers (contractor_id, company_customer_id, status_connection)
-values (1, 1, 2),
-       (1, 2, 3);
+values (1, 1, 1),
+       (1, 2, 2);
 
 insert into connection_contractor_providers (contractor_id, company_provider_id, status_connection)
-values (1, 1, 2),
-       (1, 2, 3);
+values (1, 1, 1),
+       (1, 2, 2);
 
 insert into companies_pm (company_id, user_id)
 values (1, 1),
        (1, 2),
        (2, 3),
        (2, 4);
-
-
