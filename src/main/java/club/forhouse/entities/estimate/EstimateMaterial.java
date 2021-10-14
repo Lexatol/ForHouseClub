@@ -1,6 +1,6 @@
 package club.forhouse.entities.estimate;
 
-import club.forhouse.entities.Material;
+import club.forhouse.entities.material.Material;
 import lombok.*;
 
 import javax.persistence.*;

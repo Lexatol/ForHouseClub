@@ -1,7 +1,7 @@
 package club.forhouse.mappers;
 
-import club.forhouse.dto.ProfileContractorDto;
-import club.forhouse.entities.ProfileCompany;
+import club.forhouse.dto.profiles.ProfileContractorDto;
+import club.forhouse.entities.profiles.ProfileCompany;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 

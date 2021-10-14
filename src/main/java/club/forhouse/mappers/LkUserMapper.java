@@ -1,7 +1,7 @@
 package club.forhouse.mappers;
 
-import club.forhouse.dto.LkUserDto;
-import club.forhouse.entities.LkUser;
+import club.forhouse.dto.profiles.LkUserDto;
+import club.forhouse.entities.profiles.LkUser;
 import org.mapstruct.Mapper;
 
 import java.util.List;
