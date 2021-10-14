@@ -6,6 +6,7 @@ import club.forhouse.dto.profiles.ProfileContractorDto;
 import club.forhouse.dto.operation.OperationDto;
 import club.forhouse.entities.operation.Operation;
 import club.forhouse.entities.profiles.PriceListCompany;
+import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.mappers.PriceListCompanyMapper;
 import club.forhouse.repositories.profiles.PriceListCompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,15 @@ public class PriceListCompanyService {
     private final ProfileCompanyService profileCompanyService;
 
     public PriceListCompanyDto findById(Long id) {
-        PriceListCompany priceListCompany = priceListCompanyRepository.findById(id).orElseThrow();
+        PriceListCompany priceListCompany = priceListCompanyRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Pricelist with id: " + id));
         return priceListCompanyMapper.toDto(priceListCompany);
     }
 
     //TODO необходимо протестить, не проверял, уточнить возможность передачи двух requestbody
     public PriceListCompanyDto addNewOperation(ProfileContractorDto profileContractorDto, OperationDto operationDto) {
         ProfileContractorDto proContractDto  = profileCompanyService.findById(profileContractorDto.getPriceListCompany().getId());
-        PriceListCompany priceListCompany = priceListCompanyMapper.toItem(proContractDto.getPriceListCompany());
+        PriceListCompany priceListCompany = priceListCompanyMapper.toEntity(proContractDto.getPriceListCompany());
         Operation operation = operationMapper.toEntity(operationDto);
         priceListCompany.getOperation().add(operation);
         return priceListCompanyMapper.toDto(priceListCompany);

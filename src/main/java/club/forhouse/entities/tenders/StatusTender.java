@@ -21,5 +21,5 @@ public class StatusTender {
     private Long statusId;
 
     @Column(name = "title")
-    private String status;
+    private String title;
 }

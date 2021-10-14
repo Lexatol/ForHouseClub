@@ -1,4 +1,4 @@
-package club.forhouse.controllers.profiles;
+package club.forhouse.controllers.registrations;
 
 import club.forhouse.dto.profiles.CompanyDto;
 import club.forhouse.dto.registration.SystemUserDto;

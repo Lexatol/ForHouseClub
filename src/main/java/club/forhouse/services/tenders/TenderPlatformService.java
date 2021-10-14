@@ -2,6 +2,7 @@ package club.forhouse.services.tenders;
 
 import club.forhouse.dto.tenders.TenderPlatformDto;
 import club.forhouse.entities.tenders.TenderPlatform;
+import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.mappers.TenderPlatformMapper;
 import club.forhouse.repositories.tenders.TendersPlatformRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,9 @@ public class TenderPlatformService {
     }
 
     public TenderPlatformDto findById(Long id) {
-        TenderPlatform tenderPlatform = tendersPlatformRepository.findById(id).orElseThrow();
+        TenderPlatform tenderPlatform = tendersPlatformRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Platform with id: " + id));
+        ;
         return tenderPlatformMapper.toDto(tenderPlatform);
     }
 }

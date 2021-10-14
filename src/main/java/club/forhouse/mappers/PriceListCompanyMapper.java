@@ -10,5 +10,5 @@ public interface PriceListCompanyMapper {
     PriceListCompanyDto toDto(PriceListCompany priceListCompany);
 
     @InheritInverseConfiguration
-    PriceListCompany toItem(PriceListCompanyDto priceListCompanyDto);
+    PriceListCompany toEntity(PriceListCompanyDto priceListCompanyDto);
 }

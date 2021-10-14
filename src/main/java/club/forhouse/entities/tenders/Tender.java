@@ -51,4 +51,10 @@ public class Tender {
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private StatusTender status;
+
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "platform_id")
+    private TenderPlatform tenderPlatform;
+
+
 }

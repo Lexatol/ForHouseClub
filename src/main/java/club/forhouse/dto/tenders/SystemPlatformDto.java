@@ -10,9 +10,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TenderPlatformDto {
+public class SystemPlatformDto {
 
-    private Long platformId;
     private String title;
-    private List<TenderDto> tenders;
 }

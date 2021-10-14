@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TendersPlatformRepository extends JpaRepository<TenderPlatform, Long> {
+    TenderPlatform findByTitle(String title);
 }

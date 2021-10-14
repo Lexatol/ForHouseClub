@@ -25,7 +25,7 @@ public class TenderPlatform {
     @Column(name = "title")
     private String title;
 
-    @OneToMany (cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(name = "platform_tenders",
             joinColumns = @JoinColumn(name = "platform_id"),
             inverseJoinColumns = @JoinColumn(name = "tender_id"))
