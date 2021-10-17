@@ -2,10 +2,10 @@ package club.forhouse.configuration;
 
 import club.forhouse.dto.material.MaterialDto;
 import club.forhouse.dto.material.MaterialNewDto;
-import club.forhouse.entities.Material;
-import club.forhouse.entities.MaterialCategory;
+import club.forhouse.entities.material.Material;
+import club.forhouse.entities.material.MaterialCategory;
 import club.forhouse.exceptions.ResourceNotFoundException;
-import club.forhouse.repositories.MaterialCategoryRepository;
+import club.forhouse.repositories.material.MaterialCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;

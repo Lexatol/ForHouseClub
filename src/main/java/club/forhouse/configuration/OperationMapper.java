@@ -2,10 +2,10 @@ package club.forhouse.configuration;
 
 import club.forhouse.dto.operation.OperationDto;
 import club.forhouse.dto.operation.OperationNewDto;
-import club.forhouse.entities.Operation;
-import club.forhouse.entities.OperationCategory;
+import club.forhouse.entities.operation.Operation;
+import club.forhouse.entities.operation.OperationCategory;
 import club.forhouse.exceptions.ResourceNotFoundException;
-import club.forhouse.repositories.OperationCategoryRepository;
+import club.forhouse.repositories.operation.OperationCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;

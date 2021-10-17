@@ -2,12 +2,12 @@ package club.forhouse.configuration;
 
 import club.forhouse.dto.worktemplate.WorkTemplateOperationDto;
 import club.forhouse.dto.worktemplate.WorkTemplateOperationNewDto;
-import club.forhouse.entities.Operation;
-import club.forhouse.entities.WorkTemplate;
-import club.forhouse.entities.WorkTemplateOperation;
+import club.forhouse.entities.operation.Operation;
+import club.forhouse.entities.worktemplate.WorkTemplate;
+import club.forhouse.entities.worktemplate.WorkTemplateOperation;
 import club.forhouse.exceptions.ResourceNotFoundException;
-import club.forhouse.repositories.OperationRepository;
-import club.forhouse.repositories.WorkTemplateRepository;
+import club.forhouse.repositories.operation.OperationRepository;
+import club.forhouse.repositories.worktemplate.WorkTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;

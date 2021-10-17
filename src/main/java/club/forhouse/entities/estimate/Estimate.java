@@ -1,7 +1,7 @@
 package club.forhouse.entities.estimate;
 
-import club.forhouse.entities.Company;
-import club.forhouse.entities.User;
+import club.forhouse.entities.profiles.Company;
+import club.forhouse.entities.profiles.User;
 import lombok.*;
 
 import javax.persistence.*;
