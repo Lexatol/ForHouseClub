@@ -1,7 +1,7 @@
 package club.forhouse.controllers;
 
 import club.forhouse.dto.estimate.EstimateDto;
-import club.forhouse.services.EstimateService;
+import club.forhouse.services.estimate.EstimateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
