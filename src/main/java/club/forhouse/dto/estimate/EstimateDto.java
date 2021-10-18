@@ -13,6 +13,7 @@ public class EstimateDto {
     private Long estimateId;
     private CompanyDto company;
     private Integer number;
+    private Integer sum;
     private LocalDate date;
     private String address;
     private UserDto author;

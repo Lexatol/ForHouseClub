@@ -123,6 +123,7 @@ CREATE TABLE estimates
     estimate_id     bigserial PRIMARY KEY NOT NULL,
     company_id      bigserial             NOT NULL,
     estimate_number integer               NOT NULL DEFAULT 0,
+    estimate_sum    integer               NOT NULL DEFAULT 0,
     estimate_date   date                  NOT NULL,
     address         varchar(255),
     author          bigserial

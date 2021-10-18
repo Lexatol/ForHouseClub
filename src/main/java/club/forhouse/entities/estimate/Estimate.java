@@ -30,6 +30,9 @@ public class Estimate {
     @Column(name = "estimate_number")
     private Integer number;
 
+    @Column(name = "estimate_sum")
+    private Integer sum;
+
     @Column(name = "estimate_date")
     private LocalDate date;
 

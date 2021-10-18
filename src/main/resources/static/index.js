@@ -41,12 +41,17 @@
         $routeProvider
             .when('/', {
                 templateUrl: 'main/main.html',
-                active:'homePage'
+                active: 'homePage'
             })
             .when('/profileCompanies', {
                 templateUrl: 'profileCompanies/profileCompanies.html',
                 controller: 'ProfileContractorController',
-                active:'profileCompanies'
+                active: 'profileCompanies'
+            })
+            .when('/estimates', {
+                templateUrl: 'estimates/estimate.html',
+                controller: 'EstimateController',
+                active: 'estimates'
             })
             .when('/users', {
                 templateUrl: 'users/users.html',
