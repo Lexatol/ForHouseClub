@@ -1,6 +1,9 @@
 package club.forhouse.dto.profiles;
 
+import club.forhouse.dto.registration.SimpleCompanyDto;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,7 +18,7 @@ public class CompanyDto {
     private String companyEmail;
     private Integer numberEmployees;
     private UserDto generalManager;
-//    private List<UserDto> projectManagers;
+    private List<SimpleUserDto> projectManagers;
 //    private List<SimpleCompanyDto> listCustomers;
 //    private List<SimpleCompanyDto> listProviders;
 }

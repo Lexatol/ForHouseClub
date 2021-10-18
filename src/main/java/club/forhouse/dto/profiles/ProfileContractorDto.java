@@ -1,5 +1,6 @@
 package club.forhouse.dto.profiles;
 
+import club.forhouse.dto.pricelist.PriceListCompanyDto;
 import lombok.*;
 
 import java.util.List;

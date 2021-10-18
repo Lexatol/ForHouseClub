@@ -1,9 +1,6 @@
 package club.forhouse.dto.tenders;
 
-import club.forhouse.entities.tenders.Tender;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter

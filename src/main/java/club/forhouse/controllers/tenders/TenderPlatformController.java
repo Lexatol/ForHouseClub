@@ -1,5 +1,7 @@
 package club.forhouse.controllers.tenders;
 
+import club.forhouse.dto.tenders.SystemTenderDto;
+import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.dto.tenders.TenderPlatformDto;
 import club.forhouse.services.tenders.TenderPlatformService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,11 @@ public class TenderPlatformController {
     @GetMapping
     public List<TenderPlatformDto> findAll() {
         return tendersPlatformService.findAll();
+    }
+
+    @GetMapping("/add")
+    public TenderPlatformDto add(@RequestBody SystemTenderDto systemTenderDto) {
+        return tendersPlatformService.addTender(systemTenderDto);
     }
 
 

@@ -14,11 +14,11 @@ public class TenderDto {
     private Long tenderId;
     private String title;
     private String dataStart;
-    private EstimateDto estimate;
+//    private EstimateDto estimate;
     private String address;
     private TCompanyDto contractor;
     private TCompanyDto customer;
     private String description;
-    private Long price;
+    private Long price; //TODO в будущем будет подтягивать из сметы
     private StatusTender status;
 }
