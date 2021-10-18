@@ -1,6 +1,7 @@
 package club.forhouse.repositories.profiles;
 
 import club.forhouse.entities.profiles.Company;
+import club.forhouse.entities.profiles.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     Optional<Company> findCompanyByGeneralManagerEmail(String manager);
 
     Optional<Company> findByCompanyName(String companyName);
+
+    Optional<Company> findByGeneralManager(User manager);
 }
