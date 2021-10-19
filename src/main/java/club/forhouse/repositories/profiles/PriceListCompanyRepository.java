@@ -1,6 +1,6 @@
 package club.forhouse.repositories.profiles;
 
-import club.forhouse.entities.profiles.PriceListCompany;
+import club.forhouse.entities.pricelist.PriceListCompany;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

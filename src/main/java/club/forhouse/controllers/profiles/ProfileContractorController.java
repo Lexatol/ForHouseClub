@@ -1,9 +1,7 @@
 package club.forhouse.controllers.profiles;
 
 
-import club.forhouse.dto.profiles.PriceListCompanyDto;
 import club.forhouse.dto.profiles.ProfileContractorDto;
-import club.forhouse.dto.operation.OperationDto;
 import club.forhouse.services.profiles.PriceListCompanyService;
 import club.forhouse.services.profiles.ProfileCompanyService;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +36,11 @@ public class ProfileContractorController {
     public ProfileContractorDto saveOrUpdateProfile(@RequestBody ProfileContractorDto profileContractorDto) {
         return profileCompanyService.saveOrUpdate(profileContractorDto);
     }
-    //TODO необходимо протестить, не проверял, уточнить возможность передачи двух requestbody
-    @PostMapping("/add_operation")
-    public ProfileContractorDto addNewOperation
-            (@RequestBody ProfileContractorDto profileContractorDto,
-             @RequestBody OperationDto operationDto) {
-        PriceListCompanyDto priceList = priceListCompanyService.addNewOperation(profileContractorDto, operationDto);
-        profileContractorDto.setPriceListCompany(priceList);
-        return profileContractorDto;
-    }
+
+//    @PostMapping("/add_operation")
+//    public ProfileContractorDto addNewOperation
+//            (@RequestParam  Long companyId,
+//             @RequestBody OperationDto operationDto) {
+//        return priceListCompanyService.addNewOperation(companyId, operationDto);
+//    }
 }
