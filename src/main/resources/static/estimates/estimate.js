@@ -1,4 +1,4 @@
-angular.module('app').controller('EstimateController', function ($scope, $http, $localStorage) {
+angular.module('app').controller('EstimateController', function ($scope, $http, $localStorage, $window, $location) {
     const contextPath = 'http://localhost:8189';
 
     $scope.showEstimatesPage = function (pageIndex = 1) {
@@ -35,16 +35,37 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
     }
 
     $scope.createEstimate = function () {
-        $http.get(contextPath + '/api/v1/estimates/new')
+        $http.post(contextPath + '/api/v1/estimates/new')
             .then(function (response) {
+                $scope.editEstimate(response.data.estimateId);
             });
     }
+
     $scope.editEstimate = function (estimateId) {
-        $http.get(contextPath + '/api/v1/estimates/' + estimateId)
-            .then(function (response) {
+        $location.path('/estimates/' + estimateId);
+    }
 
+    $scope.showEstimate = function () {
+        const n = $location.path().split("/");
+        const id = n[n.length - 1];
+        $http.get(contextPath + '/api/v1/estimates/' + id)
+            .then(function (response) {
+                $scope.currentEstimate = response.data;
             });
     }
 
-    $scope.showEstimatesPage();
+    $scope.saveChanges = function () {
+        $http.post(contextPath + '/api/v1/estimates/save', $scope.currentEstimate)
+            .then(function (response) {
+                $scope.showEstimate();
+                alert('Данные обновлены');
+            });
+    };
+
+    if ($location.path().endsWith('/estimates')) {
+        $scope.showEstimatesPage();
+    } else {
+        $scope.showEstimate();
+    }
+
 });

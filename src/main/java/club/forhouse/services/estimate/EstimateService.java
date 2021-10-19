@@ -5,6 +5,7 @@ import club.forhouse.dto.profiles.CompanyDto;
 import club.forhouse.dto.profiles.UserDto;
 import club.forhouse.entities.estimate.Estimate;
 import club.forhouse.entities.profiles.Company;
+import club.forhouse.exceptions.ResourceNotFoundException;
 import club.forhouse.mappers.CompanyMapper;
 import club.forhouse.mappers.UserMapper;
 import club.forhouse.repositories.estimate.EstimateMaterialRepository;
@@ -19,7 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -44,13 +45,34 @@ public class EstimateService {
         estimate.setNumber(number);
         estimate.setCompany(company);
         estimate.setAuthor(userMapper.toEntity(user));
-        estimate.setDate(LocalDate.now());
+        estimate.setDate(LocalDateTime.now());
+        estimate.setSum(0);
         return modelMapper.map(estimateRepository.save(estimate), EstimateDto.class);
     }
 
     public Page<EstimateDto> findAll(UserDto user, CompanyDto companyDto, int page) {
         Company company = companyMapper.toEntity(companyDto);
-        Pageable request = PageRequest.of(page, 10, Sort.Direction.DESC, "date");
-        return estimateRepository.findAll(request).map(it -> modelMapper.map(it, EstimateDto.class));
+        Pageable request = PageRequest.of(page, 5, Sort.Direction.DESC, "date");
+        return estimateRepository.findAllByCompany(company, request).map(it -> modelMapper.map(it, EstimateDto.class));
     }
+
+    public EstimateDto findByCompanyAndId(CompanyDto company, Long estimateId) {
+        Estimate found = estimateRepository.findById(estimateId).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Estimate with id " + estimateId)
+        );
+        EstimateDto estimateDto = modelMapper.map(found, EstimateDto.class);
+        if (estimateDto.getCompany().getCompanyId() == company.getCompanyId()) {
+            return estimateDto;
+        } else {
+            throw new ResourceNotFoundException("Unable to find Estimate with id " + estimateId + " and Company " + company.getCompanyName());
+        }
+    }
+
+    public EstimateDto save(EstimateDto estimateDto) {
+        return modelMapper.map(
+                estimateRepository.save(
+                        modelMapper.map(estimateDto, Estimate.class)
+                ), EstimateDto.class);
+    }
+
 }

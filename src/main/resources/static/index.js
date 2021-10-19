@@ -53,6 +53,11 @@
                 controller: 'EstimateController',
                 active: 'estimates'
             })
+            .when('/estimates/:id', {
+                templateUrl: 'estimates/estimate-details.html',
+                controller: 'EstimateController',
+                active: 'estimates'
+            })
             .when('/users', {
                 templateUrl: 'users/users.html',
                 controller: 'UserController',

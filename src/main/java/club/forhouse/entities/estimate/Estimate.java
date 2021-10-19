@@ -5,7 +5,7 @@ import club.forhouse.entities.profiles.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "estimates")
@@ -34,7 +34,7 @@ public class Estimate {
     private Integer sum;
 
     @Column(name = "estimate_date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(name = "address")
     private String address;

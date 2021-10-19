@@ -1,5 +1,5 @@
 <h3>Список смет</h3>
-<button class="btn btn-primary" ng-click="createEstimate">Добавить</button>
+<button class="btn btn-primary" ng-click="createEstimate()">Добавить</button>
 <table cellpadding="0" cellspacing="0" class="table table-hover">
     <thead>
     <tr>
@@ -12,7 +12,7 @@
     <tbody>
     <tr ng-repeat="e in EstimatesPage.content">
         <td>{{e.number}}</td>
-        <td>{{e.date}}</td>
+        <td>{{e.date.substring(0,19).replace("T", " ")}}</td>
         <td>{{e.sum}}</td>
         <td>
             <button class="btn btn-primary" ng-click="editEstimate(e.estimateId)">Открыть</button>

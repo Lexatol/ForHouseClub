@@ -5,7 +5,7 @@ import club.forhouse.dto.profiles.UserDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @RequiredArgsConstructor
@@ -14,7 +14,7 @@ public class EstimateDto {
     private CompanyDto company;
     private Integer number;
     private Integer sum;
-    private LocalDate date;
+    private LocalDateTime date;
     private String address;
     private UserDto author;
 }

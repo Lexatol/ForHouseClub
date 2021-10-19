@@ -21,23 +21,39 @@ public class EstimateController {
     private final UserService userService;
     private final CompanyService companyService;
 
-    @PostMapping
+    @PostMapping("/new")
     public EstimateDto createNew(@RequestHeader("Authorization") String authorizationHeader) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        String usernameFromToken = tokenService.getUsernameFromToken(token);
-        UserDto user = userService.findByUserEmailDto(usernameFromToken);
+        UserDto user = getUserFromToken(authorizationHeader);
         CompanyDto company = companyService.findByUser(user);
         return estimateService.createNew(user, company);
+    }
+
+    @PostMapping("/save")
+    public EstimateDto save(@RequestBody EstimateDto estimateDto) {
+        return estimateService.save(estimateDto);
     }
 
     @GetMapping
     public Page<EstimateDto> getAll(@RequestHeader("Authorization") String authorizationHeader,
                                     @RequestParam(name = "page", defaultValue = "1") int page) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        String usernameFromToken = tokenService.getUsernameFromToken(token);
-        UserDto user = userService.findByUserEmailDto(usernameFromToken);
+        UserDto user = getUserFromToken(authorizationHeader);
         CompanyDto company = companyService.findByUser(user);
         return estimateService.findAll(user, company, --page);
     }
+
+    private UserDto getUserFromToken(@RequestHeader("Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        String usernameFromToken = tokenService.getUsernameFromToken(token);
+        return userService.findByUserEmailDto(usernameFromToken);
+    }
+
+    @GetMapping("/{id}")
+    public EstimateDto getById(@RequestHeader("Authorization") String authorizationHeader,
+                               @PathVariable(name = "id") Long estimateId) {
+        UserDto user = getUserFromToken(authorizationHeader);
+        CompanyDto company = companyService.findByUser(user);
+        return estimateService.findByCompanyAndId(company, estimateId);
+    }
+
 
 }
