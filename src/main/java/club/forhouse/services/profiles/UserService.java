@@ -1,7 +1,7 @@
 package club.forhouse.services.profiles;
 
-import club.forhouse.dto.registration.SystemUserDto;
 import club.forhouse.dto.profiles.UserDto;
+import club.forhouse.dto.registration.SystemUserDto;
 import club.forhouse.entities.profiles.Role;
 import club.forhouse.entities.profiles.User;
 import club.forhouse.exceptions.ResourceNotFoundException;
@@ -86,6 +86,12 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> findByUserEmail(String mail) {
         return userRepository.findUserByUserEmail(mail);
+    }
+
+    public UserDto findByUserEmailDto(String mail) {
+        return userRepository.findUserByUserEmail(mail).map(userMapper::toDto).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find user with mail: " + mail)
+        );
     }
 
     @Override

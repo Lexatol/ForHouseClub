@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<org.modelmapper.version>2.4.4</org.modelmapper.version>
-		<springdoc.openapi-ui.version>1.5.10</springdoc.openapi-ui.version>
+		<springdoc.openapi-ui.version>1.5.11</springdoc.openapi-ui.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<org.projectlombok.version>1.18.20</org.projectlombok.version>
@@ -27,13 +27,18 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
-			<version>5.4.1</version>
+			<version>5.5.1</version>
 			<scope>test</scope>
 		</dependency>
 <!--		<dependency>-->
@@ -79,11 +84,11 @@
 			<artifactId>modelmapper</artifactId>
 			<version>${org.modelmapper.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${springdoc.openapi-ui.version}</version>
-		</dependency>
+		<!--		<dependency>-->
+		<!--			<groupId>org.springdoc</groupId>-->
+		<!--			<artifactId>springdoc-openapi-ui</artifactId>-->
+		<!--			<version>${springdoc.openapi-ui.version}</version>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -92,7 +97,7 @@
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.1.5.Final</version>
+			<version>7.0.1.Final</version>
 		</dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

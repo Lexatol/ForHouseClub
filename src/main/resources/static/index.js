@@ -41,12 +41,22 @@
         $routeProvider
             .when('/', {
                 templateUrl: 'main/main.html',
-                active:'homePage'
+                active: 'homePage'
             })
             .when('/profileCompanies', {
                 templateUrl: 'profileCompanies/profileCompanies.html',
                 controller: 'ProfileContractorController',
-                active:'profileCompanies'
+                active: 'profileCompanies'
+            })
+            .when('/estimates', {
+                templateUrl: 'estimates/estimate.html',
+                controller: 'EstimateController',
+                active: 'estimates'
+            })
+            .when('/estimates/:id', {
+                templateUrl: 'estimates/estimate-details.html',
+                controller: 'EstimateController',
+                active: 'estimates'
             })
             .when('/users', {
                 templateUrl: 'users/users.html',
@@ -71,8 +81,8 @@
         $httpProvider.interceptors.push(function ($q, $location) {
             return {
                 'responseError': function (rejection, $localStorage, $http) {
-                    var defer = $q.defer();
-                    if (rejection.status == 401 || rejection.status == 403) {
+                    let defer = $q.defer();
+                    if (rejection.status === 401 || rejection.status === 403) {
                         console.log('error: 401-403');
                         $location.path('/auth');
                         if (!(localStorage.getItem("localUser") === null)) {

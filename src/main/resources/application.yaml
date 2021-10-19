@@ -16,8 +16,5 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
-springdoc:
-  swagger-ui:
-    path: /swag
 jwt:
   secret: tg5g98h45g98h45g9845hg98hf9834hf9834hjheriheriuher9g8h384y5934yhhtertg

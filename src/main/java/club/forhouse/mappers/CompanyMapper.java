@@ -10,5 +10,7 @@ import java.util.List;
 public interface CompanyMapper {
     CompanyDto toDto(Company company);
 
+    Company toEntity(CompanyDto company);
+
     List<CompanyDto> toListDto(List<Company> companyList);
 }
