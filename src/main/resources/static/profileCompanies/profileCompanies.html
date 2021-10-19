@@ -7,12 +7,26 @@
     <edit-element name="Email:" edit=company.companyEmail></edit-element>
     <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
     <h5>Специализации</h5>
-    <div ng-repeat="spec in profileCompany.specializations">
-        <edit-element name="" edit=spec.specializationTitle></edit-element>
+    <div>
+        <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
+        <!--<select ng-repeat="spec in profileCompany.specializations" ng-model="spec.specializationTitle" ng-options="elem.specializationTitle as elem.specializationTitle for elem in specList"></select>
+        -->
+        <select ng-repeat="spec in profileCompany.specializations" ng-model="spec.specializationTitle" ng-change="applyNewSpec(spec.specializationTitle)">
+            <option ng-selected="spec.specializationId == elem.specializationId" ng-repeat="elem in specList" ng-value="elem.specializationTitle">
+                {{elem.specializationTitle}}
+            </option>
+        </select>
         <!--<button ng-click = removeThisSpec(spec.specializationId)>-</button>-->
     </div>
-    <!--<button ng-click = addNewSpec()>Add specialization</button>-->
-    <button ng-click = "saveChanges()">Save All Changes</button>
+    <br>
+    <!--<div>
+        <button ng-click = addNewSpec()>Add specialization</button>
+    </div>
+    <br>-->
+    <div>
+        <button ng-click = "saveChanges()">Save All Changes</button>
+    </div>
+    <br>
 </div>
 
 <br>
@@ -23,3 +37,9 @@
     <p>Почта: {{company.generalManager.userEmail}}</p>
     <p>Телефон: {{company.generalManager.userPhone}}</p>
 </div>
+
+<h2>Прайс лист компании:</h2>
+<p ng-repeat="op in profileCompany.priceListCompany.operation">
+    {{op.name}}
+</p>
+<p>Цена: {{profileCompany.priceListCompany.priceOperation}}</p>

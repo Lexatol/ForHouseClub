@@ -6,8 +6,14 @@ angular.module('app').controller('ProfileContractorController', function ($scope
             .then(function (response) {
                 $scope.profileCompany = response.data;
                 $scope.company = $scope.profileCompany.company;
-                console.log($scope.profileCompany)
             });
+    }
+
+    $scope.loadSpecList =  function () {
+        $http.get(contextPath + '/api/v1/spec')
+            .then(function (response) {
+                $scope.specList = response.data;
+            })
     }
 
     $scope.saveChanges = function () {
@@ -31,9 +37,26 @@ angular.module('app').controller('ProfileContractorController', function ($scope
     };
 
     $scope.addNewSpec = function () {
-        let newSpec = {specializationId: "", specializationTitle: ""}
+        let newSpec = null
         $scope.profileCompany.specializations.push(newSpec);
     };
 
+    $scope.applyNewSpec = function (titleSpec) {
+    /*    for (let index = 0; index < $scope.specList.length; ++index) {
+            if($scope.specList[index].specializationTitle === titleSpec){
+                let specId = $scope.specList[index].specializationId;
+
+                for (let index = 0; index < $scope.profileCompany.specializations.length; ++index) {
+                    if($scope.profileCompany.specializations[index].specializationTitle === titleSpec) {
+                        $scope.profileCompany.specializations[index].specializationId = specId
+                        break
+                    }
+                }
+                break
+            }
+        }*/
+    };
+
     $scope.loadCompanies();
+    $scope.loadSpecList();
 });

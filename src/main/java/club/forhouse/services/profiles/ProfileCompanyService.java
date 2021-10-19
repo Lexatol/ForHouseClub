@@ -20,6 +20,8 @@ public class ProfileCompanyService {
     private final CompanyService companyService;
     private final SpecializationServices specializationServices;
 
+    private final club.forhouse.configuration.ProfileCompanyMapper companyMapper;
+
     public List<ProfileContractorDto> findAll() {
         return profileCompanyMapper.toListDto(profileCompanyRepository.findAll());
     }
@@ -40,6 +42,8 @@ public class ProfileCompanyService {
         ProfileCompany profileCompany = profileCompanyMapper.toProfileCompany(profileContractorDto);
         profileCompany = profileCompanyRepository.save(profileCompany);
         return profileCompanyMapper.toDto(profileCompany);
+        //ProfileCompany profileCompany = companyMapper.toEntity(profileContractorDto);
+        //return  companyMapper.toDto(profileCompanyRepository.save(profileCompany));
     }
 
     public void saveProfileFromName(String companyName) {

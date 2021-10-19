@@ -10,5 +10,4 @@ import lombok.*;
 public class SpecializationDto {
     private Long specializationId;
     private String specializationTitle;
-
 }
