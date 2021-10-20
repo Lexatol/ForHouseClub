@@ -66,7 +66,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                 let specId = $scope.specList[index].specializationId;
 
                 for (let index = 0; index < $scope.profileCompany.specializations.length; ++index) {
-                    if($scope.profileCompany.specializations[index].specializationTitle === titleSpec) {
+                    if ($scope.profileCompany.specializations[index].specializationTitle === titleSpec) {
                         $scope.profileCompany.specializations[index].specializationId = specId
                         break
                     }
@@ -75,6 +75,10 @@ angular.module('app').controller('ProfileContractorController', function ($scope
             }
         }/**/
     };
+
+    $scope.addWork = function () {
+
+    }
 
     $scope.loadCompanies();
     $scope.loadSpecList();

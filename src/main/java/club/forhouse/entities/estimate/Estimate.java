@@ -44,10 +44,13 @@ public class Estimate {
     @ToString.Exclude
     private User author;
 
-    @OneToMany(mappedBy = "estimate")
+    @OneToMany(mappedBy = "estimate", orphanRemoval = true, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<EstimateWork> works;
 
+    public void addWork(EstimateWork work) {
+        works.add(work);
+    }
 
     @Override
     public boolean equals(Object o) {
