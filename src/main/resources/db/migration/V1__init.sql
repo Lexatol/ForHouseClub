@@ -60,15 +60,24 @@ create table companies
     foreign key (general_manager) references users (user_id)
 );
 
+--таблица связей компании и специализаций
+create table company_specializations (
+    company_id              bigint not null,
+    specialization_id       bigint not null,
+    primary key (company_id, specialization_id),
+    foreign key (company_id) references companies(company_id),
+    foreign key (specialization_id) references specializations (specialization_id)
+);
+
 
 --//таблица профилей компаний
 create table profile_companies
 (
     profile_id             bigserial primary key,
     company_id             bigint,
-    specialization_id      int,
-    foreign key (specialization_id) references specializations (specialization_id),
+    --specialization_id      bigint,
     foreign key (company_id) references companies (company_id)
+    --foreign key (specialization_id) references specializations (specialization_id)
 );
 
 
@@ -104,15 +113,6 @@ create table companies_pm
     foreign key (user_id) references users (user_id),
     foreign key (company_id) references companies (company_id)
 );
-
---таблица связей компании и специализаций
-create table company_specializations (
-    company_id              bigint not null,
-    specialization_id       bigint not null,
-    primary key (company_id, specialization_id),
-    foreign key (company_id) references companies(company_id),
-    foreign key (specialization_id) references specializations (specialization_id)
-    );
 
 insert into specializations (specialization_title)
 values ('Builder'),
@@ -170,7 +170,9 @@ insert into company_specializations values
         (2, 3),
         (3, 4);
 
-insert into profile_companies (company_id, specialization_id) values
-        (1, 1), (1, 4), (2, 2), (2, 3), (3, 4);
+insert into profile_companies (company_id) values
+        (1),
+        (2),
+        (3);
 
 

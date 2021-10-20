@@ -8,23 +8,25 @@
     <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
     <h5>Специализации</h5>
     <div>
+        <!--
         <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
-        <!--<select ng-repeat="spec in profileCompany.specializations" ng-model="spec.specializationTitle" ng-options="elem.specializationTitle as elem.specializationTitle for elem in specList"></select>
         -->
-        <select ng-repeat="spec in profileCompany.specializations" ng-model="spec.specializationTitle" ng-change="applyNewSpec(spec.specializationTitle)">
-            <option ng-selected="spec.specializationId == elem.specializationId" ng-repeat="elem in specList" ng-value="elem.specializationTitle">
-                {{elem.specializationTitle}}
-            </option>
-        </select>
-        <!--<button ng-click = removeThisSpec(spec.specializationId)>-</button>-->
+
+        <div ng-repeat="spec in profileCompany.specializations" class="select-content">
+            <select class="form-select select-profile" ng-model="spec.specializationTitle" ng-change="applyNewSpec(spec.specializationTitle)">
+                <option ng-selected="spec.specializationId == elem.specializationId" ng-repeat="elem in specList" ng-value="elem.specializationTitle">
+                    {{elem.specializationTitle}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <button ng-click = addNewSpec() class="btn btn-success">Add specialization</button>
+        <button ng-click = removeThisSpec() class="btn btn-danger edit-button">Remove specialization</button>
     </div>
     <br>
-    <!--<div>
-        <button ng-click = addNewSpec()>Add specialization</button>
-    </div>
-    <br>-->
     <div>
-        <button ng-click = "saveChanges()">Save All Changes</button>
+        <button ng-click = "saveChanges()" class="btn btn-warning">Save All Changes</button>
     </div>
     <br>
 </div>
@@ -39,7 +41,17 @@
 </div>
 
 <h2>Прайс лист компании:</h2>
-<p ng-repeat="op in profileCompany.priceListCompany.operation">
-    {{op.name}}
-</p>
-<p>Цена: {{profileCompany.priceListCompany.priceOperation}}</p>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Название операции</th>
+            <th scope="col">Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="op in profileCompany.priceListCompany.operation">
+            <td>{{op.operation.name}}</td>
+            <td>{{op.price}}</td>
+        </tr>
+    </tbody>
+</table>

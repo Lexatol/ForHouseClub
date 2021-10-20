@@ -36,9 +36,9 @@ insert into pricelist (price_id, item_id) values
         (2, 2), (2, 5), (2, 8),
         (3, 3), (3, 6), (3, 9);
 
-insert into profile_companies (company_id, specialization_id, price_id) values
-        (1, 1, 1),
-        (2, 2, 2),
-        (3, 3, 3);
+update profile_companies set price_id = 1 where profile_id = 1;
+update profile_companies set price_id = 2 where profile_id = 2;
+update profile_companies set price_id = 3 where profile_id = 3;
+
 --        (1, 1, 1), (1, 4, 2), (2, 2, 3), (2, 3, 4), (3, 4, 5);
 
