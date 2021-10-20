@@ -1,7 +1,7 @@
 package club.forhouse.mappers;
 
-import club.forhouse.dto.profiles.PriceListCompanyDto;
-import club.forhouse.entities.profiles.PriceListCompany;
+import club.forhouse.dto.pricelist.PriceListCompanyDto;
+import club.forhouse.entities.pricelist.PriceListCompany;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 

@@ -18,12 +18,12 @@ create table tenders(
         customer_id         bigint not null,
         price               bigint,
         status_id           bigint,
-        estimate_id         bigint,
+--        estimate_id         bigint,
         platform_id         bigint,
         foreign key (contractor_id) references users(user_id),
         foreign key (customer_id) references users(user_id),
         foreign key (status_id) references status(status_id),
-        foreign key (estimate_id) references estimates(estimate_id),
+--        foreign key (estimate_id) references estimates(estimate_id),
         foreign key (platform_id) references platforms (platform_id)
 );
 
@@ -34,6 +34,12 @@ create table platform_tenders (
         foreign key (platform_id) references platforms(platform_id),
         foreign key (tender_id) references tenders (tender_id)
 );
+
+
+-- table_tender_ok
+--        tender_id
+--        contractor_id
+--
 
 insert into status (title) values
 ('черновик'),
@@ -52,9 +58,9 @@ insert into platforms (title) values
 ('Строительство домов, коттеджей'),
 ('Ремонт квартир'),
 ('Ремонт офисов');
-
-insert into platform_tenders (platform_id, tender_id) values
-(1, 1),
-(1, 2),
-(2, 3),
-(2, 4);
+--
+--insert into platform_tenders (platform_id, tender_id) values
+--(1, 1),
+--(1, 2),
+--(2, 3),
+--(2, 4);

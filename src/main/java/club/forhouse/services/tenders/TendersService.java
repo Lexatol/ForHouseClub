@@ -20,7 +20,6 @@ public class TendersService {
     private final TenderRepository tenderRepository;
     private final TenderMapper tenderMapper;
     private final CompanyService companyService;
-    private final TenderPlatformService tenderPlatformService;
 
     public List<TenderDto> findAll() {
         return tenderMapper.toListDto(tenderRepository.findAll());
@@ -34,7 +33,6 @@ public class TendersService {
 
     public TenderDto save(SystemTenderDto systemTenderDto) {
         Company company = companyService.findByName(systemTenderDto.getCustomer().getCompanyName());
-//        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getSystemPlatformDto().getTitle());
         Tender tender = new Tender();
         tender.setTitle(systemTenderDto.getTitle());
         tender.setDataStart(systemTenderDto.getDataStart());
@@ -45,7 +43,6 @@ public class TendersService {
         //TODO необходимо на фронте установить по умолчанию статус "черновик"
         // и добавить кнопку опубликовать тендер и после этого изменить статус на другой
         tender.setStatus(systemTenderDto.getStatus());
-//        tender.setTenderPlatform(tenderPlatform);
         tender = tenderRepository.save(tender);
         return tenderMapper.toDto(tender);
     }
@@ -53,5 +50,10 @@ public class TendersService {
     public void delete(TenderDto tenderDto) {
         Tender tender = tenderMapper.toEntity(tenderDto);
         tenderRepository.delete(tender);
+    }
+
+    public Tender findByTitle(String title) {
+        return tenderRepository.findByTitle(title);
+
     }
 }

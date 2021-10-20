@@ -25,9 +25,9 @@ public class TenderPlatform {
     @Column(name = "title")
     private String title;
 
-    @OneToMany
-    @JoinTable(name = "platform_tenders",
-            joinColumns = @JoinColumn(name = "platform_id"),
-            inverseJoinColumns = @JoinColumn(name = "tender_id"))
-    private List<Tender> tenders;
+//    @OneToMany
+//    @JoinTable(name = "platform_tenders",
+//            joinColumns = @JoinColumn(name = "platform_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tender_id"))
+//    private List<Tender> tenders;
 }

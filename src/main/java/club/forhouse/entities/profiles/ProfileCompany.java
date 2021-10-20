@@ -1,5 +1,6 @@
 package club.forhouse.entities.profiles;
 
+import club.forhouse.entities.pricelist.PriceListCompany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,12 +29,15 @@ public class ProfileCompany {
     private Company company;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "specialization_id")
+    @JoinTable(name = "company_specializations",
+            joinColumns = @JoinColumn(name = "company_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialization_id"))
     @ToString.Exclude
     private List<Specialization> specializations;
 
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pricelist_id")
+    @JoinColumn(name = "price_id")
     private PriceListCompany priceListCompany;
 
     @Override

@@ -1,26 +1,44 @@
-create table pricelist_companies(
-            pricelist_id        bigserial primary key,
-            operation_id        bigint not null,
-            company_id          bigint,
-            price_operation     bigint not null,
-            foreign key (operation_id) references operations (operation_id),
-            foreign key (company_id) references companies (company_id)
+create table price_items(
+        item_id             bigserial primary key,
+        operation_id        bigint,
+        price               bigint,
+        foreign key (operation_id) references operations (operation_id)
 );
 
-insert into pricelist_companies (operation_id, company_id, price_operation) values
-            (1, 1, 100),
-            (2, 1, 200),
-            (3, 1, 300),
-            (1, 2, 120),
-            (2, 2, 230),
-            (3, 2, 340);
+create table prices (
+        price_id            bigserial primary key,
+        profile_id          bigint,
+        foreign key (profile_id) references profile_companies(profile_id)
+);
 
-alter table profile_companies add pricelist_id bigint;
+create table pricelist (
+        price_id        bigint not null,
+        item_id         bigint not null,
+        primary key (price_id, item_id),
+        foreign key (price_id) references prices(price_id),
+        foreign key (item_id) references price_items (item_id)
+);
+--
+alter table profile_companies add price_id bigint;
 
-alter table profile_companies add foreign key (pricelist_id)
-  references pricelist_companies(pricelist_id);
+alter table profile_companies add foreign key (price_id)
+  references prices(price_id);
 
-insert into profile_companies (profile_id, company_id, specialization_id, pricelist_id) values      (1, 1, 1, 1),
-           (2, 2, 2, 2),
-           (3, 3, 3, 3);
+insert into price_items (operation_id, price) values
+        (1, 1000), (1, 1200), (1, 1300),
+        (2, 2000), (2, 2200), (2, 2300),
+        (3, 3000), (3, 3200), (3, 3300);
+
+insert into prices (profile_id) values (1), (2), (3);
+
+insert into pricelist (price_id, item_id) values
+        (1, 1), (1, 4), (1, 7),
+        (2, 2), (2, 5), (2, 8),
+        (3, 3), (3, 6), (3, 9);
+
+update profile_companies set price_id = 1 where profile_id = 1;
+update profile_companies set price_id = 2 where profile_id = 2;
+update profile_companies set price_id = 3 where profile_id = 3;
+
+--        (1, 1, 1), (1, 4, 2), (2, 2, 3), (2, 3, 4), (3, 4, 5);
 
