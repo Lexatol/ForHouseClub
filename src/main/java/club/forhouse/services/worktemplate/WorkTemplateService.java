@@ -1,5 +1,6 @@
 package club.forhouse.services.worktemplate;
 
+import club.forhouse.dto.worktemplate.WorkTemplateBaseDto;
 import club.forhouse.dto.worktemplate.WorkTemplateDto;
 import club.forhouse.dto.worktemplate.WorkTemplateNewDto;
 import club.forhouse.entities.worktemplate.WorkTemplate;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +25,13 @@ public class WorkTemplateService {
     public Page<WorkTemplateDto> getAll(int page, int size) {
         return workTemplateRepository.findAll(PageRequest.of(page, size))
                 .map(it -> modelMapper.map(it, WorkTemplateDto.class));
+    }
+
+    public List<WorkTemplateBaseDto> getList() {
+        return workTemplateRepository.findAll()
+                .stream()
+                .map(it -> modelMapper.map(it, WorkTemplateBaseDto.class))
+                .collect(Collectors.toList());
     }
 
     @Transactional
