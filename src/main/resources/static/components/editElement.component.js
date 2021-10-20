@@ -8,18 +8,24 @@ angular.module('editElement')
             edit: '='
         },
         controller: function ($scope) {
-            $scope.sendData = function () {
-                $scope.editing = false
+            $scope.onLoad = function() {
+                $scope.currentEdit = this.$ctrl.edit;
             }
 
-            $scope.closeEdit = function () {
+            $scope.sendData = function () {
                 this.$ctrl.edit = $scope.currentEdit
                 $scope.editing = false
             }
 
-            $scope.startEdit = function () {
-                $scope.editing = true
-                $scope.currentEdit = this.$ctrl.edit
+            $scope.closeEdit = function () {
+                $scope.editing = false
             }
+
+            $scope.startEdit = function () {
+                $scope.currentEdit = this.$ctrl.edit
+                $scope.editing = true
+            }
+
+            $scope.onLoad();
         }
     });
