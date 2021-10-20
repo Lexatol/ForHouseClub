@@ -3,7 +3,7 @@
 <div>
     <p>Компания: {{currentEstimate.company.companyName}}</p>
     <p>Дата: {{currentEstimate.date.substring(0,19).replace("T", " ")}}</p>
-    <edit-element edit=currentEstimate.sum name="Сумма:"></edit-element>
+    <edit-element edit=currentEstimate.sum name="Сумма:" type=number></edit-element>
     <edit-element edit=currentEstimate.address name="Адрес:"></edit-element>
     <p>Автор: {{currentEstimate.author.userName}}</p>
     <button ng-click="saveChanges()">Сохранить</button>
