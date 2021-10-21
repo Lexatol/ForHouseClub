@@ -54,6 +54,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
 
     $scope.addNewSpec = function () {
         $http.get(contextPath + '/api/v1/spec/1')
+
             .then(function (response) {
                 $scope.newSpec = response.data;
                 $scope.profileCompany.specializations.push($scope.newSpec)
@@ -75,10 +76,6 @@ angular.module('app').controller('ProfileContractorController', function ($scope
             }
         }/**/
     };
-
-    $scope.addWork = function () {
-
-    }
 
     $scope.loadCompanies();
     $scope.loadSpecList();

@@ -1,10 +1,12 @@
 package club.forhouse.services.worktemplate;
 
+import club.forhouse.dto.worktemplate.WorkCategoryDto;
 import club.forhouse.dto.worktemplate.WorkTemplateBaseDto;
 import club.forhouse.dto.worktemplate.WorkTemplateDto;
 import club.forhouse.dto.worktemplate.WorkTemplateNewDto;
 import club.forhouse.entities.worktemplate.WorkTemplate;
 import club.forhouse.exceptions.ResourceNotFoundException;
+import club.forhouse.repositories.worktemplate.WorkCategoryRepository;
 import club.forhouse.repositories.worktemplate.WorkTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WorkTemplateService {
     private final WorkTemplateRepository workTemplateRepository;
+    private final WorkCategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
 
     public Page<WorkTemplateDto> getAll(int page, int size) {
@@ -31,6 +34,12 @@ public class WorkTemplateService {
         return workTemplateRepository.findAll()
                 .stream()
                 .map(it -> modelMapper.map(it, WorkTemplateBaseDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<WorkCategoryDto> getCategories() {
+        return categoryRepository.findAll()
+                .stream().map(it -> modelMapper.map(it, WorkCategoryDto.class))
                 .collect(Collectors.toList());
     }
 

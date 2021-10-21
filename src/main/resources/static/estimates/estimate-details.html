@@ -12,6 +12,15 @@
     <h4>Работы:</h4>
 
     <table cellpadding="0" cellspacing="0" class="table table-hover">
+
+
+        <div class="tab">
+            <button class="tablinks" ng-click="openCategory(c.categoryId)" ng-repeat="c in categories">{{c.name}}
+            </button>
+        </div>
+
+        <div class="tabcontent" ng-repeat="c in categories" ng-show="c.categoryId===currentCategory">{{c.name}}</div>
+
         <thead>
         <tr>
             <td>Работа</td>
@@ -28,6 +37,7 @@
             </td>
         </tr>
         </tbody>
+
     </table>
     <button class="btn btn-primary" ng-click="addWork()">Добавить</button>
 

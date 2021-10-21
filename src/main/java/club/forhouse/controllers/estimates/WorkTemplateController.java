@@ -1,5 +1,6 @@
 package club.forhouse.controllers.estimates;
 
+import club.forhouse.dto.worktemplate.WorkCategoryDto;
 import club.forhouse.dto.worktemplate.WorkTemplateBaseDto;
 import club.forhouse.dto.worktemplate.WorkTemplateDto;
 import club.forhouse.dto.worktemplate.WorkTemplateNewDto;
@@ -21,6 +22,11 @@ public class WorkTemplateController {
     public Page<WorkTemplateDto> getAll(@RequestParam(name = "page", defaultValue = "1") int page,
                                         @RequestParam(defaultValue = "5") int size) {
         return workTemplateService.getAll(page - 1, size);
+    }
+
+    @GetMapping("/categories")
+    public List<WorkCategoryDto> getCategories() {
+        return workTemplateService.getCategories();
     }
 
     @GetMapping("/list")

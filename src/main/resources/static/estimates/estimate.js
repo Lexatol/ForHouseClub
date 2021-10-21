@@ -52,6 +52,15 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
             .then(function (response) {
                 $scope.currentEstimate = response.data;
             });
+        $http.get(contextPath + "/api/v1/work_templates/categories")
+            .then(function (response) {
+                $scope.categories = response.data;
+                $scope.currentCategory = response.data[0].categoryId;
+            })
+    }
+
+    $scope.openCategory = function (categoryId) {
+        $scope.currentCategory = categoryId;
     }
 
     $scope.saveChanges = function () {
@@ -61,6 +70,14 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
                 alert('Данные обновлены');
             });
     };
+
+    $scope.addWork = function () {
+        $http.get(contextPath + "/api/v1/estimates/addwork?estimate=" + $scope.currentEstimate + "&work=" + 1)
+            .then(function (response) {
+                    $scope.currentEstimate.works.push(response.data);
+                }
+            );
+    }
 
     if ($location.path().endsWith('/estimates')) {
         $scope.showEstimatesPage();
