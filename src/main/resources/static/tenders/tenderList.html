@@ -1,0 +1,15 @@
+<h3>Список тендеров</h3>
+<div>
+    <ul style="padding-left: 0px">
+        <li ng-repeat="tender in tendersList" style="list-style-type: none; padding: 5px;">
+            <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
+                <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;">
+                    <h5>{{tender.title}}</h5>
+                    <h6>{{tender.price}}</h6>
+                </div>
+                <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
+                <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
+            </div>
+        </li>
+    </ul>
+</div>
