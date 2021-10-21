@@ -38,6 +38,11 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#!/" class="nav-link" aria-current="page"
                                         ng-class="{'active':$route.current.active === 'homePage'}">Главная</a></li>
+                <li class="nav-item"><a href="#!/tenders" class="nav-link" aria-current="page"
+                                        ng-class="{'active':$route.current.active === 'tenders'}">Тендеры</a></li>
+                <li class="nav-item"><a href="#!/tenderAdd" class="nav-link" aria-current="page"
+                                        ng-class="{'active':$route.current.active === 'tenderAdd'}"
+                                        ng-if="isUserLoggedIn()">Добавить тендер</a></li>
                 <li class="nav-item"><a href="#!/profileCompanies" class="nav-link"
                                         ng-class="{'active':$route.current.active === 'profileCompanies'}"
                                         ng-if="isUserLoggedIn()">Профиль Компании</a></li>
@@ -65,6 +70,8 @@
     <script src="auth/auth.js"></script>
     <script src="register/register.js"></script>
     <script src="estimates/estimate.js"></script>
+    <script src="tenders/tenderList.js"></script>
+    <script src="tenders/tenderAdd.js"></script>
 </div>
 </body>
 </html>

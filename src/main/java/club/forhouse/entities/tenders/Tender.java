@@ -27,9 +27,9 @@ public class Tender {
     @Column(name = "data_start")
     private String dataStart;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "estimate_id")
-    private Estimate estimate;
+//    @OneToOne (cascade = CascadeType.ALL)
+//    @JoinColumn(name = "estimate_id")
+//    private Estimate estimate;
 
     @Column(name = "address")
     private String address;
