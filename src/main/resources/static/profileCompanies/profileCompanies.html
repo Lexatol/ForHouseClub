@@ -1,0 +1,57 @@
+<h3>Профиль Компании</h3>
+
+<div>
+    <edit-element name="Название компании:" edit=company.companyName></edit-element>
+    <edit-element name="Адресс:" edit=company.legalAddress></edit-element>
+    <edit-element name="Телефон:" edit=company.companyPhone></edit-element>
+    <edit-element name="Email:" edit=company.companyEmail></edit-element>
+    <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
+    <h5>Специализации</h5>
+    <div>
+        <!--
+        <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
+        -->
+
+        <div ng-repeat="spec in profileCompany.specializations" class="select-content">
+            <select class="form-select select-profile" ng-model="spec.specializationTitle" ng-change="applyNewSpec(spec.specializationTitle)">
+                <option ng-selected="spec.specializationId == elem.specializationId" ng-repeat="elem in specList" ng-value="elem.specializationTitle">
+                    {{elem.specializationTitle}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <button ng-click = addNewSpec() class="btn btn-success">Add specialization</button>
+        <button ng-click = removeThisSpec() class="btn btn-danger edit-button">Remove specialization</button>
+    </div>
+    <br>
+    <div>
+        <button ng-click = "saveChanges()" class="btn btn-warning">Save All Changes</button>
+    </div>
+    <br>
+</div>
+
+<br>
+
+<h2>Информация о менеджере</h2>
+<div>
+    <p>Главный Менеджер: {{company.generalManager.userName}}</p>
+    <p>Почта: {{company.generalManager.userEmail}}</p>
+    <p>Телефон: {{company.generalManager.userPhone}}</p>
+</div>
+
+<h2>Прайс лист компании:</h2>
+<table class = "table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Название операции</th>
+            <th scope="col">Цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="op in profileCompany.priceListCompany.operation">
+            <td>{{op.operation.name}}</td>
+            <td>{{op.price}}</td>
+        </tr>
+    </tbody>
+</table>

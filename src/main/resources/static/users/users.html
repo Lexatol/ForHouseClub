@@ -1,0 +1,30 @@
+<div>
+    <h3>Профиль</h3>
+
+    <form novalidate ng-submit="submitUpdateProfile()">
+        <input class="form-control" type="number" hidden ng-model="user.userId">
+        <div class="form-group col-md-6">
+            <label for="elementUsername">Имя пользователя</label>
+            <input class="form-control" type="text" ng-model="user.userName" id="elementUsername">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="elementEmail">Почта</label>
+            <input class="form-control" type="text" ng-model="user.userEmail" id="elementEmail">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="elementPhone">Телефон</label>
+            <input class="form-control" type="text" ng-model="user.userPhone" id="elementPhone">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="elementPass">Новый Пароль</label>
+            <input class="form-control" type="password" ng-model="user.userPassword" id="password">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="elementPass">Старый Пароль</label>
+            <input class="form-control" type="password" ng-model="user.confirmationPassword" id="elementPass">
+        </div>
+        <div>
+            <button class="btn btn-success" type="submit">Сохранить</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=ForHouse
+    username: postgres
+    password: admin
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+springdoc:
+  swagger-ui:
+    path: /swag
+jwt:
+  secret: tg5g98h45g98h45g9845hg98hf9834hf9834hjheriheriuher9g8h384y5934yhhtertg
