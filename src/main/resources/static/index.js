@@ -43,6 +43,16 @@
                 templateUrl: 'main/main.html',
                 active: 'homePage'
             })
+            .when('/tenders', {
+                templateUrl: 'tenders/tenderList.html',
+                controller: 'TenderListController',
+                active: 'tenders'
+            })
+            .when('/tenderAdd', {
+                templateUrl: 'tenders/tenderAdd.html',
+                controller: 'TenderAddController',
+                active: 'tenderAdd'
+            })
             .when('/profileCompanies', {
                 templateUrl: 'profileCompanies/profileCompanies.html',
                 controller: 'ProfileContractorController',
