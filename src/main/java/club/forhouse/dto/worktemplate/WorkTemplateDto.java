@@ -11,7 +11,6 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class WorkTemplateDto extends WorkTemplateBaseDto {
 
-    private Long templateId;
     private List<WorkTemplateOperationDto> operations;
 
 }

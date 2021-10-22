@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/estimates")
@@ -39,7 +41,7 @@ public class EstimateController {
                                     @RequestParam(name = "page", defaultValue = "1") int page) {
         UserDto user = getUserFromToken(authorizationHeader);
         CompanyDto company = companyService.findByUser(user);
-        return estimateService.findAll(user, company, --page);
+        return estimateService.findAll(company, --page);
     }
 
     private UserDto getUserFromToken(@RequestHeader(name = "Authorization", required = false) String authorizationHeader) {
@@ -60,6 +62,17 @@ public class EstimateController {
     public EstimateWorkDto addWork(@RequestParam(name = "estimate") Long estimateId,
                                    @RequestParam(name = "work") Long workTemplateId) {
         return estimateService.addWork(estimateId, workTemplateId);
+    }
+
+    @GetMapping("/works")
+    public List<EstimateWorkDto> getWorksForEstimateAndCategory(@RequestParam(name = "estimate") Long estimateId,
+                                                                @RequestParam(name = "category", required = false) Long categoryId) {
+
+        if (categoryId == null) {
+            return estimateService.getWorksForEstimate(estimateId);
+        } else {
+            return estimateService.getWorksForEstimateAndCategory(estimateId, categoryId);
+        }
     }
 
 }

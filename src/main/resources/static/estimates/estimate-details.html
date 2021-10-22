@@ -11,34 +11,44 @@
     <br>
     <h4>Работы:</h4>
 
-    <table cellpadding="0" cellspacing="0" class="table table-hover">
 
+    <div class="workContainer">
 
         <div class="tab">
-            <button class="tablinks" ng-click="openCategory(c.categoryId)" ng-repeat="c in categories">{{c.name}}
+            <button ng-class="currentCategory===c.categoryId ? 'tablinks active' :'tablinks'"
+                    ng-click="openCategory(c.categoryId)"
+                    ng-repeat="c in categories">{{c.name}}
             </button>
         </div>
 
-        <div class="tabcontent" ng-repeat="c in categories" ng-show="c.categoryId===currentCategory">{{c.name}}</div>
+        <div class="tabcontent">
 
-        <thead>
-        <tr>
-            <td>Работа</td>
-            <td>Описание</td>
-            <td></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="w in currentEstimate.works">
-            <td>{{w.workTemplate.name}}</td>
-            <td>{{w.workTemplate.description}}</td>
-            <td>
-                <button class="btn btn-danger edit-button" ng-click="deleteWork(w.rowId)">Удалить</button>
-            </td>
-        </tr>
-        </tbody>
+            <table cellpadding="0" cellspacing="0" class="table table-hover">
 
-    </table>
-    <button class="btn btn-primary" ng-click="addWork()">Добавить</button>
+                <thead>
+                <tr>
+                    <td>Работа</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="w in currentWorks">
+                    <td>
+                        <select id="workSelect" name="workSelect" ng-model="w.workTemplate.templateId">
+                            <option ng-repeat="option in availableWorks" value="{{option.templateId}}">{{option.name}}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger edit-button" ng-click="deleteWork(w.rowId)">Удалить</button>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <button class="btn btn-primary" ng-click="addWork()">Добавить</button>
+        </div>
+    </div>
 
 </div>

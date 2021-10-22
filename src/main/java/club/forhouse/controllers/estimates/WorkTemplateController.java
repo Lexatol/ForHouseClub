@@ -30,8 +30,12 @@ public class WorkTemplateController {
     }
 
     @GetMapping("/list")
-    public List<WorkTemplateBaseDto> getList() {
-        return workTemplateService.getList();
+    public List<WorkTemplateBaseDto> getList(@RequestParam(name = "category", required = false) Long categoryId) {
+        if (categoryId == null) {
+            return workTemplateService.getList();
+        } else {
+            return workTemplateService.getListByCategory(categoryId);
+        }
     }
 
     @GetMapping("/{id}")
