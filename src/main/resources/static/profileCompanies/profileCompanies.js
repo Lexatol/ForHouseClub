@@ -54,6 +54,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
 
     $scope.addNewSpec = function () {
         $http.get(contextPath + '/api/v1/spec/1')
+
             .then(function (response) {
                 $scope.newSpec = response.data;
                 $scope.profileCompany.specializations.push($scope.newSpec)
@@ -66,7 +67,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                 let specId = $scope.specList[index].specializationId;
 
                 for (let index = 0; index < $scope.profileCompany.specializations.length; ++index) {
-                    if($scope.profileCompany.specializations[index].specializationTitle === titleSpec) {
+                    if ($scope.profileCompany.specializations[index].specializationTitle === titleSpec) {
                         $scope.profileCompany.specializations[index].specializationId = specId
                         break
                     }
