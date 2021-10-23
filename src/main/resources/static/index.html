@@ -46,9 +46,6 @@
                 <li class="nav-item"><a href="#!/profileCompanies" class="nav-link"
                                         ng-class="{'active':$route.current.active === 'profileCompanies'}"
                                         ng-if="isUserLoggedIn()">Профиль Компании</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!/estimates"
-                                        ng-class="{'active':$route.current.active === 'estimates'}"
-                                        ng-if="isUserLoggedIn()">Сметы</a></li>
                 <li class="nav-item"><a href="#!/users" class="nav-link" ng-if="isUserLoggedIn()"
                                         ng-class="{'active':$route.current.active === 'userPage'}">Пользователь</a></li>
                 <li class="nav-item"><a href="#!/auth" class="nav-link"
@@ -71,8 +68,10 @@
     <script src="auth/auth.js"></script>
     <script src="register/register.js"></script>
     <script src="estimates/estimate.js"></script>
+    <script src="estimates/estimate-list.js"></script>
     <script src="tenders/tenderList.js"></script>
     <script src="tenders/tenderAdd.js"></script>
+
 </div>
 </body>
 </html>
