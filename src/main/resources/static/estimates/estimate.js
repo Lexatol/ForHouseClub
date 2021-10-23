@@ -1,49 +1,6 @@
 angular.module('app').controller('EstimateController', function ($scope, $http, $localStorage, $window, $location) {
     const contextPath = 'http://localhost:8189';
-
-    $scope.showEstimatesPage = function (pageIndex = 1) {
-        $http({
-            url: contextPath + '/api/v1/estimates',
-            method: 'GET',
-            params: {
-                page: pageIndex
-            },
-            page: pageIndex
-        }).then(function (response) {
-            $scope.EstimatesPage = response.data;
-
-            let minPageIndex = pageIndex - 2;
-            if (minPageIndex < 1) {
-                minPageIndex = 1;
-            }
-
-            let maxPageIndex = pageIndex + 2;
-            if (maxPageIndex > $scope.EstimatesPage.totalPages) {
-                maxPageIndex = $scope.EstimatesPage.totalPages;
-            }
-
-            $scope.PaginationArray = $scope.generatePagesIndexes(minPageIndex, maxPageIndex);
-        });
-    };
-
-    $scope.generatePagesIndexes = function (startPage, endPage) {
-        let arr = [];
-        for (let i = startPage; i < endPage + 1; i++) {
-            arr.push(i);
-        }
-        return arr;
-    }
-
-    $scope.createEstimate = function () {
-        $http.post(contextPath + '/api/v1/estimates/new')
-            .then(function (response) {
-                $scope.editEstimate(response.data.estimateId);
-            });
-    }
-
-    $scope.editEstimate = function (estimateId) {
-        $location.path('/estimates/' + estimateId);
-    }
+    var iter = 0;
 
     $scope.showEstimate = function () {
         const n = $location.path().split("/");
@@ -86,13 +43,18 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
         if ($scope.currentWorks === undefined || $scope.currentWorks.lenght === 0) {
             $scope.currentWorks = [];
         }
-        $scope.currentWorks.push({rowId: 'New', workTemplate: {name: 'New', templateId: 0}});
+        $scope.currentWorks.push({rowId: 'New' + iter, workTemplate: {name: 'New', templateId: 0}});
+        iter++;
     }
 
-    if ($location.path().endsWith('/estimates')) {
-        $scope.showEstimatesPage();
-    } else {
-        $scope.showEstimate();
+    $scope.deleteWork = function (rowId) {
+        $scope.currentWorks.forEach(function (item, i, arr) {
+            if (item.rowId === rowId) {
+                arr.splice(i, 1);
+            }
+        });
     }
+
+    $scope.showEstimate();
 
 });
