@@ -59,8 +59,8 @@ insert into platforms (title) values
 ('Ремонт квартир'),
 ('Ремонт офисов');
 --
---insert into platform_tenders (platform_id, tender_id) values
---(1, 1),
---(1, 2),
---(2, 3),
---(2, 4);
+insert into platform_tenders (platform_id, tender_id) values
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4);
