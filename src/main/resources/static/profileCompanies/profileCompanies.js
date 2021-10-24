@@ -20,7 +20,34 @@ angular.module('app').controller('ProfileContractorController', function ($scope
         $http.get(contextPath + '/api/v1/tenders/comp/' + $scope.company.companyName)
             .then(function (response) {
                 $scope.myTenders = response.data;
-                console.log($scope.myTenders)
+            })
+    }
+
+    $scope.removeThisContractor = function(tenderId){
+        $http.get(contextPath + '/api/v1/tenders/remove_contractor/' + tenderId)
+            .then(function (response) {
+                $scope.loadMyTenders();
+            })
+    }
+
+    $scope.approveThisContractor = function(tenderId) {
+        $http.get(contextPath + '/api/v1/tenders/approve_contractor/' + tenderId)
+            .then(function (response) {
+                $scope.loadMyTenders();
+            })
+    }
+
+    $scope.closeTender = function(tenderId) {
+        $http.get(contextPath + '/api/v1/tenders/close_tender/' + tenderId)
+            .then(function (response) {
+                $scope.loadMyTenders();
+            })
+    }
+
+    $scope.removeThisTender = function(tenderId){
+        $http.get(contextPath + '/api/v1/tenders/remove/' + tenderId)
+            .then(function (response) {
+                $scope.loadMyTenders();
             })
     }
 
