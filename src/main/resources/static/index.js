@@ -4,10 +4,12 @@
     angular
         .module('app', ['ngRoute', 'ngStorage', 'editElement'])
         .config(config)
-        .controller('IndexController', function($scope, $http, $localStorage, $route) {
+        .controller('IndexController', function($scope, $http, $localStorage, $route, $window) {
+            const contextPath = 'http://localhost:8189';
             $scope.$route = $route;
 
             $scope.tryToLogout = function () {
+                $window.location.href = contextPath + '#!/auth';
                 localStorage.clear();
                 $scope.clearUser();
                 try {
