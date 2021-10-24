@@ -19,15 +19,13 @@ angular.module('app').controller('ProfileContractorController', function ($scope
         $http.get(contextPath + '/api/v1/spec')
             .then(function (response) {
                 $scope.specList = response.data;
+                $scope.buildSelectArray();
             })
         }
 
     $scope.saveChanges = function () {
         $scope.profileCompany.company = $scope.company
 
-        //$scope.profileCompany.specializations.map(function(spec) {
-        //    console.log(spec.specializationTitle)
-        //});
         let n = $scope.profileCompany.specializations.length;
         for (let i = 0; i < n-1; i++)
         {
@@ -49,23 +47,10 @@ angular.module('app').controller('ProfileContractorController', function ($scope
 
     $scope.removeThisSpec = function () {
         $scope.profileCompany.specializations.splice($scope.profileCompany.specializations.length - 1, 1);
-        //console.log(specId + " " + $scope.profileCompany.specializations[0].specializationId);
-
-        /*for (let index = 0; index < $scope.profileCompany.specializations.length; ++index) {
-            if($scope.profileCompany.specializations[index].specializationId === specId) {
-                $scope.profileCompany.specializations = $scope.profileCompany.specializations.splice(index, index)
-            }
-        }*/
+        $scope.buildSelectArray()
     };
 
     $scope.addNewSpec = function () {
-        /*$http.get(contextPath + '/api/v1/spec/1')
-
-            .then(function (response) {
-                $scope.newSpec = response.data;
-                $scope.profileCompany.specializations.push($scope.newSpec)
-            })*/
-
         let newSpec = Array.from($scope.specList);
 
         $scope.cleanSpec(newSpec)
@@ -75,6 +60,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                 .then(function (response) {
                     $scope.newSpec = response.data;
                     $scope.profileCompany.specializations.push($scope.newSpec)
+                    $scope.buildSelectArray()
                 })
         }
     };
@@ -103,12 +89,6 @@ angular.module('app').controller('ProfileContractorController', function ($scope
     $scope.applyNewSpec = function (titleSpec) {
         for (let i = 0; i < $scope.currentSpecList.length; ++i) {
             if($scope.currentSpecList[i] === titleSpec){
-                //console.log($scope.currentSpecId + " " + $scope.currentSpecTitle);
-
-                //for (let i = 0; i < $scope.specList.length; ++i) {
-                    //if ($scope.specList[i].specializationTitle === titleSpec) {
-                        //let specId = $scope.specList[i].specializationId;
-
                         for (let j = 0; j < $scope.profileCompany.specializations.length; ++j) {
                             if ($scope.profileCompany.specializations[j].specializationTitle === titleSpec) {
                                 if ($scope.profileCompany.specializations[j].specializationId === $scope.currentSpecId) {
@@ -118,13 +98,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                                 }
                             }
                         }
-                    //    break
-                    //}
-                //}
-
-                //console.log($scope.currentSpecList)
                 $scope.currentSpecList = [];
-                //console.log($scope.currentSpecList)
                 for (let i = 0; i < $scope.profileCompany.specializations.length; ++i) {
                     let title = $scope.profileCompany.specializations[i].specializationTitle;
                     $scope.currentSpecList.push(title);
@@ -132,30 +106,6 @@ angular.module('app').controller('ProfileContractorController', function ($scope
             return;
             }
         }
-
-        /*
-        console.log($scope.currentSpec);
-        console.log(titleSpec)
-        for (let i = 0; i < $scope.currentSpecList.length; ++i) {
-        //    for (let j = 0; j < $scope.profileCompany.specializations.length; ++j) {
-            console.log($scope.currentSpecList)
-                if($scope.currentSpecList[i] === titleSpec){
-                    for (let j = 0; j < $scope.profileCompany.specializations.length; ++j) {
-                        if ($scope.profileCompany.specializations[j].specializationTitle === titleSpec) {
-                            $scope.profileCompany.specializations[j].specializationTitle = $scope.currentSpec
-                        }
-                    }
-
-                    $scope.currentSpecList = [];
-                    console.log($scope.currentSpecList)
-                    for (let i = 0; i < $scope.profileCompany.specializations.length; ++i) {
-                        let title = $scope.profileCompany.specializations[i].specializationTitle;
-                        $scope.currentSpecList.push(title);
-                    }
-                    return;
-                }
-        //    }
-        }*/
 
         for (let i = 0; i < $scope.specList.length; ++i) {
             if ($scope.specList[i].specializationTitle === titleSpec) {
@@ -176,8 +126,35 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                 break
             }
         }
-
+        $scope.buildSelectArray();
     };
+
+    $scope.buildSelectArray = function() {
+        for (let i = 0; i < $scope.profileCompany.specializations.length; ++i) {
+            $scope.specArrays = new Array($scope.profileCompany.specializations.length);
+            for (let j = 0; j < $scope.specArrays.length; j++) {
+                $scope.specArrays[j] = Array.from($scope.specList);
+            }
+        }
+
+        if($scope.specArrays) {
+            for (let i = 0; i < $scope.specArrays.length; ++i) {
+                for (let j = 0; j < $scope.specArrays[i].length; ++j) {
+                    for (let k = 0; k < $scope.profileCompany.specializations.length; ++k) {
+                        //console.log(i + " " + j + " " + $scope.specArrays[i][j].specializationTitle + " " + $scope.profileCompany.specializations[i].specializationTitle)
+                        if ($scope.specArrays[i][j].specializationTitle === $scope.profileCompany.specializations[k].specializationTitle) {
+                            if (i !== k) {
+                                $scope.specArrays[i].splice(j, 1)
+                                i = 0;
+                                j = 0;
+                            }
+                            //console.log("rem "+ i + " " + j + " " + $scope.specArrays[i][j].specializationTitle + " " + $scope.profileCompany.specializations[i].specializationTitle)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     $scope.loadCompanies();
 });

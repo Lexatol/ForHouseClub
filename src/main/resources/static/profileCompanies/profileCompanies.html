@@ -12,6 +12,17 @@
         <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
         -->
 
+        <div ng-repeat="spec in profileCompany.specializations track by $index" class="select-content" ng-click="saveCurrentSpec(spec.specializationId, spec.specializationTitle)">
+            <select class="form-select select-profile" ng-change="applyNewSpec(spec.specializationTitle)"
+                    ng-model="spec.specializationTitle">
+                <option ng-repeat="elem in specArrays[$index]" ng-selected="spec.specializationId == elem.specializationId"
+                        ng-value="elem.specializationTitle">
+                    {{elem.specializationTitle}}
+                </option>
+            </select>
+        </div>
+
+        <!--
         <div ng-repeat="spec in profileCompany.specializations" class="select-content" ng-click="saveCurrentSpec(spec.specializationId, spec.specializationTitle)">
             <select class="form-select select-profile" ng-change="applyNewSpec(spec.specializationTitle)"
                     ng-model="spec.specializationTitle">
@@ -21,6 +32,7 @@
                 </option>
             </select>
         </div>
+        -->
     </div>
     <div>
         <button class="btn btn-success" ng-click=addNewSpec()>Add specialization</button>
