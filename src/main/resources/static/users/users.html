@@ -23,8 +23,11 @@
             <label for="elementPass">Старый Пароль</label>
             <input class="form-control" type="password" ng-model="user.confirmationPassword" id="elementPass">
         </div>
+        <br>
         <div>
             <button class="btn btn-success" type="submit">Сохранить</button>
         </div>
     </form>
+    <br>
+    <button ng-click = "tryToLogout()" class="btn btn-warning">Выход</button>
 </div>

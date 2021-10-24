@@ -12,7 +12,7 @@
         <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
         -->
 
-        <div ng-repeat="spec in profileCompany.specializations" class="select-content">
+        <div ng-repeat="spec in profileCompany.specializations" class="select-content" ng-click="saveCurrentSpec(spec.specializationId, spec.specializationTitle)">
             <select class="form-select select-profile" ng-change="applyNewSpec(spec.specializationTitle)"
                     ng-model="spec.specializationTitle">
                 <option ng-repeat="elem in specList" ng-selected="spec.specializationId == elem.specializationId"
