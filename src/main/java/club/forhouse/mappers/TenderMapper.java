@@ -1,6 +1,5 @@
 package club.forhouse.mappers;
 
-import club.forhouse.dto.tenders.SystemTenderDto;
 import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.entities.tenders.Tender;
 import org.mapstruct.InheritInverseConfiguration;
@@ -17,6 +16,4 @@ public interface TenderMapper {
     @InheritInverseConfiguration
     Tender toEntity(TenderDto tenderDto);
 
-    @InheritInverseConfiguration
-    Tender toEntitySystem(SystemTenderDto systemTenderDto);
 }

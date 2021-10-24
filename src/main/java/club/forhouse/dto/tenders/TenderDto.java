@@ -19,6 +19,5 @@ public class TenderDto {
     private TCompanyDto customer;
     private String description;
     private Long price; //TODO в будущем будет подтягивать из сметы
-//    private StatusTender status;
-//    private TenderPlatformDto tenderPlatform;
+    private StatusTender status;
 }
