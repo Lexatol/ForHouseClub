@@ -50,8 +50,8 @@ public class TendersService {
         tender.setStatus(status);
         
         tender = tenderRepository.save(tender);
-        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
-        tenderPlatformService.save(tenderPlatform, tender);
+        //TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
+        //tenderPlatformService.save(tenderPlatform, tender);
         return tenderMapper.toDto(tender);
     }
 
@@ -63,5 +63,9 @@ public class TendersService {
     public Tender findByTitle(String title) {
         return tenderRepository.findByTitle(title);
 
+    }
+
+    public List<TenderDto> findByCompanyCustomer(Company company) {
+        return tenderMapper.toListDto(tenderRepository.findAllByCustomer(company));
     }
 }
