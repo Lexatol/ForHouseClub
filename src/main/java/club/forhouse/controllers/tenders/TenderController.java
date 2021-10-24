@@ -3,6 +3,7 @@ package club.forhouse.controllers.tenders;
 import club.forhouse.dto.tenders.SystemTenderDto;
 import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.exceptions.MarketError;
+import club.forhouse.services.tenders.TenderPlatformService;
 import club.forhouse.services.tenders.TendersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("api/v1/tenders")
 public class TenderController {
     private final TendersService tendersService;
+    private  final TenderPlatformService tenderPlatformService;
 
     @GetMapping("id/{id}")
     public TenderDto findById(@PathVariable Long id) {

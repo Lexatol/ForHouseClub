@@ -48,11 +48,11 @@ public class Tender {
     @Column(name = "price")
     private Long price;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
-    private StatusTender status;
+//    @OneToOne (cascade = CascadeType.ALL)
+//    @JoinColumn(name = "status_id")
+//    private StatusTender status;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "platform_id")
-    private TenderPlatform tenderPlatform;
+//    @ManyToOne (cascade = CascadeType.ALL)
+//    @JoinColumn(name = "platform_id")
+//    private TenderPlatform tenderPlatform;
 }

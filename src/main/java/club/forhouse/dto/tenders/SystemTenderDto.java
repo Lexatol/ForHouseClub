@@ -1,7 +1,5 @@
 package club.forhouse.dto.tenders;
 
-import club.forhouse.dto.profiles.CompanyDto;
-import club.forhouse.entities.profiles.Company;
 import club.forhouse.entities.tenders.StatusTender;
 import lombok.*;
 
@@ -18,6 +16,6 @@ public class SystemTenderDto {
     private TCompanyDto customer;
     private String description;
     private Long price;
-    private StatusTender status;
-    private SystemPlatformDto systemPlatformDto;
+//    private StatusTender status;
+    private String titlePlatform;
 }

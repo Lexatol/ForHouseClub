@@ -20,6 +20,7 @@ public class TendersService {
     private final TenderRepository tenderRepository;
     private final TenderMapper tenderMapper;
     private final CompanyService companyService;
+    private final TenderPlatformService tenderPlatformService;
 
     public List<TenderDto> findAll() {
         return tenderMapper.toListDto(tenderRepository.findAll());
@@ -40,10 +41,12 @@ public class TendersService {
         tender.setAddress(systemTenderDto.getAddress());
         tender.setDescription(systemTenderDto.getDescription());
         tender.setPrice(systemTenderDto.getPrice());
+        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
         //TODO необходимо на фронте установить по умолчанию статус "черновик"
         // и добавить кнопку опубликовать тендер и после этого изменить статус на другой
-        tender.setStatus(systemTenderDto.getStatus());
+//        tender.setStatus(systemTenderDto.getStatus());
         tender = tenderRepository.save(tender);
+        tenderPlatformService.save(tenderPlatform, tender);
         return tenderMapper.toDto(tender);
     }
 
