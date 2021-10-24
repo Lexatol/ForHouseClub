@@ -3,6 +3,7 @@ package club.forhouse.services.tenders;
 import club.forhouse.dto.tenders.SystemTenderDto;
 import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.entities.profiles.Company;
+import club.forhouse.entities.tenders.StatusTender;
 import club.forhouse.entities.tenders.Tender;
 import club.forhouse.entities.tenders.TenderPlatform;
 import club.forhouse.exceptions.ResourceNotFoundException;
@@ -20,6 +21,8 @@ public class TendersService {
     private final TenderRepository tenderRepository;
     private final TenderMapper tenderMapper;
     private final CompanyService companyService;
+    private final TenderPlatformService tenderPlatformService;
+    private final StatusTenderService statusTenderService;
 
     public List<TenderDto> findAll() {
         return tenderMapper.toListDto(tenderRepository.findAll());
@@ -40,10 +43,15 @@ public class TendersService {
         tender.setAddress(systemTenderDto.getAddress());
         tender.setDescription(systemTenderDto.getDescription());
         tender.setPrice(systemTenderDto.getPrice());
+
         //TODO необходимо на фронте установить по умолчанию статус "черновик"
         // и добавить кнопку опубликовать тендер и после этого изменить статус на другой
-        tender.setStatus(systemTenderDto.getStatus());
+        StatusTender status = statusTenderService.findByTitle(systemTenderDto.getStatus());
+        tender.setStatus(status);
+        
         tender = tenderRepository.save(tender);
+        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
+        tenderPlatformService.save(tenderPlatform, tender);
         return tenderMapper.toDto(tender);
     }
 

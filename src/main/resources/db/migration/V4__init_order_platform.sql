@@ -43,7 +43,7 @@ create table platform_tenders (
 
 insert into status (title) values
 ('черновик'),
-('объявлен тенер'),
+('объявлен тендер'),
 ('тендер завершен'),
 ('в работе');
 

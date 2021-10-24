@@ -15,4 +15,5 @@ public interface TenderMapper {
 
     @InheritInverseConfiguration
     Tender toEntity(TenderDto tenderDto);
+
 }

@@ -1,6 +1,5 @@
 package club.forhouse.dto.tenders;
 
-import club.forhouse.dto.estimate.EstimateDto;
 import club.forhouse.entities.tenders.StatusTender;
 import lombok.*;
 
