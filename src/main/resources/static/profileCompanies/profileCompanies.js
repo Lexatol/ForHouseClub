@@ -12,7 +12,16 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                     $scope.currentSpecList.push(title);
                 }
                 $scope.loadSpecList();
+                $scope.loadMyTenders();
             });
+    }
+
+    $scope.loadMyTenders = function(){
+        $http.get(contextPath + '/api/v1/tenders/comp/' + $scope.company.companyName)
+            .then(function (response) {
+                $scope.myTenders = response.data;
+                console.log($scope.myTenders)
+            })
     }
 
     $scope.loadSpecList =  function () {

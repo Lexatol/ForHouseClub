@@ -1,8 +1,12 @@
 package club.forhouse.controllers.tenders;
 
 import club.forhouse.dto.tenders.SystemTenderDto;
+import club.forhouse.dto.tenders.TCompanyDto;
 import club.forhouse.dto.tenders.TenderDto;
+import club.forhouse.entities.profiles.Company;
+import club.forhouse.entities.tenders.Tender;
 import club.forhouse.exceptions.MarketError;
+import club.forhouse.services.profiles.CompanyService;
 import club.forhouse.services.tenders.TenderPlatformService;
 import club.forhouse.services.tenders.TendersService;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +22,18 @@ import java.util.List;
 public class TenderController {
     private final TendersService tendersService;
     private  final TenderPlatformService tenderPlatformService;
+    private final CompanyService companyService;
 
     @GetMapping("id/{id}")
     public TenderDto findById(@PathVariable Long id) {
         return tendersService.findById(id);
+    }
+
+    @GetMapping("comp/{c}")
+    public List<TenderDto> findByCompanyCustomer(@PathVariable String c) {
+        System.out.println(c);
+        Company company = companyService.findByName(c);
+        return tendersService.findByCompanyCustomer(company);
     }
 
     @GetMapping

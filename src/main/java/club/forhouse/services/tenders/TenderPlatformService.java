@@ -35,7 +35,7 @@ public class TenderPlatformService {
     }
 
     public void save (TenderPlatform tenderPlatform, Tender tender) {
-        TenderPlatform platform = tendersPlatformRepository.findById(tenderPlatform.getPlatformId()).orElseThrow();
+        TenderPlatform platform = tendersPlatformRepository.findById(tenderPlatform.getPlatformId()).orElseThrow(() -> new ResourceNotFoundException("Unable to find platform"));
         platform.getTenders().add(tender);
         tendersPlatformRepository.save(platform);
     }
