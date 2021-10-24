@@ -1,6 +1,38 @@
-<div>
-    <h3>Main Page</h3>
-    <p>
-        Добро пожаловать на главную старницу ForHouseClub
-    </p>
+<div style="width: 100%; height: 100%" ng-controller="TenderListController">
+
+    <h3>Список тендеров</h3>
+
+    <button class="btn btn-primary" style="margin-left: 10px;" ng-click="addTender()"
+            ng-class="{'active':$route.current.active === 'tenderAdd'}"
+            ng-if="isUserLoggedIn()">Добавить тендер</button>
+
+    <div style="padding: 5px; display: flex;">
+        <div style="width: 90%">
+            <ul style="padding-left: 0px">
+                <li ng-repeat="tender in tendersList" style="list-style-type: none; padding: 5px;">
+                    <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px; cursor:pointer;" ng-click="viewTender(tender.tenderId)">
+                        <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;">
+                            <h5>{{tender.title}}</h5>
+                            <h6>{{tender.price}}</h6>
+                        </div>
+                        <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
+                        <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div style="padding-left: 10px; padding-top: 5px; background: #ecebeb; border-radius: 7px">
+            <h4>Виды работ</h4>
+            <ul style="padding: 0px">
+                <li ng-repeat="platform in platformList" style="list-style-type: none;">
+                        <div ng-click="filterTenders(platform.title)" style="cursor:pointer">
+                            <p style="padding: 5px; margin: 0px;">{{platform.title}}</p>
+                        </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </div>
+
