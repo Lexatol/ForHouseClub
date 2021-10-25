@@ -1,5 +1,6 @@
 package club.forhouse.services.estimate;
 
+import club.forhouse.dto.estimate.EstimateBaseDto;
 import club.forhouse.dto.estimate.EstimateDto;
 import club.forhouse.dto.estimate.EstimateWorkDto;
 import club.forhouse.dto.profiles.CompanyDto;
@@ -44,7 +45,7 @@ public class EstimateService {
     private final CompanyMapper companyMapper;
     private final UserMapper userMapper;
 
-    public EstimateDto createNew(UserDto user, CompanyDto companyDto) {
+    public EstimateBaseDto createNew(UserDto user, CompanyDto companyDto) {
         Company company = companyMapper.toEntity(companyDto);
         Pageable request = PageRequest.of(0, 1, Sort.Direction.DESC, "number");
         Optional<Estimate> found = estimateRepository.findTop1ByCompany(company, request).stream().findFirst();
@@ -55,13 +56,13 @@ public class EstimateService {
         estimate.setAuthor(userMapper.toEntity(user));
         estimate.setDate(LocalDateTime.now());
         estimate.setSum(0);
-        return modelMapper.map(estimateRepository.save(estimate), EstimateDto.class);
+        return modelMapper.map(estimateRepository.save(estimate), EstimateBaseDto.class);
     }
 
-    public Page<EstimateDto> findAll(CompanyDto companyDto, int page) {
+    public Page<EstimateBaseDto> findAll(CompanyDto companyDto, int page) {
         Company company = companyMapper.toEntity(companyDto);
         Pageable request = PageRequest.of(page, 5, Sort.Direction.DESC, "date");
-        return estimateRepository.findAllByCompany(company, request).map(it -> modelMapper.map(it, EstimateDto.class));
+        return estimateRepository.findAllByCompany(company, request).map(it -> modelMapper.map(it, EstimateBaseDto.class));
     }
 
     public EstimateDto findByCompanyAndId(CompanyDto company, Long estimateId) {

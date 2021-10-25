@@ -1,6 +1,7 @@
 package club.forhouse.controllers.estimates;
 
 import club.forhouse.configuration.JwtTokenUtil;
+import club.forhouse.dto.estimate.EstimateBaseDto;
 import club.forhouse.dto.estimate.EstimateDto;
 import club.forhouse.dto.estimate.EstimateWorkDto;
 import club.forhouse.dto.profiles.CompanyDto;
@@ -25,7 +26,7 @@ public class EstimateController {
     private final CompanyService companyService;
 
     @PostMapping("/new")
-    public EstimateDto createNew(@RequestHeader(name = "Authorization", required = false) String authorizationHeader) {
+    public EstimateBaseDto createNew(@RequestHeader(name = "Authorization", required = false) String authorizationHeader) {
         UserDto user = getUserFromToken(authorizationHeader);
         CompanyDto company = companyService.findByUser(user);
         return estimateService.createNew(user, company);
@@ -37,14 +38,14 @@ public class EstimateController {
     }
 
     @GetMapping
-    public Page<EstimateDto> getAll(@RequestHeader(name = "Authorization", required = false) String authorizationHeader,
-                                    @RequestParam(name = "page", defaultValue = "1") int page) {
+    public Page<EstimateBaseDto> getAll(@RequestHeader(name = "Authorization", required = false) String authorizationHeader,
+                                        @RequestParam(name = "page", defaultValue = "1") int page) {
         UserDto user = getUserFromToken(authorizationHeader);
         CompanyDto company = companyService.findByUser(user);
         return estimateService.findAll(company, --page);
     }
 
-    private UserDto getUserFromToken(@RequestHeader(name = "Authorization", required = false) String authorizationHeader) {
+    private UserDto getUserFromToken(String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         String usernameFromToken = tokenService.getUsernameFromToken(token);
         return userService.findByUserEmailDto(usernameFromToken);
