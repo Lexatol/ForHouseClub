@@ -1,4 +1,4 @@
-angular.module('app').controller('TenderListController', function ($scope, $http, $location) {
+angular.module('app').controller('TenderListController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:8189';
 
     $scope.showTendersPage = function (pageIndex = 1) {
@@ -14,7 +14,6 @@ angular.module('app').controller('TenderListController', function ($scope, $http
         });
     };
 
-<<<<<<< HEAD
     $scope.loadPlatforms = function () {
         $http({
             url: contextPath + '/api/v1/platform',
@@ -25,7 +24,7 @@ angular.module('app').controller('TenderListController', function ($scope, $http
     };
 
     $scope.filterTenders = function (id) {
-        alert('В списке тендеров буду показывать только: '+id);
+        alert('В списке тендеров буду показывать только: ' + id);
     }
 
     $scope.addTender = function () {
@@ -45,36 +44,14 @@ angular.module('app').controller('TenderListController', function ($scope, $http
             });
     }
 
-    // $scope.loadTenderId = function (pageIndex = 1) {
-    //     $http({
-    //         url: contextPath + '/api/v1/tenders',
-    //         method: 'GET',
-    //         params: {
-    //             page: pageIndex
-    //         },
-    //         page: pageIndex
-    //     }).then(function (response) {
-    //         $scope.tendersList = response.data;
-    //     });
-    // };
-
-    if ($location.path().endsWith('/')) {
-        $scope.showTendersPage();
-        $scope.loadPlatforms();
-    }else{
-        $scope.showTender();
-    }
-
-});
-=======
-    $scope.setThisForMe = function(tenderId){
+    $scope.setThisForMe = function (tenderId) {
         $http.get(contextPath + '/api/v1/tenders/set_contractor/' + $scope.profileCompany.companyName + "/" + tenderId)
             .then(function (response) {
                 $scope.showTendersPage();
             })
     }
 
-    $scope.removeThisFromMe = function(tenderId){
+    $scope.removeThisFromMe = function (tenderId) {
         $http.get(contextPath + '/api/v1/tenders/remove_contractor/' + tenderId)
             .then(function (response) {
                 $scope.showTendersPage();
@@ -88,7 +65,13 @@ angular.module('app').controller('TenderListController', function ($scope, $http
             });
     }
 
-    $scope.showTendersPage();
-    $scope.loadCompanies();
+    if ($location.path().endsWith('/')) {
+        $scope.showTendersPage();
+        $scope.loadPlatforms();
+        $scope.loadCompanies();
+    } else {
+        $scope.showTender();
+    }
+
+
 });
->>>>>>> Base
