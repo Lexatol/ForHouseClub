@@ -14,11 +14,20 @@ angular.module('app').controller('TenderAddController', function ($scope, $http,
     $scope.submitTender = function () {
         $http.put(contextPath + '/api/v1/tenders/add', $scope.tender)
             .then(function (response) {
+                //console.log(response)
                 alert('Тендер добавлен');
             }, function errorCallback(response) {
+                //console.log(response)
                 window.alert(response.data.message);
             });
     };
+
+    /*$scope.loadPlatformList = function () {
+        $http.get(contextPath + "api/v1/platform")
+            .then(function (response) {
+                $scope.platformList = response.data;
+            })
+    }*/
 
     $scope.loadCompanies();
 });

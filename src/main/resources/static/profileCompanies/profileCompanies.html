@@ -12,10 +12,10 @@
         <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
         -->
 
-        <div ng-repeat="spec in profileCompany.specializations" class="select-content">
+        <div ng-repeat="spec in profileCompany.specializations track by $index" class="select-content" ng-click="saveCurrentSpec(spec.specializationId, spec.specializationTitle)">
             <select class="form-select select-profile" ng-change="applyNewSpec(spec.specializationTitle)"
                     ng-model="spec.specializationTitle">
-                <option ng-repeat="elem in specList" ng-selected="spec.specializationId == elem.specializationId"
+                <option ng-repeat="elem in specArrays[$index]" ng-selected="spec.specializationId == elem.specializationId"
                         ng-value="elem.specializationTitle">
                     {{elem.specializationTitle}}
                 </option>
@@ -40,6 +40,43 @@
     <p>Главный Менеджер: {{company.generalManager.userName}}</p>
     <p>Почта: {{company.generalManager.userEmail}}</p>
     <p>Телефон: {{company.generalManager.userPhone}}</p>
+</div>
+
+<h2>Созданные тендеры</h2>
+<div>
+    <ul style="padding-left: 0px">
+        <li ng-repeat="tender in myTenders" style="list-style-type: none; padding: 5px;">
+            <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
+                <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;">
+                    <h5>{{tender.title}}</h5>
+                    <h6>{{tender.price}}</h6>
+                </div>
+                <p style="padding: 5px; margin: 0px;">{{tender.customer.companyName}}</p>
+                <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
+                <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
+                <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
+                <button ng-click="removeThisTender(tender.tenderId)"
+                        class="btn btn-danger tender-button">
+                    Удалить заявку
+                </button>
+                <button ng-click="removeThisContractor(tender.tenderId)"
+                        ng-if="tender.contractor !== null && tender.status.title !== 'тендер завершен'"
+                        class="btn btn-danger tender-button">
+                    Отменить заявку
+                </button>
+                <button ng-click="approveThisContractor(tender.tenderId)"
+                        ng-if="tender.contractor !== null && tender.status.title === 'ждет подтверждения'"
+                        class="btn btn-warning tender-button">
+                    Принять заявку
+                </button>
+                <button ng-click="closeTender(tender.tenderId)"
+                        ng-if="tender.contractor !== null && tender.status.title === 'в работе'"
+                        class="btn btn-success tender-button">
+                    Закрыть заявку
+                </button>
+            </div>
+        </li>
+    </ul>
 </div>
 
 <h2>Прайс лист компании:</h2>
