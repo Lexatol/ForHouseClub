@@ -2,7 +2,6 @@ package club.forhouse.controllers.estimates;
 
 import club.forhouse.configuration.JwtTokenUtil;
 import club.forhouse.dto.estimate.EstimateBaseDto;
-import club.forhouse.dto.estimate.EstimateDto;
 import club.forhouse.dto.estimate.EstimateWorkDto;
 import club.forhouse.dto.profiles.CompanyDto;
 import club.forhouse.dto.profiles.UserDto;
@@ -33,7 +32,7 @@ public class EstimateController {
     }
 
     @PostMapping("/save")
-    public EstimateDto save(@RequestBody EstimateDto estimateDto) {
+    public EstimateBaseDto save(@RequestBody EstimateBaseDto estimateDto) {
         return estimateService.save(estimateDto);
     }
 
@@ -52,8 +51,8 @@ public class EstimateController {
     }
 
     @GetMapping("/{id}")
-    public EstimateDto getById(@RequestHeader(name = "Authorization", required = false) String authorizationHeader,
-                               @PathVariable(name = "id") Long estimateId) {
+    public EstimateBaseDto getById(@RequestHeader(name = "Authorization", required = false) String authorizationHeader,
+                                   @PathVariable(name = "id") Long estimateId) {
         UserDto user = getUserFromToken(authorizationHeader);
         CompanyDto company = companyService.findByUser(user);
         return estimateService.findByCompanyAndId(company, estimateId);
@@ -76,4 +75,9 @@ public class EstimateController {
         }
     }
 
+    @DeleteMapping("/works")
+    public Boolean removeWorkFromEstimate(@RequestParam(name = "estimate") Long estimateId,
+                                          @RequestParam(name = "work") Long workRowId) {
+        return estimateService.removeWorkFromEstimate(estimateId, workRowId);
+    }
 }

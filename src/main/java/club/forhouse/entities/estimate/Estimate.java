@@ -52,6 +52,10 @@ public class Estimate {
         works.add(work);
     }
 
+    public void removeWork(EstimateWork work) {
+        works.remove(work);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,9 +33,20 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="w in currentWorks">
+
+                    <td>{{w.workTemplate.name}}</td>
+
                     <td>
-                        <select id="workSelect" name="workSelect" ng-model="w.workTemplate.templateId">
-                            <option ng-repeat="option in availableWorks" value="{{option.templateId}}">{{option.name}}
+                        <button class="btn btn-danger edit-button" ng-click="deleteWork(w.rowId)">Удалить</button>
+                    </td>
+                </tr>
+                <tr ng-repeat="w in editWorks" ng-show="w.category===currentCategory">
+
+                    <td>
+                        <select id="workSelect" name="workSelect" ng-change="changeSelectedItem(w.rowId)"
+                                ng-model="selectedItem">
+                            <option ng-repeat="option in availableWorks" value="option.templateId">
+                                {{option.name}}
                             </option>
                         </select>
                     </td>

@@ -1,7 +1,6 @@
 package club.forhouse.services.estimate;
 
 import club.forhouse.dto.estimate.EstimateBaseDto;
-import club.forhouse.dto.estimate.EstimateDto;
 import club.forhouse.dto.estimate.EstimateWorkDto;
 import club.forhouse.dto.profiles.CompanyDto;
 import club.forhouse.dto.profiles.UserDto;
@@ -65,9 +64,9 @@ public class EstimateService {
         return estimateRepository.findAllByCompany(company, request).map(it -> modelMapper.map(it, EstimateBaseDto.class));
     }
 
-    public EstimateDto findByCompanyAndId(CompanyDto company, Long estimateId) {
+    public EstimateBaseDto findByCompanyAndId(CompanyDto company, Long estimateId) {
         Estimate found = getEstimate(estimateId);
-        EstimateDto estimateDto = modelMapper.map(found, EstimateDto.class);
+        EstimateBaseDto estimateDto = modelMapper.map(found, EstimateBaseDto.class);
         if (Objects.equals(estimateDto.getCompany().getCompanyId(), company.getCompanyId())) {
             return estimateDto;
         } else {
@@ -75,11 +74,15 @@ public class EstimateService {
         }
     }
 
-    public EstimateDto save(EstimateDto estimateDto) {
+    @Transactional
+    public EstimateBaseDto save(EstimateBaseDto estimateDto) {
+
+        Estimate estimate = modelMapper.map(estimateDto, Estimate.class);
+        estimate.setWorks(estimateWorkRepository.findAllByEstimate(estimate));
         return modelMapper.map(
                 estimateRepository.save(
-                        modelMapper.map(estimateDto, Estimate.class)
-                ), EstimateDto.class);
+                        estimate
+                ), EstimateBaseDto.class);
     }
 
     public List<EstimateWorkDto> getWorksForEstimateAndCategory(Long estimateId, Long categoryId) {
@@ -127,4 +130,11 @@ public class EstimateService {
         );
     }
 
+    @Transactional
+    public Boolean removeWorkFromEstimate(Long estimateId, Long workRowId) {
+        Estimate estimate = getEstimate(estimateId);
+        EstimateWork estimateWork = estimateWorkRepository.findById(workRowId).orElseThrow();
+        estimate.removeWork(estimateWork);
+        return true;
+    }
 }
