@@ -43,6 +43,7 @@ angular.module('app').controller('TenderListController', function ($scope, $http
             .then(function (response) {
                 $scope.currentTender = response.data;
                 $scope.getCurrentTenderCustomerInfo();
+                $scope.getCurrentTenderContractorInfo();
             });
     }
 
@@ -51,6 +52,17 @@ angular.module('app').controller('TenderListController', function ($scope, $http
             .then(function (response) {
                 $scope.currentTenderCustomer = response.data;
             });
+    }
+
+    $scope.getCurrentTenderContractorInfo = function (){
+        try {
+            $http.get(contextPath + '/api/v1/profile_companies/get_comp?c=' + $scope.currentTender.contractor.companyName)
+                .then(function (response) {
+                    console.log(response.data);
+                    $scope.currentTenderContractor = response.data;
+                });
+        } catch (e) {
+        }
     }
 
     $scope.setThisForMe = function (tenderId) {
