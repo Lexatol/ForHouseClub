@@ -1,7 +1,6 @@
 package club.forhouse.controllers.profiles;
 
 import club.forhouse.dto.profiles.CompanyDto;
-import club.forhouse.entities.profiles.Company;
 import club.forhouse.services.profiles.CompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

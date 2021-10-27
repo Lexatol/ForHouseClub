@@ -1,6 +1,6 @@
 package club.forhouse.dto.estimate;
 
-import club.forhouse.dto.worktemplate.WorkTemplateBaseDto;
+import club.forhouse.dto.worktemplate.WorkTemplateDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public class EstimateWorkDto {
 
     private Long rowId;
-    private EstimateBaseDto estimate;
-    private WorkTemplateBaseDto workTemplate;
+    private EstimateDto estimate;
+    private WorkTemplateDto workTemplate;
 
 }
