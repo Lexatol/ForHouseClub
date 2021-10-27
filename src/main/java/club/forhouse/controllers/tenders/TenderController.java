@@ -65,6 +65,11 @@ public class TenderController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @DeleteMapping
+    public void delete(@RequestParam Long tenderId) {
+        tendersService.delete(tenderId);
+    }
+
     @GetMapping("/set_contractor/{c}/{id}")
     public void setCompanyContractor(@PathVariable String c, @PathVariable Long id) {
         Company company = companyService.findByName(c);

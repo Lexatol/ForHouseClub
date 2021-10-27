@@ -1,6 +1,5 @@
 package club.forhouse.dto.tenders;
 
-import club.forhouse.entities.tenders.StatusTender;
 import lombok.*;
 
 
@@ -10,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SystemTenderDto {
+    private Long tenderId;
     private String title;
     private String dataStart;
     private String address;

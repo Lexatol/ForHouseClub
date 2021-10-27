@@ -19,6 +19,7 @@ Programming languages:
 - Spring security ver 5.5.1
 - Hibernate ver 7.0.1
 - Lombok ver 1.18.20
+- Swagger 
 
 Code generator:
 - Mapstruct

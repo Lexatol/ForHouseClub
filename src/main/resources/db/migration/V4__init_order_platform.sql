@@ -18,28 +18,14 @@ create table tenders(
         customer_id         bigint not null,
         price               bigint,
         status_id           bigint,
---        estimate_id         bigint,
-        platform_id         bigint,
+        estimate_id         bigint,
+        platform_id         bigint not null,
         foreign key (contractor_id) references users(user_id),
         foreign key (customer_id) references users(user_id),
         foreign key (status_id) references status(status_id),
---        foreign key (estimate_id) references estimates(estimate_id),
+        foreign key (estimate_id) references estimates(estimate_id),
         foreign key (platform_id) references platforms (platform_id)
 );
-
-create table platform_tenders (
-        platform_id         bigint not null,
-        tender_id           bigint not null,
-        primary key (platform_id, tender_id),
-        foreign key (platform_id) references platforms(platform_id),
-        foreign key (tender_id) references tenders (tender_id)
-);
-
-
--- table_tender_ok
---        tender_id
---        contractor_id
---
 
 insert into status (title) values
 ('черновик'),
@@ -48,20 +34,21 @@ insert into status (title) values
 ('в работе'),
 ('ждет подтверждения');
 
-insert into tenders (title, customer_id, price, status_id, address) values
-('Строительство коттеджа 600м2', 1, '20000000', 2, 'Московская область, Новорижское шоссе, снт Итренок'),
-('Строительство коттеджа 200м2', 2, '1000000', 4, 'Московская область, Киевское шоссе'),
-('Ремонт квартиры 250м2', 3, '1200000', 2, 'Москва, Малая ордынка, 21'),
-('Дизайнерский ремонт квартиры 350м2', 3, '2500000', 3, 'Москва, ул Минская 13');
-
+insert into estimates (company_id, estimate_number, estimate_sum) values
+(1, 1, 1000), (2,2, 2000), (3,3, 3000), (4,4, 4000);
 
 insert into platforms (title) values
 ('Строительство домов, коттеджей'),
 ('Ремонт квартир'),
 ('Ремонт офисов');
---
-insert into platform_tenders (platform_id, tender_id) values
-(1, 1),
-(1, 2),
-(2, 3),
-(2, 4);
+
+insert into tenders (title, customer_id, price, status_id, address, estimate_id, platform_id) values
+('Строительство коттеджа 600м2', 1, '20000000', 2, 'Московская область, Новорижское шоссе, снт Итренок', 1, 1),
+('Строительство коттеджа 200м2', 2, '1000000', 4, 'Московская область, Киевское шоссе', 2, 1),
+('Ремонт квартиры 250м2', 3, '1200000', 2, 'Москва, Малая ордынка, 21', 3, 2),
+('Дизайнерский ремонт квартиры 350м2', 3, '2500000', 3, 'Москва, ул Минская 13', 4, 2);
+
+
+
+
+

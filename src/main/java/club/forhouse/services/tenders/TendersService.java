@@ -21,8 +21,8 @@ public class TendersService {
     private final TenderRepository tenderRepository;
     private final TenderMapper tenderMapper;
     private final CompanyService companyService;
-    private final TenderPlatformService tenderPlatformService;
     private final StatusTenderService statusTenderService;
+    private final TenderPlatformService tenderPlatformService;
 
     public List<TenderDto> findAll() {
         return tenderMapper.toListDto(tenderRepository.findAll());
@@ -49,20 +49,17 @@ public class TendersService {
         tender.setAddress(systemTenderDto.getAddress());
         tender.setDescription(systemTenderDto.getDescription());
         tender.setPrice(systemTenderDto.getPrice());
-
-        //TODO необходимо на фронте установить по умолчанию статус "черновик"
-        // и добавить кнопку опубликовать тендер и после этого изменить статус на другой
-        StatusTender status = statusTenderService.findByTitle("объявлен тендер");
+        StatusTender status = statusTenderService.findByTitle(systemTenderDto.getStatus());
         tender.setStatus(status);
-        
         tender = tenderRepository.save(tender);
-        //TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
-        //tenderPlatformService.save(tenderPlatform, tender);
+        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
+        tender.setTenderPlatform(tenderPlatform);
         return tenderMapper.toDto(tender);
     }
 
-    public void delete(TenderDto tenderDto) {
-        Tender tender = tenderMapper.toEntity(tenderDto);
+    public void delete(Long id) {
+        Tender tender = tenderRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Tender with id: " + id));
         tenderRepository.delete(tender);
     }
 
@@ -77,10 +74,6 @@ public class TendersService {
 
     public void saveOrUpdate(Tender tender) {
         tenderRepository.save(tender);
-    }
-
-    public void deleteThis(Tender tender) {
-        tenderRepository.delete(tender);
     }
 
     public List<TenderDto> findByCompanyContractor(Company company) {
