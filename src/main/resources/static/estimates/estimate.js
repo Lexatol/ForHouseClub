@@ -58,6 +58,13 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
         iter++;
     }
 
+    $scope.changeSelectedItem = function (rowId, workId) {
+        $scope.editWorks.forEach(function (item, i, arr) {
+            if (item.rowId === rowId) {
+                item.templateId = workId;
+            }
+        });
+    }
 
     $scope.deleteWork = function (rowId) {
         $scope.currentWorks.forEach(function (item, i, arr) {
