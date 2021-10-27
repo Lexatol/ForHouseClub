@@ -4,10 +4,12 @@
     angular
         .module('app', ['ngRoute', 'ngStorage', 'editElement'])
         .config(config)
-        .controller('IndexController', function($scope, $http, $localStorage, $route) {
+        .controller('IndexController', function($scope, $http, $localStorage, $route, $window) {
+            const contextPath = 'http://localhost:8189';
             $scope.$route = $route;
 
             $scope.tryToLogout = function () {
+                $window.location.href = contextPath + '#!/auth';
                 localStorage.clear();
                 $scope.clearUser();
                 try {
@@ -18,7 +20,7 @@
                         $scope.user.password = null;
                     }
                 } catch (e) {
-                    console.log("already cleaned")
+                    //console.log("already cleaned")
                 }
             };
 
@@ -43,15 +45,15 @@
                 templateUrl: 'main/main.html',
                 active: 'homePage'
             })
-            .when('/tenders', {
-                templateUrl: 'tenders/tenderList.html',
-                controller: 'TenderListController',
-                active: 'tenders'
-            })
             .when('/tenderAdd', {
                 templateUrl: 'tenders/tenderAdd.html',
                 controller: 'TenderAddController',
                 active: 'tenderAdd'
+            })
+            .when('/tenderView/:id', {
+                templateUrl: 'tenders/tenderView.html',
+                controller: 'TenderListController',
+                active: 'tenderView'
             })
             .when('/profileCompanies', {
                 templateUrl: 'profileCompanies/profileCompanies.html',
@@ -86,6 +88,7 @@
             .otherwise({
                 redirect: '/'
             });
+
 
 
         $httpProvider.interceptors.push(function ($q, $location) {

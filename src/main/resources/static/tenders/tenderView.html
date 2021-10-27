@@ -1,0 +1,11 @@
+<div>
+    <h3>{{currentTender.title}}</h3>
+    <p>Адрес: {{currentTender.address}}</p> <br>
+    <p>Описание: {{currentTender.description}}</p><br>
+    <p>Стоимость: {{currentTender.price}}</p><br>
+    <p>Заказчик: {{currentTender.customer.companyName}}</p><br>
+    <p>Телефон заказчика: {{currentTenderCustomer.company.companyPhone}}</p><br>
+    <p ng-if="currentTender.contractor.companyName">Исполнитель: {{currentTender.contractor.companyName}}</p><br>
+    <p ng-if="currentTender.contractor.companyName">Телефон для связи с исполнителем: {{currentTenderContractor.company.companyPhone}}</p><br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="document.location='#!/'">Вернуться</button>
+</div>

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StatusTenderRepository extends JpaRepository<StatusTender, Long> {
+    StatusTender findByTitle(String title);
 }

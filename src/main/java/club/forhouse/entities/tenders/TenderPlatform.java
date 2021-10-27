@@ -1,6 +1,5 @@
 package club.forhouse.entities.tenders;
 
-import club.forhouse.entities.profiles.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,9 +24,6 @@ public class TenderPlatform {
     @Column(name = "title")
     private String title;
 
-//    @OneToMany
-//    @JoinTable(name = "platform_tenders",
-//            joinColumns = @JoinColumn(name = "platform_id"),
-//            inverseJoinColumns = @JoinColumn(name = "tender_id"))
-//    private List<Tender> tenders;
+    @OneToMany(mappedBy = "tenderPlatform")
+    private List<Tender> tenders;
 }

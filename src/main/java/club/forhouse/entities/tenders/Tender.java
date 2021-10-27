@@ -1,6 +1,5 @@
 package club.forhouse.entities.tenders;
 
-import club.forhouse.entities.estimate.Estimate;
 import club.forhouse.entities.profiles.Company;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,7 @@ public class Tender {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "contractor_id")
     private Company contractor;
 
@@ -48,11 +47,11 @@ public class Tender {
     @Column(name = "price")
     private Long price;
 
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "status_id")
     private StatusTender status;
 
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "platform_id")
     private TenderPlatform tenderPlatform;
 }

@@ -1,6 +1,55 @@
-<div>
-    <h3>Main Page</h3>
-    <p>
-        Добро пожаловать на главную старницу ForHouseClub
-    </p>
+<div style="width: 100%; height: 100%" ng-controller="TenderListController">
+
+    <h3>Список тендеров</h3>
+
+    <button class="btn btn-primary" style="margin-left: 10px;" ng-click="addTender()"
+            ng-class="{'active':$route.current.active === 'tenderAdd'}"
+            ng-if="isUserLoggedIn()">Добавить тендер</button>
+
+    <div style="padding: 5px; display: flex;">
+        <div style="width: 90%">
+            <ul style="padding-left: 0px">
+                <li ng-repeat="tender in tendersList" style="list-style-type: none; padding: 5px;"
+                    ng-if="tender.status.title === 'объявлен тендер'
+                    && tender.customer.companyName !== profileCompany.companyName
+                    && isUserLoggedIn()">
+                    <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 2px; border-padding: 5px;">
+                        <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;  cursor:pointer;" ng-click="viewTender(tender.tenderId)">
+                            <h5>{{tender.title}}</h5>
+                            <h6>{{tender.price}}</h6>
+                        </div>
+                        <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
+                        <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
+                        <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
+                        <button ng-click="setThisForMe(tender.tenderId)"
+                                ng-if="tender.contractor === null && tender.customer.companyName !== profileCompany.companyName
+                        && (tender.status.title === 'объявлен тендер') "
+                                class="btn btn-primary tender-button">
+                            Предложить себя
+                        </button>
+                        <button ng-click="removeThisFromMe(tender.tenderId)"
+                                ng-if="tender.contractor.companyName === profileCompany.companyName"
+                                class="btn btn-danger tender-button">
+                            Отменить заявку
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!--
+        <div style="padding-left: 10px; padding-top: 5px; border-style:solid; border-radius: 5px; border-color: blue; border-width: 2px; border-padding: 5px;">
+            <h4>Виды работ</h4>
+            <ul style="padding: 0px">
+                <li ng-repeat="platform in platformList" style="list-style-type: none;">
+                        <div ng-click="filterTenders(platform.title)" style="cursor:pointer">
+                            <p style="padding: 5px; margin: 0px;">{{platform.title}}</p>
+                        </div>
+                </li>
+            </ul>
+        </div>
+        -->
+    </div>
+
 </div>
+

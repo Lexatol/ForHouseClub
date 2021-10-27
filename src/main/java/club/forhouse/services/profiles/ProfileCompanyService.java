@@ -1,6 +1,7 @@
 package club.forhouse.services.profiles;
 
 import club.forhouse.dto.profiles.ProfileContractorDto;
+import club.forhouse.entities.profiles.Company;
 import club.forhouse.entities.profiles.ProfileCompany;
 import club.forhouse.entities.profiles.Specialization;
 import club.forhouse.exceptions.ResourceNotFoundException;
@@ -53,5 +54,11 @@ public class ProfileCompanyService {
         profileCompany.setSpecializations(null);
 
         profileCompanyRepository.save(profileCompany);
+    }
+
+    public ProfileContractorDto findByCompanyName(String c) {
+        ProfileCompany pfC = profileCompanyRepository.findByCompanyName(c).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find profiles with company name: " + c));
+        return profileCompanyMapper.toDto(pfC);
     }
 }

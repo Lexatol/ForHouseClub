@@ -3,9 +3,66 @@
 <div>
     <p>Компания: {{currentEstimate.company.companyName}}</p>
     <p>Дата: {{currentEstimate.date.substring(0,19).replace("T", " ")}}</p>
-    <edit-element edit=currentEstimate.sum name="Сумма:"></edit-element>
+    <edit-element edit=currentEstimate.sum name="Сумма:" type=number></edit-element>
     <edit-element edit=currentEstimate.address name="Адрес:"></edit-element>
     <p>Автор: {{currentEstimate.author.userName}}</p>
-    <button ng-click="saveChanges()">Сохранить</button>
+    <button class="btn btn-success" ng-click="saveChanges()">Сохранить</button>
+
+    <br>
+    <h4>Работы:</h4>
+
+
+    <div class="workContainer">
+
+        <div class="tab">
+            <button ng-class="currentCategory===c.categoryId ? 'tablinks active' :'tablinks'"
+                    ng-click="openCategory(c.categoryId)"
+                    ng-repeat="c in categories">{{c.name}}
+            </button>
+        </div>
+
+        <div class="tabcontent">
+
+            <table cellpadding="0" cellspacing="0" class="table table-hover">
+
+                <thead>
+                <tr>
+                    <td>Работа</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="w in currentWorks">
+
+                    <td>{{w.workTemplate.name}}</td>
+
+                    <td>
+                        <button class="btn btn-danger edit-button" ng-click="deleteWork(w.rowId)">Удалить</button>
+                    </td>
+                </tr>
+                <tr ng-repeat="w in editWorks | filter:{ category: currentCategory }">
+
+                    <td>
+                        <select id="workSelect" name="workSelect"
+                                ng-change="changeSelectedItem(w.rowId, w.templateId)"
+                                ng-model="w.templateId">
+                            <option ng-repeat="opt in availableWorks"
+                                    ng-value="opt.templateId"
+                                    ng-selected="w.templateId == opt.templateId">
+                                {{opt.name}}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger edit-button" ng-click="deleteWork(w.rowId)">Удалить</button>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <button class="btn btn-primary" ng-click="addWork()">Добавить</button>
+        </div>
+    </div>
 
 </div>

@@ -1,5 +1,6 @@
 package club.forhouse.mappers;
 
+import club.forhouse.dto.tenders.TPlatformDto;
 import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.dto.tenders.TenderPlatformDto;
 import club.forhouse.entities.tenders.Tender;
