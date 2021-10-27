@@ -17,5 +17,5 @@ public class SystemTenderDto {
     private String description;
     private Long price;
     private String status;
-    private String titlePlatform;
+//    private String titlePlatform;
 }

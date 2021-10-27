@@ -52,8 +52,8 @@ public class TendersService {
         StatusTender status = statusTenderService.findByTitle(systemTenderDto.getStatus());
         tender.setStatus(status);
         tender = tenderRepository.save(tender);
-        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
-        tender.setTenderPlatform(tenderPlatform);
+//        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
+//        tender.setTenderPlatform(tenderPlatform);
         return tenderMapper.toDto(tender);
     }
 
