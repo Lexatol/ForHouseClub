@@ -1,4 +1,4 @@
-angular.module('app').controller('ProfileContractorController', function ($scope, $http, $localStorage) {
+angular.module('app').controller('ProfileContractorController', function ($scope, $http, $localStorage, $window) {
     const contextPath = 'http://localhost:8189';
 
     $scope.loadCompanies = function () {
@@ -199,6 +199,10 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                 }
             }
         }
+    }
+
+    $scope.viewTender = function (id) {
+        $window.location.href = contextPath + '/#!/tenderView/' + id;
     }
 
     $scope.loadCompanies();
