@@ -5,8 +5,7 @@ angular.module('editElement')
         templateUrl: '/templates/edit-elem.html',
         bindings: {
             name: '@',
-            edit: '=',
-            type: '@'
+            edit: '='
         },
         controller: function ($scope) {
             $scope.onLoad = function() {

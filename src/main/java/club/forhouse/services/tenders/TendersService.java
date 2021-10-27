@@ -3,7 +3,6 @@ package club.forhouse.services.tenders;
 import club.forhouse.dto.tenders.SystemTenderDto;
 import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.entities.profiles.Company;
-import club.forhouse.entities.tenders.StatusTender;
 import club.forhouse.entities.tenders.Tender;
 import club.forhouse.entities.tenders.TenderPlatform;
 import club.forhouse.exceptions.ResourceNotFoundException;
@@ -21,8 +20,6 @@ public class TendersService {
     private final TenderRepository tenderRepository;
     private final TenderMapper tenderMapper;
     private final CompanyService companyService;
-    private final StatusTenderService statusTenderService;
-    private final TenderPlatformService tenderPlatformService;
 
     public List<TenderDto> findAll() {
         return tenderMapper.toListDto(tenderRepository.findAll());
@@ -34,12 +31,6 @@ public class TendersService {
         return tenderMapper.toDto(tender);
     }
 
-    public Tender findTenderById(Long id) {
-        Tender tender = tenderRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find Tender with id: " + id));
-        return tender;
-    }
-
     public TenderDto save(SystemTenderDto systemTenderDto) {
         Company company = companyService.findByName(systemTenderDto.getCustomer().getCompanyName());
         Tender tender = new Tender();
@@ -49,33 +40,20 @@ public class TendersService {
         tender.setAddress(systemTenderDto.getAddress());
         tender.setDescription(systemTenderDto.getDescription());
         tender.setPrice(systemTenderDto.getPrice());
-        StatusTender status = statusTenderService.findByTitle("объявлен тендер");
-        tender.setStatus(status);
+        //TODO необходимо на фронте установить по умолчанию статус "черновик"
+        // и добавить кнопку опубликовать тендер и после этого изменить статус на другой
+        tender.setStatus(systemTenderDto.getStatus());
         tender = tenderRepository.save(tender);
-//        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
-//        tender.setTenderPlatform(tenderPlatform);
         return tenderMapper.toDto(tender);
     }
 
-    public void delete(Long id) {
-        Tender tender = tenderRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Unable to find Tender with id: " + id));
+    public void delete(TenderDto tenderDto) {
+        Tender tender = tenderMapper.toEntity(tenderDto);
         tenderRepository.delete(tender);
     }
 
-    public List<TenderDto> findByCompanyCustomer(Company company) {
-        return tenderMapper.toListDto(tenderRepository.findAllByCustomer(company));
-    }
+    public Tender findByTitle(String title) {
+        return tenderRepository.findByTitle(title);
 
-    public void saveOrUpdate(Tender tender) {
-        tenderRepository.save(tender);
     }
-
-    public List<TenderDto> findByCompanyContractor(Company company) {
-        return tenderMapper.toListDto(tenderRepository.findAllByContractor(company));
-    }
-
-    //public Tender findTenderByCompanyCustomer(Company company) {
-        //return tenderMapper.toDto(tenderRepository.f)
-    //}
 }

@@ -2,7 +2,6 @@ package club.forhouse.controllers.profiles;
 
 
 import club.forhouse.dto.profiles.ProfileContractorDto;
-import club.forhouse.entities.profiles.Company;
 import club.forhouse.services.profiles.PriceListCompanyService;
 import club.forhouse.services.profiles.ProfileCompanyService;
 import lombok.RequiredArgsConstructor;
@@ -36,11 +35,6 @@ public class ProfileContractorController {
     @PostMapping("/save")
     public ProfileContractorDto saveOrUpdateProfile(@RequestBody ProfileContractorDto profileContractorDto) {
         return profileCompanyService.saveOrUpdate(profileContractorDto);
-    }
-
-    @GetMapping("/get_comp")
-    public ProfileContractorDto findCompany(@RequestParam String c) {
-        return profileCompanyService.findByCompanyName(c);
     }
 
 //    @PostMapping("/add_operation")

@@ -7,21 +7,8 @@
                     <h5>{{tender.title}}</h5>
                     <h6>{{tender.price}}</h6>
                 </div>
-                <p style="padding: 5px; margin: 0px;">{{tender.customer.companyName}}</p>
                 <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
                 <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
-                <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
-                <button ng-click="setThisForMe(tender.tenderId)"
-                        ng-if="tender.contractor === null && tender.customer.companyName !== profileCompany.companyName
-                        && (tender.status.title === 'объявлен тендер') "
-                        class="btn btn-primary tender-button">
-                    Предложить себя
-                </button>
-                <button ng-click="removeThisFromMe(tender.tenderId)"
-                        ng-if="tender.contractor.companyName === profileCompany.companyName"
-                        class="btn btn-danger tender-button">
-                    Отменить заявку
-                </button>
             </div>
         </li>
     </ul>

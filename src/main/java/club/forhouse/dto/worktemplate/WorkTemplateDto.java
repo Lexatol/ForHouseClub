@@ -1,16 +1,17 @@
 package club.forhouse.dto.worktemplate;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class WorkTemplateDto extends WorkTemplateBaseDto {
+public class WorkTemplateDto {
 
+    private Long templateId;
+    private String name;
+    private String description;
     private List<WorkTemplateOperationDto> operations;
 
 }

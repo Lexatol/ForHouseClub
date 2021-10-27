@@ -1,186 +1,57 @@
-<details>
-    <summary class="summary">Информация о компании</summary>
-    <div>
-        <edit-element name="Название компании:" edit=company.companyName></edit-element>
-        <edit-element name="Адресс:" edit=company.legalAddress></edit-element>
-        <edit-element name="Телефон:" edit=company.companyPhone></edit-element>
-        <edit-element name="Email:" edit=company.companyEmail></edit-element>
-        <edit-element edit=company.numberEmployees name="Количество сотрудников:" type=number></edit-element>
-        <h5>Специализации</h5>
-        <div>
-            <!--
-            <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
-            -->
+<h3>Профиль Компании</h3>
 
-            <div ng-repeat="spec in profileCompany.specializations track by $index" class="select-content"
-                 ng-click="saveCurrentSpec(spec.specializationId, spec.specializationTitle)">
-                <select class="form-select select-profile" ng-change="applyNewSpec(spec.specializationTitle)"
-                        ng-model="spec.specializationTitle">
-                    <option ng-repeat="elem in specArrays[$index]"
-                            ng-selected="spec.specializationId == elem.specializationId"
-                            ng-value="elem.specializationTitle">
-                        {{elem.specializationTitle}}
-                    </option>
-                </select>
-            </div>
+<div>
+    <edit-element name="Название компании:" edit=company.companyName></edit-element>
+    <edit-element name="Адресс:" edit=company.legalAddress></edit-element>
+    <edit-element name="Телефон:" edit=company.companyPhone></edit-element>
+    <edit-element name="Email:" edit=company.companyEmail></edit-element>
+    <edit-element name="Число нанимателей:" edit=company.numberEmployees></edit-element>
+    <h5>Специализации</h5>
+    <div>
+        <!--
+        <p ng-repeat="spec in profileCompany.specializations">{{spec.specializationId}}:{{spec.specializationTitle}}</p>
+        -->
+
+        <div ng-repeat="spec in profileCompany.specializations" class="select-content">
+            <select class="form-select select-profile" ng-model="spec.specializationTitle" ng-change="applyNewSpec(spec.specializationTitle)">
+                <option ng-selected="spec.specializationId == elem.specializationId" ng-repeat="elem in specList" ng-value="elem.specializationTitle">
+                    {{elem.specializationTitle}}
+                </option>
+            </select>
         </div>
-        <div>
-            <button class="btn btn-success" ng-click=addNewSpec()>Добавить специализацию</button>
-            <button class="btn btn-danger edit-button" ng-click=removeThisSpec()>Удалить специализацию</button>
-        </div>
-        <br>
-        <div>
-            <button class="btn btn-warning" ng-click="saveChanges()">Сохранить все</button>
-        </div>
-        <br>
     </div>
-</details>
-
-<br>
-
-<details>
-    <summary class="summary">Информация о менеджере</summary>
     <div>
-        <p>Руководитель компании: {{company.generalManager.userName}}</p>
-        <p>Почта: {{company.generalManager.userEmail}}</p>
-        <p>Телефон: {{company.generalManager.userPhone}}</p>
+        <button ng-click = addNewSpec() class="btn btn-success">Add specialization</button>
+        <button ng-click = removeThisSpec() class="btn btn-danger edit-button">Remove specialization</button>
     </div>
-</details>
-
-<br>
-
-<details>
-    <summary class="summary">Созданные тендеры</summary>
+    <br>
     <div>
-        <ul style="padding-left: 0px">
-            <li ng-repeat="tender in myTenders" style="list-style-type: none; padding: 5px;">
-                <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
-                    <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;" ng-click="viewTender(tender.tenderId)">
-                        <h5>{{tender.title}}</h5>
-                        <h6>{{tender.price}}</h6>
-                    </div>
-                    <p style="padding: 5px; margin: 0px;">{{tender.customer.companyName}}</p>
-                    <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
-                    <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
-                    <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
-                    <button ng-click="removeThisTender(tender.tenderId)"
-                            class="btn btn-danger tender-button">
-                        Удалить заявку
-                    </button>
-                    <button ng-click="removeThisContractor(tender.tenderId)"
-                            ng-if="tender.contractor !== null && tender.status.title !== 'тендер завершен'"
-                            class="btn btn-danger tender-button">
-                        Отменить заявку
-                    </button>
-                    <button ng-click="approveThisContractor(tender.tenderId)"
-                            ng-if="tender.contractor !== null && tender.status.title === 'ждет подтверждения'"
-                            class="btn btn-warning tender-button">
-                        Принять заявку
-                    </button>
-                    <button ng-click="closeTender(tender.tenderId)"
-                            ng-if="tender.contractor !== null && tender.status.title === 'в работе'"
-                            class="btn btn-success tender-button">
-                        Закрыть заявку
-                    </button>
-                </div>
-            </li>
-        </ul>
+        <button ng-click = "saveChanges()" class="btn btn-warning">Save All Changes</button>
     </div>
-</details>
-
-
-<br>
-
-<details>
-    <summary class="summary">Принятые к исполнению</summary>
-    <div>
-        <ul style="padding-left: 0px">
-            <li ng-repeat="tender in chosenTenders" style="list-style-type: none; padding: 5px;">
-                <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
-                    <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;" ng-click="viewTender(tender.tenderId)">
-                        <h5>{{tender.title}}</h5>
-                        <h6>{{tender.price}}</h6>
-                    </div>
-                    <p style="padding: 5px; margin: 0px;">{{tender.customer.companyName}}</p>
-                    <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
-                    <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
-                    <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
-                    <button ng-click="removeThisContractor(tender.tenderId)"
-                            ng-if="tender.contractor !== null && tender.status.title !== 'тендер завершен'"
-                            class="btn btn-danger tender-button">
-                        Отменить заявку
-                    </button>
-                </div>
-            </li>
-        </ul>
+    <br>
 </div>
-</details>
-
 
 <br>
 
-<details>
-    <summary class="summary">Прайс лист компании:</summary>
-    <table class="table table-hover">
-        <thead>
+<h2>Информация о менеджере</h2>
+<div>
+    <p>Главный Менеджер: {{company.generalManager.userName}}</p>
+    <p>Почта: {{company.generalManager.userEmail}}</p>
+    <p>Телефон: {{company.generalManager.userPhone}}</p>
+</div>
+
+<h2>Прайс лист компании:</h2>
+<table class = "table table-hover">
+    <thead>
         <tr>
             <th scope="col">Название операции</th>
             <th scope="col">Цена</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         <tr ng-repeat="op in profileCompany.priceListCompany.operation">
             <td>{{op.operation.name}}</td>
             <td>{{op.price}}</td>
         </tr>
-        </tbody>
+    </tbody>
 </table>
-</details>
-
-
-<br>
-
-<div ng-controller="EstimateListController">
-
-    <details>
-        <summary class="summary">Сметы</summary>
-        <button class="btn btn-primary" ng-click="createEstimate()">Добавить</button>
-        <table cellpadding="0" cellspacing="0" class="table table-hover">
-            <thead>
-            <tr>
-                <td>Номер</td>
-                <td>Дата</td>
-                <td>Сумма</td>
-                <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="e in EstimatesPage.content">
-                <td>{{e.number}}</td>
-                <td>{{e.date.substring(0,19).replace("T", " ")}}</td>
-                <td>{{e.sum}}</td>
-                <td>
-                    <button class="btn btn-primary" ng-click="editEstimate(e.estimateId)">Открыть</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li ng-class="EstimatesPage.first ? 'page-item disabled' : 'page-item'">
-                    <a class="page-link" ng-click="showEstimatesPage(EstimatesPage.number)">Пред.</a>
-                </li>
-
-                <li ng-class="EstimatesPage.number == pageIndex - 1 ? 'page-item active' : 'page-item'"
-                    ng-repeat="pageIndex in PaginationArray">
-                    <a class="page-link" ng-click="showEstimatesPage(pageIndex)">{{pageIndex}}</a>
-                </li>
-
-                <li ng-class="EstimatesPage.last ? 'page-item disabled' : 'page-item'">
-                    <a class="page-link" ng-click="showEstimatesPage(EstimatesPage.number + 2)">След.</a>
-                </li>
-            </ul>
-        </nav>
-    </details>
-</div>

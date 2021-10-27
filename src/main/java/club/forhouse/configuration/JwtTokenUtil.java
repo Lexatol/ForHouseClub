@@ -45,7 +45,7 @@ public class JwtTokenUtil {
     // Сброка токена на основе полученной информации о клиенте от сервера
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         Date issuedDate = new Date();
-        Date expiredDate = new Date(issuedDate.getTime() + 24 * 60 * 60 * 1000);
+        Date expiredDate = new Date(issuedDate.getTime() + 60 * 60 * 1000);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
