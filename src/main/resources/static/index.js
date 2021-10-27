@@ -20,7 +20,7 @@
                         $scope.user.password = null;
                     }
                 } catch (e) {
-                    console.log("already cleaned")
+                    //console.log("already cleaned")
                 }
             };
 
