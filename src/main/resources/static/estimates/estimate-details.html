@@ -43,10 +43,12 @@
                 <tr ng-repeat="w in editWorks" ng-show="w.category===currentCategory">
 
                     <td>
-                        <select id="workSelect" name="workSelect" ng-change="changeSelectedItem(w.rowId)"
-                                ng-model="selectedItem">
-                            <option ng-repeat="option in availableWorks" value="option.templateId">
-                                {{option.name}}
+                        <select id="workSelect" name="workSelect"
+                                ng-model="w.templateId">
+                            <option ng-repeat="opt in availableWorks"
+                                    ng-value="opt.templateId"
+                            >
+                                {{opt.name}}
                             </option>
                         </select>
                     </td>

@@ -5,7 +5,6 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
     $scope.showEstimate = function () {
         const n = $location.path().split("/");
         const id = n[n.length - 1];
-        $scope.selectedItem = 0;
         $http.get(contextPath + '/api/v1/estimates/' + id)
             .then(function (response) {
                 $scope.currentEstimate = response.data;
@@ -59,13 +58,6 @@ angular.module('app').controller('EstimateController', function ($scope, $http, 
         iter++;
     }
 
-    $scope.changeSelectedItem = function (rowId) {
-        $scope.editWorks.forEach(function (item, i, arr) {
-            if (item.rowId === rowId) {
-                item.templateId = $scope.selectedItem;
-            }
-        });
-    }
 
     $scope.deleteWork = function (rowId) {
         $scope.currentWorks.forEach(function (item, i, arr) {
