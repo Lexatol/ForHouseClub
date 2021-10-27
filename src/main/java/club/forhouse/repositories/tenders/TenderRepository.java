@@ -12,4 +12,6 @@ public interface TenderRepository extends JpaRepository<Tender, Long> {
     Tender findByTitle(String title);
 
     List<Tender> findAllByCustomer(Company customer);
+
+    List<Tender> findAllByContractor(Company company);
 }

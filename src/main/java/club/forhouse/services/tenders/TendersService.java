@@ -34,6 +34,12 @@ public class TendersService {
         return tenderMapper.toDto(tender);
     }
 
+    public Tender findTenderById(Long id) {
+        Tender tender = tenderRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Unable to find Tender with id: " + id));
+        return tender;
+    }
+
     public TenderDto save(SystemTenderDto systemTenderDto) {
         Company company = companyService.findByName(systemTenderDto.getCustomer().getCompanyName());
         Tender tender = new Tender();
@@ -55,10 +61,21 @@ public class TendersService {
         Tender tender = tenderRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Unable to find Tender with id: " + id));
         tenderRepository.delete(tender);
-
     }
 
     public List<TenderDto> findByCompanyCustomer(Company company) {
         return tenderMapper.toListDto(tenderRepository.findAllByCustomer(company));
     }
+
+    public void saveOrUpdate(Tender tender) {
+        tenderRepository.save(tender);
+    }
+
+    public List<TenderDto> findByCompanyContractor(Company company) {
+        return tenderMapper.toListDto(tenderRepository.findAllByContractor(company));
+    }
+
+    //public Tender findTenderByCompanyCustomer(Company company) {
+        //return tenderMapper.toDto(tenderRepository.f)
+    //}
 }

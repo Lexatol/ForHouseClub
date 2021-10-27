@@ -13,6 +13,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
                 }
                 $scope.loadSpecList();
                 $scope.loadMyTenders();
+                $scope.loadChosenTenders();
             });
     }
 
@@ -23,10 +24,18 @@ angular.module('app').controller('ProfileContractorController', function ($scope
             })
     }
 
+    $scope.loadChosenTenders = function(){
+        $http.get(contextPath + '/api/v1/tenders/chosen/' + $scope.company.companyName)
+            .then(function (response) {
+                $scope.chosenTenders = response.data;
+            })
+    }
+
     $scope.removeThisContractor = function(tenderId){
         $http.get(contextPath + '/api/v1/tenders/remove_contractor/' + tenderId)
             .then(function (response) {
                 $scope.loadMyTenders();
+                $scope.loadChosenTenders();
             })
     }
 
@@ -45,7 +54,7 @@ angular.module('app').controller('ProfileContractorController', function ($scope
     }
 
     $scope.removeThisTender = function(tenderId){
-        $http.get(contextPath + '/api/v1/tenders/remove/' + tenderId)
+        $http.delete(contextPath + '/api/v1/tenders?tenderId=' + tenderId)
             .then(function (response) {
                 $scope.loadMyTenders();
             })

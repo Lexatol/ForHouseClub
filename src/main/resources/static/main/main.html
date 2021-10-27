@@ -9,7 +9,10 @@
     <div style="padding: 5px; display: flex;">
         <div style="width: 90%">
             <ul style="padding-left: 0px">
-                <li ng-repeat="tender in tendersList" style="list-style-type: none; padding: 5px;">
+                <li ng-repeat="tender in tendersList" style="list-style-type: none; padding: 5px;"
+                    ng-if="tender.status.title === 'объявлен тендер'
+                    && tender.customer.companyName !== profileCompany.companyName
+                    && isUserLoggedIn()">
                     <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 2px; border-padding: 5px;">
                         <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;  cursor:pointer;" ng-click="viewTender(tender.tenderId)">
                             <h5>{{tender.title}}</h5>
