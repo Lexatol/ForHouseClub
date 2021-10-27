@@ -52,7 +52,7 @@ public class TendersService {
 
         //TODO необходимо на фронте установить по умолчанию статус "черновик"
         // и добавить кнопку опубликовать тендер и после этого изменить статус на другой
-        StatusTender status = statusTenderService.findByTitle(systemTenderDto.getStatus());
+        StatusTender status = statusTenderService.findByTitle("объявлен тендер");
         tender.setStatus(status);
         
         tender = tenderRepository.save(tender);
@@ -81,6 +81,10 @@ public class TendersService {
 
     public void deleteThis(Tender tender) {
         tenderRepository.delete(tender);
+    }
+
+    public List<TenderDto> findByCompanyContractor(Company company) {
+        return tenderMapper.toListDto(tenderRepository.findAllByContractor(company));
     }
 
     //public Tender findTenderByCompanyCustomer(Company company) {

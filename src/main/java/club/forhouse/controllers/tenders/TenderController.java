@@ -35,9 +35,14 @@ public class TenderController {
 
     @GetMapping("comp/{c}")
     public List<TenderDto> findByCompanyCustomer(@PathVariable String c) {
-        System.out.println(c);
         Company company = companyService.findByName(c);
         return tendersService.findByCompanyCustomer(company);
+    }
+
+    @GetMapping("chosen/{c}")
+    public List<TenderDto> findByCompanyContractor(@PathVariable String c) {
+        Company company = companyService.findByName(c);
+        return tendersService.findByCompanyContractor(company);
     }
 
     @GetMapping
@@ -99,7 +104,9 @@ public class TenderController {
 
     @GetMapping("/remove/{id}")
     public void removeTender(@PathVariable Long id){
-        Tender tender = tendersService.findTenderById(id);
-        tendersService.deleteThis(tender);
+        //Tender tender = tendersService.findTenderById(id);
+        //tender.setCustomer(null);
+        //tendersService.saveOrUpdate(tender);
+        //tendersService.deleteThis(tender);
     }
 }

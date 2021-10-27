@@ -11,6 +11,7 @@ angular.module('app').controller('TenderListController', function ($scope, $http
             page: pageIndex
         }).then(function (response) {
             $scope.tendersList = response.data;
+            console.log($scope.tendersList)
         });
     };
 
@@ -59,10 +60,14 @@ angular.module('app').controller('TenderListController', function ($scope, $http
     }
 
     $scope.loadCompanies = function () {
-        $http.get(contextPath + '/api/v1/profile_companies/company_info?email=' + $localStorage.currentUser.email)
-            .then(function (response) {
-                $scope.profileCompany = response.data.company;
-            });
+        try {
+            $http.get(contextPath + '/api/v1/profile_companies/company_info?email=' + $localStorage.currentUser.email)
+                .then(function (response) {
+                    $scope.profileCompany = response.data.company;
+                });
+        } catch (e) {
+            alert("Добро пожаловать на сайт ForHouse проидите регистрацию")
+        }
     }
 
     if ($location.path().endsWith('/')) {
