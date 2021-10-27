@@ -1,6 +1,6 @@
 package club.forhouse.services.estimate;
 
-import club.forhouse.dto.estimate.EstimateDto;
+import club.forhouse.dto.estimate.EstimateBaseDto;
 import club.forhouse.dto.estimate.EstimateWorkDto;
 import club.forhouse.dto.profiles.CompanyDto;
 import club.forhouse.dto.profiles.UserDto;
@@ -44,7 +44,7 @@ public class EstimateService {
     private final CompanyMapper companyMapper;
     private final UserMapper userMapper;
 
-    public EstimateDto createNew(UserDto user, CompanyDto companyDto) {
+    public EstimateBaseDto createNew(UserDto user, CompanyDto companyDto) {
         Company company = companyMapper.toEntity(companyDto);
         Pageable request = PageRequest.of(0, 1, Sort.Direction.DESC, "number");
         Optional<Estimate> found = estimateRepository.findTop1ByCompany(company, request).stream().findFirst();
@@ -55,18 +55,18 @@ public class EstimateService {
         estimate.setAuthor(userMapper.toEntity(user));
         estimate.setDate(LocalDateTime.now());
         estimate.setSum(0);
-        return modelMapper.map(estimateRepository.save(estimate), EstimateDto.class);
+        return modelMapper.map(estimateRepository.save(estimate), EstimateBaseDto.class);
     }
 
-    public Page<EstimateDto> findAll(CompanyDto companyDto, int page) {
+    public Page<EstimateBaseDto> findAll(CompanyDto companyDto, int page) {
         Company company = companyMapper.toEntity(companyDto);
         Pageable request = PageRequest.of(page, 5, Sort.Direction.DESC, "date");
-        return estimateRepository.findAllByCompany(company, request).map(it -> modelMapper.map(it, EstimateDto.class));
+        return estimateRepository.findAllByCompany(company, request).map(it -> modelMapper.map(it, EstimateBaseDto.class));
     }
 
-    public EstimateDto findByCompanyAndId(CompanyDto company, Long estimateId) {
+    public EstimateBaseDto findByCompanyAndId(CompanyDto company, Long estimateId) {
         Estimate found = getEstimate(estimateId);
-        EstimateDto estimateDto = modelMapper.map(found, EstimateDto.class);
+        EstimateBaseDto estimateDto = modelMapper.map(found, EstimateBaseDto.class);
         if (Objects.equals(estimateDto.getCompany().getCompanyId(), company.getCompanyId())) {
             return estimateDto;
         } else {
@@ -74,11 +74,15 @@ public class EstimateService {
         }
     }
 
-    public EstimateDto save(EstimateDto estimateDto) {
+    @Transactional
+    public EstimateBaseDto save(EstimateBaseDto estimateDto) {
+
+        Estimate estimate = modelMapper.map(estimateDto, Estimate.class);
+        estimate.setWorks(estimateWorkRepository.findAllByEstimate(estimate));
         return modelMapper.map(
                 estimateRepository.save(
-                        modelMapper.map(estimateDto, Estimate.class)
-                ), EstimateDto.class);
+                        estimate
+                ), EstimateBaseDto.class);
     }
 
     public List<EstimateWorkDto> getWorksForEstimateAndCategory(Long estimateId, Long categoryId) {
@@ -126,4 +130,11 @@ public class EstimateService {
         );
     }
 
+    @Transactional
+    public Boolean removeWorkFromEstimate(Long estimateId, Long workRowId) {
+        Estimate estimate = getEstimate(estimateId);
+        EstimateWork estimateWork = estimateWorkRepository.findById(workRowId).orElseThrow();
+        estimate.removeWork(estimateWork);
+        return true;
+    }
 }
