@@ -63,11 +63,6 @@ public class TendersService {
         tenderRepository.delete(tender);
     }
 
-    public Tender findByTitle(String title) {
-        return tenderRepository.findByTitle(title);
-
-    }
-
     public List<TenderDto> findByCompanyCustomer(Company company) {
         return tenderMapper.toListDto(tenderRepository.findAllByCustomer(company));
     }

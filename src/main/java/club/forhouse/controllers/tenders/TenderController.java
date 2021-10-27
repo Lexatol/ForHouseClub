@@ -106,12 +106,4 @@ public class TenderController {
         tender.setStatus(status);
         tendersService.saveOrUpdate(tender);
     }
-
-    @GetMapping("/remove/{id}")
-    public void removeTender(@PathVariable Long id){
-        //Tender tender = tendersService.findTenderById(id);
-        //tender.setCustomer(null);
-        //tendersService.saveOrUpdate(tender);
-        //tendersService.delete(tender);
-    }
 }
