@@ -1,12 +1,9 @@
 package club.forhouse.services.tenders;
 
-import club.forhouse.dto.tenders.SystemTenderDto;
-import club.forhouse.dto.tenders.TenderDto;
 import club.forhouse.dto.tenders.TenderPlatformDto;
 import club.forhouse.entities.tenders.Tender;
 import club.forhouse.entities.tenders.TenderPlatform;
 import club.forhouse.exceptions.ResourceNotFoundException;
-import club.forhouse.mappers.TenderMapper;
 import club.forhouse.mappers.TenderPlatformMapper;
 import club.forhouse.repositories.tenders.TendersPlatformRepository;
 import lombok.RequiredArgsConstructor;

@@ -10,7 +10,7 @@
         <div style="width: 90%">
             <ul style="padding-left: 0px">
                 <li ng-repeat="tender in tendersList" style="list-style-type: none; padding: 5px;">
-                    <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
+                    <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 2px; border-padding: 5px;">
                         <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;  cursor:pointer;" ng-click="viewTender(tender.tenderId)">
                             <h5>{{tender.title}}</h5>
                             <h6>{{tender.price}}</h6>
@@ -34,7 +34,7 @@
             </ul>
         </div>
 
-        <div style="padding-left: 10px; padding-top: 5px; background: #ecebeb; border-radius: 7px">
+        <div style="padding-left: 10px; padding-top: 5px; border-style:solid; border-radius: 5px; border-color: blue; border-width: 2px; border-padding: 5px;">
             <h4>Виды работ</h4>
             <ul style="padding: 0px">
                 <li ng-repeat="platform in platformList" style="list-style-type: none;">

@@ -124,7 +124,7 @@ CREATE TABLE estimates
     company_id      bigserial             NOT NULL,
     estimate_number integer               NOT NULL DEFAULT 0,
     estimate_sum    integer               NOT NULL DEFAULT 0,
-    estimate_date   timestamp             NOT NULL,
+    estimate_date   timestamp,
     address         varchar(255),
     author          bigserial
 );
