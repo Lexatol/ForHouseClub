@@ -49,7 +49,7 @@ public class TendersService {
         tender.setAddress(systemTenderDto.getAddress());
         tender.setDescription(systemTenderDto.getDescription());
         tender.setPrice(systemTenderDto.getPrice());
-        StatusTender status = statusTenderService.findByTitle(systemTenderDto.getStatus());
+        StatusTender status = statusTenderService.findByTitle("объявлен тендер");
         tender.setStatus(status);
         tender = tenderRepository.save(tender);
 //        TenderPlatform tenderPlatform = tenderPlatformService.findByTitle(systemTenderDto.getTitlePlatform());
