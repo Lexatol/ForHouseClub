@@ -11,4 +11,7 @@ import java.util.Optional;
 public interface ProfileCompanyRepository extends JpaRepository<ProfileCompany, Long> {
     @Query("select pc from ProfileCompany pc where pc.company.generalManager.userEmail = ?1")
     Optional<ProfileCompany> findCompanyByGeneralManagerEmail(String managerEmail);
+
+    @Query("select pc from ProfileCompany pc where pc.company.companyName = ?1")
+    Optional<ProfileCompany> findByCompanyName(String c);
 }

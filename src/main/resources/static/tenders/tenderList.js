@@ -42,6 +42,14 @@ angular.module('app').controller('TenderListController', function ($scope, $http
         $http.get(contextPath + '/api/v1/tenders/id/' + id)
             .then(function (response) {
                 $scope.currentTender = response.data;
+                $scope.getCurrentTenderCustomerInfo();
+            });
+    }
+
+    $scope.getCurrentTenderCustomerInfo = function (){
+        $http.get(contextPath + '/api/v1/profile_companies/get_comp?c=' + $scope.currentTender.customer.companyName)
+            .then(function (response) {
+                $scope.currentTenderCustomer = response.data;
             });
     }
 
