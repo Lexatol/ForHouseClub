@@ -40,14 +40,15 @@
                         <button class="btn btn-danger edit-button" ng-click="deleteWork(w.rowId)">Удалить</button>
                     </td>
                 </tr>
-                <tr ng-repeat="w in editWorks" ng-show="w.category===currentCategory">
+                <tr ng-repeat="w in editWorks | filter:{ category: currentCategory }">
 
                     <td>
                         <select id="workSelect" name="workSelect"
+                                ng-change="changeSelectedItem(w.rowId, w.templateId)"
                                 ng-model="w.templateId">
                             <option ng-repeat="opt in availableWorks"
                                     ng-value="opt.templateId"
-                            >
+                                    ng-selected="w.templateId == opt.templateId">
                                 {{opt.name}}
                             </option>
                         </select>
