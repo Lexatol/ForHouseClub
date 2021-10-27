@@ -11,7 +11,7 @@ angular.module('app').controller('TenderListController', function ($scope, $http
             page: pageIndex
         }).then(function (response) {
             $scope.tendersList = response.data;
-            console.log($scope.tendersList)
+            //console.log($scope.tendersList)
         });
     };
 
