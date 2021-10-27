@@ -112,6 +112,6 @@ public class TenderController {
         //Tender tender = tendersService.findTenderById(id);
         //tender.setCustomer(null);
         //tendersService.saveOrUpdate(tender);
-        //tendersService.deleteThis(tender);
+        //tendersService.delete(tender);
     }
 }

@@ -88,45 +88,57 @@
     </div>
 </details>
 
-<h2>Принятые к исполнению</h2>
-<div>
-    <ul style="padding-left: 0px">
-        <li ng-repeat="tender in chosenTenders" style="list-style-type: none; padding: 5px;">
-            <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
-                <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;">
-                    <h5>{{tender.title}}</h5>
-                    <h6>{{tender.price}}</h6>
+
+<br>
+
+<details>
+    <summary class="summary">Принятые к исполнению</summary>
+    <div>
+        <ul style="padding-left: 0px">
+            <li ng-repeat="tender in chosenTenders" style="list-style-type: none; padding: 5px;">
+                <div style="border-style:solid; border-radius: 5px; border-color: blue; border-width: 1px; border-padding: 5px;">
+                    <div style="padding: 5px; display: flex; align-items: baseline; justify-content: space-between;">
+                        <h5>{{tender.title}}</h5>
+                        <h6>{{tender.price}}</h6>
+                    </div>
+                    <p style="padding: 5px; margin: 0px;">{{tender.customer.companyName}}</p>
+                    <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
+                    <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
+                    <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
+                    <button ng-click="removeThisContractor(tender.tenderId)"
+                            ng-if="tender.contractor !== null && tender.status.title !== 'тендер завершен'"
+                            class="btn btn-danger tender-button">
+                        Отменить заявку
+                    </button>
                 </div>
-                <p style="padding: 5px; margin: 0px;">{{tender.customer.companyName}}</p>
-                <p style="padding: 5px; margin: 0px;">{{tender.description}}</p>
-                <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.address}}</p>
-                <p style="padding: 5px; margin: 0px; color: darkgray;">{{tender.status.title}}</p>
-                <button ng-click="removeThisContractor(tender.tenderId)"
-                        ng-if="tender.contractor !== null && tender.status.title !== 'тендер завершен'"
-                        class="btn btn-danger tender-button">
-                    Отменить заявку
-                </button>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
 </div>
+</details>
 
 
-<h2>Прайс лист компании:</h2>
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col">Название операции</th>
-        <th scope="col">Цена</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="op in profileCompany.priceListCompany.operation">
-        <td>{{op.operation.name}}</td>
-        <td>{{op.price}}</td>
-    </tr>
-    </tbody>
+<br>
+
+<details>
+    <summary class="summary">Прайс лист компании:</summary>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Название операции</th>
+            <th scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="op in profileCompany.priceListCompany.operation">
+            <td>{{op.operation.name}}</td>
+            <td>{{op.price}}</td>
+        </tr>
+        </tbody>
 </table>
+</details>
+
+
+<br>
 
 <div ng-controller="EstimateListController">
 
